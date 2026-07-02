@@ -1,0 +1,17 @@
+# MySQL data
+/mysql/*
+!/mysql/.gitkeep
+
+# Laravel
+/backend/.env
+/backend/vendor/
+/backend/node_modules/
+/backend/storage/logs/*.log
+/backend/storage/framework/cache/*
+/backend/storage/framework/sessions/*
+/backend/storage/framework/views/*
+
+# OS
+.DS_Store
+Thumbs.db
+README.md
