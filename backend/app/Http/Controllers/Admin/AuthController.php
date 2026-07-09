@@ -10,7 +10,7 @@ class AuthController extends Controller
     public function showLoginForm()
     {
         if (auth('admin')->check()) {
-            return redirect()->route('admin.news.index');
+            return redirect()->route('admin.dashboard');
         }
 
         return view('admin.auth.login');
@@ -31,7 +31,7 @@ class AuthController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('admin.news.index'));
+        return redirect()->intended(route('admin.dashboard'));
     }
 
     public function logout(Request $request)

@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
+use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
@@ -65,8 +67,15 @@ Route::prefix("admin")->name("admin.")->group(function () {
     Route::post("logout", [AdminAuthController::class, "logout"])->name("logout");
 
     Route::middleware("auth.admin")->group(function () {
+        Route::get("/", [AdminDashboardController::class, "index"])->name("dashboard");
+
         Route::resource("news", AdminNewsController::class);
         Route::patch("news/{news}/toggle", [AdminNewsController::class, "toggleStatus"])->name("news.toggle");
         Route::resource("products", AdminProductController::class)->except(["show"]);
+
+        // {order}パラメータとの衝突を避けるため export は resource より前に定義
+        Route::get("orders/export", [AdminOrderController::class, "export"])->name("orders.export");
+        Route::resource("orders", AdminOrderController::class)->only(["index", "show", "destroy"]);
+        Route::patch("orders/{order}/status", [AdminOrderController::class, "updateStatus"])->name("orders.updateStatus");
     });
 });

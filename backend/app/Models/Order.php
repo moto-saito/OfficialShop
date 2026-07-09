@@ -34,6 +34,38 @@ class Order extends Model
         return $this->hasMany(OrderItem::class);
     }
 
+    // ─── 検索 ──────────────────────────────────────────
+
+    /**
+     * 管理画面の注文検索用スコープ
+     * 各条件はすべて任意で、指定されたものだけAND条件で絞り込む
+     */
+    public function scopeSearch($query, array $filters)
+    {
+        return $query
+            ->when($filters['order_number'] ?? null, function ($q, $value) {
+                $q->where('order_number', 'like', "%{$value}%");
+            })
+            ->when($filters['recipient_name'] ?? null, function ($q, $value) {
+                $q->where('recipient_name', 'like', "%{$value}%");
+            })
+            ->when($filters['email'] ?? null, function ($q, $value) {
+                $q->where('email', 'like', "%{$value}%");
+            })
+            ->when($filters['status'] ?? null, function ($q, $value) {
+                $q->where('status', $value);
+            })
+            ->when($filters['payment_status'] ?? null, function ($q, $value) {
+                $q->where('payment_status', $value);
+            })
+            ->when($filters['date_from'] ?? null, function ($q, $value) {
+                $q->whereDate('created_at', '>=', $value);
+            })
+            ->when($filters['date_to'] ?? null, function ($q, $value) {
+                $q->whereDate('created_at', '<=', $value);
+            });
+    }
+
     // ─── ステータスラベル ───────────────────────────────
 
     /** 注文ステータスの日本語ラベルを返す */
