@@ -4,64 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', '管理画面') | {{ config('app.name') }} Admin</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{{ asset('css/common.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/layout.css') }}">
+    @stack('head')
 </head>
-<body class="bg-gray-100 min-h-screen flex">
+<body class="admin_layouts_app_body">
 
     {{-- サイドバー --}}
-    <aside class="w-56 bg-gray-900 text-gray-300 flex flex-col flex-shrink-0 min-h-screen">
-        <div class="px-6 py-5 border-b border-gray-700">
-            <p class="text-xs text-gray-500 uppercase tracking-widest mb-1">Admin</p>
-            <a href="{{ route('admin.dashboard') }}" class="text-white font-bold text-lg leading-tight">{{ config('app.name') }}</a>
+    <aside class="admin_layouts_app_sidebar">
+        <div class="admin_layouts_app_sidebar-header">
+            <p class="admin_layouts_app_sidebar-eyebrow">Admin</p>
+            <a href="{{ route('admin.dashboard') }}" class="admin_layouts_app_sidebar-title">{{ config('app.name') }}</a>
         </div>
-        <nav class="flex-1 py-4">
+        <nav class="admin_layouts_app_nav">
             <a href="{{ route('admin.dashboard') }}"
-               class="flex items-center gap-3 px-6 py-2.5 text-sm hover:bg-gray-800 hover:text-white transition {{ request()->routeIs('admin.dashboard') ? 'bg-gray-800 text-white' : '' }}">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+               class="admin_layouts_app_nav-link {{ request()->routeIs('admin.dashboard') ? 'is-active' : '' }}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="admin_layouts_app_nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
                 </svg>
                 ダッシュボード
             </a>
 
-            <p class="px-6 py-2 text-xs text-gray-500 uppercase tracking-wider">コンテンツ</p>
+            <p class="admin_layouts_app_nav-heading">コンテンツ</p>
 
             <a href="{{ route('admin.products.index') }}"
-               class="flex items-center gap-3 px-6 py-2.5 text-sm hover:bg-gray-800 hover:text-white transition {{ request()->routeIs('admin.products.*') ? 'bg-gray-800 text-white' : '' }}">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+               class="admin_layouts_app_nav-link {{ request()->routeIs('admin.products.*') ? 'is-active' : '' }}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="admin_layouts_app_nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10"/>
                 </svg>
                 商品管理
             </a>
 
             <a href="{{ route('admin.news.index') }}"
-               class="flex items-center gap-3 px-6 py-2.5 text-sm hover:bg-gray-800 hover:text-white transition {{ request()->routeIs('admin.news.*') ? 'bg-gray-800 text-white' : '' }}">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+               class="admin_layouts_app_nav-link {{ request()->routeIs('admin.news.*') ? 'is-active' : '' }}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="admin_layouts_app_nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 12h6"/>
                 </svg>
                 お知らせ管理
             </a>
 
-            <p class="px-6 py-2 mt-4 text-xs text-gray-500 uppercase tracking-wider">受注</p>
+            <p class="admin_layouts_app_nav-heading">受注</p>
 
             <a href="{{ route('admin.orders.index') }}"
-               class="flex items-center gap-3 px-6 py-2.5 text-sm hover:bg-gray-800 hover:text-white transition {{ request()->routeIs('admin.orders.*') ? 'bg-gray-800 text-white' : '' }}">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+               class="admin_layouts_app_nav-link {{ request()->routeIs('admin.orders.*') ? 'is-active' : '' }}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="admin_layouts_app_nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 14l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
                 </svg>
                 注文管理
             </a>
         </nav>
-        <div class="px-6 py-4 border-t border-gray-700 space-y-3">
-            <a href="/" target="_blank" class="text-xs text-gray-500 hover:text-white transition flex items-center gap-1">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div class="admin_layouts_app_sidebar-footer">
+            <a href="/" target="_blank" class="admin_layouts_app_footer-link">
+                <svg xmlns="http://www.w3.org/2000/svg" class="admin_layouts_app_footer-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
                 </svg>
                 サイトを見る
             </a>
             <form method="POST" action="{{ route('admin.logout') }}">
                 @csrf
-                <button type="submit" class="text-xs text-gray-500 hover:text-white transition flex items-center gap-1 w-full text-left">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <button type="submit" class="admin_layouts_app_footer-logout">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="admin_layouts_app_footer-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
                     </svg>
                     ログアウト
@@ -71,19 +73,19 @@
     </aside>
 
     {{-- メインコンテンツ --}}
-    <div class="flex-1 flex flex-col min-h-screen overflow-auto">
-        <header class="bg-white border-b px-8 py-4 flex items-center justify-between">
-            <h1 class="text-lg font-semibold text-gray-800">@yield('title', '管理画面')</h1>
-            <div class="flex items-center gap-4">
-                <span class="text-sm text-gray-500">{{ auth('admin')->user()->name ?? '' }}</span>
+    <div class="admin_layouts_app_content">
+        <header class="admin_layouts_app_topbar">
+            <h1 class="admin_layouts_app_topbar-title">@yield('title', '管理画面')</h1>
+            <div class="admin_layouts_app_topbar-actions">
+                <span class="admin_layouts_app_topbar-user">{{ auth('admin')->user()->name ?? '' }}</span>
                 @yield('header-action')
             </div>
         </header>
 
-        <main class="flex-1 p-8">
+        <main class="admin_layouts_app_main">
 
             @if (session('success'))
-                <div class="mb-6 bg-green-50 border border-green-200 text-green-800 text-sm px-4 py-3 rounded-lg">
+                <div class="common_flash-success">
                     {{ session('success') }}
                 </div>
             @endif

@@ -2,46 +2,50 @@
 
 @section('title', $news->title)
 
+@push('head')
+<link rel="stylesheet" href="{{ asset('css/pages/news-show.css') }}">
+@endpush
+
 @section('content')
-<div class="max-w-3xl mx-auto px-4 py-10">
+<div class="news_show_layout">
 
     {{-- パンくず --}}
-    <nav class="text-sm text-gray-400 mb-6 flex items-center gap-2">
-        <a href="/news" class="hover:text-indigo-600 transition">お知らせ</a>
+    <nav class="common_breadcrumb">
+        <a href="/news" class="common_breadcrumb-link">お知らせ</a>
         <span>/</span>
-        <span class="text-gray-600 truncate">{{ $news->title }}</span>
+        <span class="common_breadcrumb-current">{{ $news->title }}</span>
     </nav>
 
-    <article class="bg-white rounded-2xl shadow-sm overflow-hidden">
+    <article class="common_card">
 
         {{-- 画像 --}}
         @if ($news->image_path)
             <img src="{{ asset($news->image_path) }}"
                  alt="{{ $news->title }}"
-                 class="w-full max-h-80 object-cover">
+                 class="news_show_image">
         @endif
 
-        <div class="p-8">
+        <div class="news_show_body">
             {{-- 投稿日 --}}
-            <p class="text-sm text-gray-400 mb-3">
+            <p class="news_show_date">
                 {{ $news->published_at->format('Y年n月j日') }}
             </p>
 
             {{-- タイトル --}}
-            <h1 class="text-2xl font-bold leading-snug mb-6">{{ $news->title }}</h1>
+            <h1 class="news_show_title">{{ $news->title }}</h1>
 
             {{-- 本文 --}}
-            <div class="text-gray-700 leading-relaxed whitespace-pre-line">
+            <div class="news_show_content">
                 {{ $news->content }}
             </div>
         </div>
     </article>
 
     {{-- 一覧に戻る --}}
-    <div class="mt-8">
+    <div class="news_show_back-wrap">
         <a href="{{ route('news.index') }}"
-           class="inline-flex items-center gap-2 text-sm text-indigo-600 hover:text-indigo-800 transition">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+           class="news_show_back-link">
+            <svg xmlns="http://www.w3.org/2000/svg" class="news_show_back-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
             </svg>
             お知らせ一覧へ戻る

@@ -1,0 +1,120 @@
+/*
+ * pages/admin-news.css
+ * resources/views/admin/news/index.blade.php, create.blade.php, edit.blade.php, _form.blade.php 専用スタイル
+ */
+
+.admin_news_index_col-id {
+    width: 4rem;
+}
+
+.admin_news_index_col-status {
+    width: 8rem;
+}
+
+.admin_news_index_col-date {
+    width: 10rem;
+}
+
+.admin_news_index_col-action {
+    width: 12rem;
+}
+
+.admin_news_index_id-cell {
+    color: var(--color-gray-400);
+}
+
+.admin_news_index_title {
+    font-weight: 500;
+    color: var(--color-gray-800, inherit);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 20rem;
+}
+
+.admin_news_index_date-cell {
+    color: var(--color-gray-500);
+}
+
+.admin_news_index_actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: .5rem;
+}
+
+td.admin_news_index_empty {
+    text-align: center;
+    color: var(--color-gray-400);
+    padding-block: 4rem;
+}
+
+.admin_news_index_pagination-wrap {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--color-gray-200);
+    background-color: var(--color-gray-50);
+}
+
+/* ============================================================
+   admin/news/_form.blade.php
+   ============================================================ */
+.admin_news_form_image-preview-wrap {
+    margin-bottom: .75rem;
+}
+
+.admin_news_form_image-preview {
+    height: 8rem;
+    width: auto;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-gray-200);
+    object-fit: cover;
+}
+
+.admin_news_form_file-input {
+    width: 100%;
+    font-size: var(--text-sm);
+    color: var(--color-gray-600);
+}
+
+.admin_news_form_file-input::file-selector-button {
+    margin-right: .75rem;
+    padding: .5rem 1rem;
+    border-radius: var(--radius-lg);
+    border: 0;
+    background-color: var(--color-indigo-50);
+    color: var(--color-indigo-700);
+    transition: background-color .15s ease;
+}
+
+.admin_news_form_file-input:hover::file-selector-button {
+    background-color: var(--color-indigo-100);
+}
+
+.admin_news_form_status-label {
+    display: block;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-gray-700);
+    margin-bottom: .5rem;
+}
+
+.admin_news_form_status-options {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.admin_news_form_status-option {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    cursor: pointer;
+}
+
+.admin_news_form_status-radio {
+    accent-color: var(--color-indigo-600);
+}
+
+.admin_news_form_status-option-label {
+    font-size: var(--text-sm);
+    color: var(--color-gray-700);
+}

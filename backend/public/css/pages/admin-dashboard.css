@@ -1,0 +1,108 @@
+/*
+ * pages/admin-dashboard.css
+ * resources/views/admin/dashboard/index.blade.php 専用スタイル
+ */
+
+.admin_dashboard_summary-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.admin_dashboard_summary-card {
+    background-color: var(--color-white);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-sm);
+    padding: 1.25rem 1.5rem;
+}
+
+.admin_dashboard_summary-label {
+    font-size: var(--text-xs);
+    color: var(--color-gray-500);
+    margin-bottom: .25rem;
+}
+
+.admin_dashboard_summary-value {
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    color: var(--color-gray-900);
+}
+
+.admin_dashboard_summary-unit {
+    font-size: var(--text-sm);
+    font-weight: 400;
+    color: var(--color-gray-400);
+    margin-left: .25rem;
+}
+
+.admin_dashboard_orders-header {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--color-gray-200);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.admin_dashboard_orders-link {
+    font-size: var(--text-xs);
+    color: var(--color-indigo-600);
+    transition: color .15s ease;
+}
+
+.admin_dashboard_orders-link:hover {
+    color: var(--color-indigo-700);
+}
+
+.admin_dashboard_col-date {
+    width: 10rem;
+}
+
+.admin_dashboard_col-amount {
+    width: 7rem;
+}
+
+.admin_dashboard_col-status {
+    width: 7rem;
+}
+
+.admin_dashboard_col-action {
+    width: 6rem;
+}
+
+.admin_dashboard_row-number {
+    font-weight: 500;
+    color: var(--color-gray-800, inherit);
+}
+
+.admin_dashboard_row-date,
+.admin_dashboard_row-recipient,
+.admin_dashboard_row-amount {
+    color: var(--color-gray-700);
+}
+
+.admin_dashboard_row-date {
+    color: var(--color-gray-500);
+}
+
+.admin_dashboard_row-action {
+    text-align: right;
+}
+
+td.admin_dashboard_empty {
+    text-align: center;
+    color: var(--color-gray-400);
+    padding-block: 4rem;
+}
+
+@media (min-width: 640px) {
+    .admin_dashboard_summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .admin_dashboard_summary-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}

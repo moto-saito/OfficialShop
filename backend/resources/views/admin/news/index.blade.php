@@ -2,75 +2,78 @@
 
 @section('title', 'お知らせ管理')
 
+@push('head')
+<link rel="stylesheet" href="{{ asset('css/pages/admin-news.css') }}">
+@endpush
+
 @section('header-action')
     <a href="{{ route('admin.news.create') }}"
-       class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium px-4 py-2 rounded-lg transition">
+       class="admin_header-action-button">
         ＋ 新規作成
     </a>
 @endsection
 
 @section('content')
-<div class="bg-white rounded-xl shadow-sm overflow-hidden">
-    <table class="w-full text-sm">
-        <thead class="bg-gray-50 border-b">
+<div class="admin_card">
+    <table class="common_table">
+        <thead>
             <tr>
-                <th class="text-left px-6 py-3 font-medium text-gray-500 w-16">ID</th>
-                <th class="text-left px-6 py-3 font-medium text-gray-500">タイトル</th>
-                <th class="text-left px-6 py-3 font-medium text-gray-500 w-32">ステータス</th>
-                <th class="text-left px-6 py-3 font-medium text-gray-500 w-40">公開日時</th>
-                <th class="text-left px-6 py-3 font-medium text-gray-500 w-40">作成日時</th>
-                <th class="px-6 py-3 w-48"></th>
+                <th class="admin_news_index_col-id">ID</th>
+                <th>タイトル</th>
+                <th class="admin_news_index_col-status">ステータス</th>
+                <th class="admin_news_index_col-date">公開日時</th>
+                <th class="admin_news_index_col-date">作成日時</th>
+                <th class="admin_news_index_col-action"></th>
             </tr>
         </thead>
-        <tbody class="divide-y divide-gray-100">
+        <tbody>
             @forelse ($newsList as $news)
-                <tr class="hover:bg-gray-50 transition">
-                    <td class="px-6 py-4 text-gray-400">{{ $news->id }}</td>
+                <tr>
+                    <td class="admin_news_index_id-cell">{{ $news->id }}</td>
 
-                    <td class="px-6 py-4">
-                        <p class="font-medium text-gray-800 truncate max-w-xs">{{ $news->title }}</p>
+                    <td>
+                        <p class="admin_news_index_title">{{ $news->title }}</p>
                     </td>
 
-                    <td class="px-6 py-4">
+                    <td>
                         @if ($news->status === 'published' && $news->published_at && $news->published_at->lte(now()))
-                            <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-700">
-                                <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>公開中
+                            <span class="common_status-badge common_status-badge--success">
+                                <span class="common_status-badge__dot"></span>公開中
                             </span>
                         @elseif ($news->status === 'published')
-                            <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-700">
-                                <span class="w-1.5 h-1.5 rounded-full bg-yellow-500"></span>予約済
+                            <span class="common_status-badge common_status-badge--warning">
+                                <span class="common_status-badge__dot"></span>予約済
                             </span>
                         @else
-                            <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-500">
-                                <span class="w-1.5 h-1.5 rounded-full bg-gray-400"></span>非公開
+                            <span class="common_status-badge common_status-badge--neutral">
+                                <span class="common_status-badge__dot"></span>非公開
                             </span>
                         @endif
                     </td>
 
-                    <td class="px-6 py-4 text-gray-500">
+                    <td class="admin_news_index_date-cell">
                         {{ $news->published_at ? $news->published_at->format('Y/m/d H:i') : '―' }}
                     </td>
 
-                    <td class="px-6 py-4 text-gray-500">
+                    <td class="admin_news_index_date-cell">
                         {{ $news->created_at->format('Y/m/d H:i') }}
                     </td>
 
-                    <td class="px-6 py-4">
-                        <div class="flex items-center justify-end gap-2">
+                    <td>
+                        <div class="admin_news_index_actions">
                             {{-- 公開/非公開切り替え --}}
                             <form method="POST" action="{{ route('admin.news.toggle', $news) }}">
                                 @csrf
                                 @method('PATCH')
                                 <button type="submit"
-                                        class="text-xs px-3 py-1.5 rounded-lg border transition
-                                        {{ $news->status === 'published' ? 'border-yellow-300 text-yellow-700 hover:bg-yellow-50' : 'border-green-300 text-green-700 hover:bg-green-50' }}">
+                                        class="common_button-toggle--xs {{ $news->status === 'published' ? 'is-published' : 'is-draft' }}">
                                     {{ $news->status === 'published' ? '非公開にする' : '公開する' }}
                                 </button>
                             </form>
 
                             {{-- 編集 --}}
                             <a href="{{ route('admin.news.edit', $news) }}"
-                               class="text-xs px-3 py-1.5 rounded-lg border border-gray-300 text-gray-600 hover:bg-gray-100 transition">
+                               class="common_button-outline--xs">
                                 編集
                             </a>
 
@@ -80,7 +83,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit"
-                                        class="text-xs px-3 py-1.5 rounded-lg border border-red-200 text-red-500 hover:bg-red-50 transition">
+                                        class="common_button-danger--xs">
                                     削除
                                 </button>
                             </form>
@@ -89,7 +92,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="6" class="px-6 py-16 text-center text-gray-400">
+                    <td colspan="6" class="admin_news_index_empty">
                         お知らせがありません
                     </td>
                 </tr>
@@ -98,7 +101,7 @@
     </table>
 
     @if ($newsList->hasPages())
-        <div class="px-6 py-4 border-t bg-gray-50">
+        <div class="admin_news_index_pagination-wrap">
             {{ $newsList->links() }}
         </div>
     @endif

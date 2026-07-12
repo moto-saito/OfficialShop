@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', config('app.name'))</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{{ asset('css/common.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/layout.css') }}">
     @stack('head')
 </head>
-<body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col">
+<body class="layouts_app_body">
 
     <x-header />
 
-    <main class="flex-1">
+    <main class="layouts_app_main">
         @yield('content')
     </main>
 

@@ -40,6 +40,25 @@ class CartController extends Controller
             ]);
         }
 
+        // 商品一覧ページの小計欄からのAJAX送信にはJSONでカート情報を返す
+        if ($request->wantsJson()) {
+            $items = Cart::with('product')
+                ->where('session_id', $sessionId)
+                ->get();
+
+            return response()->json([
+                'success'  => true,
+                'items'    => $items->map(fn ($item) => [
+                    'id'       => $item->id,
+                    'name'     => $item->product?->name,
+                    'price'    => $item->product?->price ?? 0,
+                    'quantity' => $item->quantity,
+                    'subtotal' => $item->subtotal,
+                ]),
+                'subtotal' => $items->sum(fn ($item) => $item->subtotal),
+            ]);
+        }
+
         return redirect()->route('cart.index')->with('success', 'カートに追加しました。');
     }
 

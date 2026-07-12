@@ -3,7 +3,29 @@
     "allow": [
       "Bash(docker compose up *)",
       "Bash(docker compose ps *)",
-      "Bash(docker compose *)"
+      "Bash(docker compose *)",
+      "Bash(cat resources/js/app.js)",
+      "Bash(ls node_modules)",
+      "Bash(curl -s -o /dev/null -w \"products page: %{http_code}\\\\n\" http://localhost/products)",
+      "Bash(curl -s -o /dev/null -w \"common.css: %{http_code}\\\\n\" http://localhost/css/common.css)",
+      "Bash(curl -s -o /dev/null -w \"layout.css: %{http_code}\\\\n\" http://localhost/css/layout.css)",
+      "Bash(curl -s -o /dev/null -w \"admin login page: %{http_code}\\\\n\" http://localhost/admin/login)",
+      "Bash(curl -s http://localhost/ -o /dev/null -w \"home: %{http_code}\\\\n\")",
+      "Bash(curl -s http://localhost/css/pages/home.css -o /dev/null -w \"home.css: %{http_code}\\\\n\")",
+      "Bash(curl -s http://localhost/)",
+      "Bash(curl -s -o /dev/null -w \"cart index: %{http_code}\\\\n\" http://localhost/cart)",
+      "Bash(curl -s -o /dev/null -w \"cart-index.css: %{http_code}\\\\n\" http://localhost/css/pages/cart-index.css)",
+      "Bash(curl -s http://localhost/cart)",
+      "Bash(curl -s -o /dev/null -w \"checkout/index \\(未ログイン\\): %{http_code}\\\\n\" http://localhost/checkout)",
+      "Bash(curl -s -o /dev/null -w \"login: %{http_code}\\\\n\" http://localhost/login)",
+      "Bash(curl -s -o /dev/null -w \"register: %{http_code}\\\\n\" http://localhost/register)",
+      "Bash(curl -s -o /dev/null -w \"auth.css: %{http_code}\\\\n\" http://localhost/css/pages/auth.css)",
+      "Bash(curl -s -o /dev/null -w \"admin/login: %{http_code}\\\\n\" http://localhost/admin/login)",
+      "Bash(grep -rn 'px-5 py-2 rounded-lg' resources/views/)",
+      "Bash(grep -rln 'text-sm text-gray-500 hover:text-gray-700 transition' resources/views/)",
+      "Bash(grep -rln 'flex items-center justify-between mb-8' resources/views/)",
+      "Bash(grep -rn '\\\\$order->status_color\\\\|\\\\$news->status\\\\b\\\\|status_color' resources/views/)",
+      "Bash(cd *)"
     ]
   }
 }

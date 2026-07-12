@@ -2,20 +2,24 @@
 
 @section('title', 'プロフィール編集')
 
-@section('content')
-<div class="max-w-2xl mx-auto px-4 py-12">
+@push('head')
+<link rel="stylesheet" href="{{ asset('css/pages/mypage.css') }}">
+@endpush
 
-    <div class="flex items-center justify-between mb-8">
-        <h1 class="text-2xl font-bold text-gray-900">プロフィール編集</h1>
+@section('content')
+<div class="mypage_layout">
+
+    <div class="common_page-header">
+        <h1 class="common_page-header-title">プロフィール編集</h1>
         <a href="{{ route('mypage.index') }}"
-           class="text-sm text-gray-500 hover:text-gray-700 transition">
+           class="common_back-link">
             ← マイページへ戻る
         </a>
     </div>
 
     @if ($errors->any())
-        <div class="mb-6 bg-red-50 border border-red-200 text-red-700 text-sm px-4 py-3 rounded-lg">
-            <ul class="list-disc list-inside space-y-1">
+        <div class="common_flash-error">
+            <ul class="checkout_error-list">
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
                 @endforeach
@@ -27,40 +31,40 @@
         @csrf
         @method('PATCH')
 
-        <div class="bg-white rounded-2xl shadow-sm border border-gray-200 px-8 py-8 flex flex-col gap-6">
+        <div class="common_card common_card--bordered mypage_edit_form-card">
 
             {{-- 基本情報セクション --}}
             <div>
-                <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-4 pb-2 border-b border-gray-100">基本情報</h2>
-                <div class="flex flex-col gap-5">
+                <h2 class="mypage_edit_section-title">基本情報</h2>
+                <div class="mypage_edit_field-group">
 
                     {{-- 氏名 --}}
                     <div>
-                        <label for="name" class="block text-sm font-medium text-gray-700 mb-1.5">
-                            氏名 <span class="text-red-500">*</span>
+                        <label for="name" class="common_form-label">
+                            氏名 <span class="common_required-mark">*</span>
                         </label>
                         <input type="text" id="name" name="name"
                                value="{{ old('name', $user->name) }}"
                                required autocomplete="name"
-                               class="w-full px-4 py-2.5 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition @error('name') border-red-400 bg-red-50 @else border-gray-300 @enderror"
+                               class="common_form-input @error('name') is-invalid @enderror"
                                placeholder="山田 太郎">
                         @error('name')
-                            <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                            <p class="common_form-error">{{ $message }}</p>
                         @enderror
                     </div>
 
                     {{-- メールアドレス --}}
                     <div>
-                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1.5">
-                            メールアドレス <span class="text-red-500">*</span>
+                        <label for="email" class="common_form-label">
+                            メールアドレス <span class="common_required-mark">*</span>
                         </label>
                         <input type="email" id="email" name="email"
                                value="{{ old('email', $user->email) }}"
                                required autocomplete="email"
-                               class="w-full px-4 py-2.5 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition @error('email') border-red-400 bg-red-50 @else border-gray-300 @enderror"
+                               class="common_form-input @error('email') is-invalid @enderror"
                                placeholder="example@email.com">
                         @error('email')
-                            <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                            <p class="common_form-error">{{ $message }}</p>
                         @enderror
                     </div>
 
@@ -69,27 +73,27 @@
 
             {{-- 配送先情報セクション（将来の注文・配送機能と連携） --}}
             <div>
-                <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-4 pb-2 border-b border-gray-100">配送先情報</h2>
-                <div class="flex flex-col gap-5">
+                <h2 class="mypage_edit_section-title">配送先情報</h2>
+                <div class="mypage_edit_field-group">
 
                     {{-- 郵便番号 --}}
                     <div>
-                        <label for="postal_code" class="block text-sm font-medium text-gray-700 mb-1.5">郵便番号</label>
+                        <label for="postal_code" class="common_form-label">郵便番号</label>
                         <input type="text" id="postal_code" name="postal_code"
                                value="{{ old('postal_code', $user->postal_code) }}"
                                autocomplete="postal-code"
-                               class="w-40 px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
+                               class="common_form-input mypage_edit_field--w40"
                                placeholder="123-4567">
                         @error('postal_code')
-                            <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                            <p class="common_form-error">{{ $message }}</p>
                         @enderror
                     </div>
 
                     {{-- 都道府県 --}}
                     <div>
-                        <label for="prefecture" class="block text-sm font-medium text-gray-700 mb-1.5">都道府県</label>
+                        <label for="prefecture" class="common_form-label">都道府県</label>
                         <select id="prefecture" name="prefecture"
-                                class="w-40 px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition">
+                                class="common_form-input mypage_edit_field--w40">
                             <option value="">選択してください</option>
                             @php
                                 $prefectures = [
@@ -108,33 +112,33 @@
                             @endforeach
                         </select>
                         @error('prefecture')
-                            <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                            <p class="common_form-error">{{ $message }}</p>
                         @enderror
                     </div>
 
                     {{-- 住所（市区町村以降） --}}
                     <div>
-                        <label for="address" class="block text-sm font-medium text-gray-700 mb-1.5">住所（市区町村以降）</label>
+                        <label for="address" class="common_form-label">住所（市区町村以降）</label>
                         <input type="text" id="address" name="address"
                                value="{{ old('address', $user->address) }}"
                                autocomplete="street-address"
-                               class="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
+                               class="common_form-input"
                                placeholder="渋谷区〇〇町1-2-3">
                         @error('address')
-                            <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                            <p class="common_form-error">{{ $message }}</p>
                         @enderror
                     </div>
 
                     {{-- 電話番号 --}}
                     <div>
-                        <label for="phone_number" class="block text-sm font-medium text-gray-700 mb-1.5">電話番号</label>
+                        <label for="phone_number" class="common_form-label">電話番号</label>
                         <input type="tel" id="phone_number" name="phone_number"
                                value="{{ old('phone_number', $user->phone_number) }}"
                                autocomplete="tel"
-                               class="w-56 px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
+                               class="common_form-input mypage_edit_field--w56"
                                placeholder="090-1234-5678">
                         @error('phone_number')
-                            <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                            <p class="common_form-error">{{ $message }}</p>
                         @enderror
                     </div>
 
@@ -143,13 +147,13 @@
 
         </div>
 
-        <div class="mt-4 flex justify-end gap-3">
+        <div class="mypage_edit_actions">
             <a href="{{ route('mypage.index') }}"
-               class="px-5 py-2 rounded-lg border border-gray-300 text-sm text-gray-600 hover:bg-gray-100 transition">
+               class="common_button-outline--compact">
                 キャンセル
             </a>
             <button type="submit"
-                    class="px-5 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium transition">
+                    class="common_button-primary--compact">
                 更新する
             </button>
         </div>

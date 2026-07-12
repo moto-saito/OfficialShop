@@ -1,0 +1,289 @@
+/*
+ * pages/admin-orders.css
+ * resources/views/admin/orders/index.blade.php, show.blade.php 専用スタイル
+ */
+
+/* ============================================================
+   admin/orders/index.blade.php・show.blade.php で共通の検索/更新フォーム部品
+   ============================================================ */
+.admin_orders_filter-card {
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.admin_orders_filter-label {
+    display: block;
+    font-size: var(--text-xs);
+    color: var(--color-gray-500);
+    margin-bottom: .25rem;
+}
+
+.admin_orders_filter-input {
+    width: 100%;
+    font-size: var(--text-sm);
+    border: 1px solid var(--color-gray-300);
+    border-radius: var(--radius-lg);
+    padding: .5rem .75rem;
+}
+
+.admin_orders_filter-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--color-indigo-500);
+}
+
+/* ============================================================
+   admin/orders/index.blade.php
+   ============================================================ */
+.admin_orders_index_filter-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.admin_orders_index_date-range {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.admin_orders_index_date-range-sep {
+    color: var(--color-gray-400);
+}
+
+.admin_orders_index_filter-actions {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+}
+
+.admin_orders_index_table-scroll {
+    overflow-x: auto;
+}
+
+.admin_orders_index_col-date {
+    width: 10rem;
+}
+
+.admin_orders_index_col-amount {
+    width: 7rem;
+}
+
+.admin_orders_index_col-status {
+    width: 7rem;
+}
+
+.admin_orders_index_col-action {
+    width: 6rem;
+}
+
+.admin_orders_index_number-cell {
+    font-weight: 500;
+    color: var(--color-gray-800, inherit);
+}
+
+.admin_orders_index_date-cell {
+    color: var(--color-gray-500);
+}
+
+.admin_orders_index_recipient-cell {
+    color: var(--color-gray-700);
+}
+
+.admin_orders_index_email-cell {
+    color: var(--color-gray-500);
+    word-break: break-all;
+}
+
+.admin_orders_index_amount-cell {
+    color: var(--color-gray-700);
+}
+
+.admin_orders_index_action-cell {
+    text-align: right;
+}
+
+td.admin_orders_index_empty {
+    text-align: center;
+    color: var(--color-gray-400);
+    padding-block: 4rem;
+}
+
+.admin_orders_index_pagination-wrap {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--color-gray-200);
+    background-color: var(--color-gray-50);
+}
+
+@media (min-width: 640px) {
+    .admin_orders_index_filter-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .admin_orders_index_filter-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* ============================================================
+   admin/orders/show.blade.php
+   ============================================================ */
+.admin_orders_show_layout {
+    max-width: 48rem;
+}
+
+.admin_orders_show_section {
+    margin-bottom: 1.5rem;
+}
+
+.admin_orders_show_summary-header {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--color-gray-200);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: .5rem;
+}
+
+.admin_orders_show_badges {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.admin_orders_show_order-number-label {
+    font-size: var(--text-xs);
+    color: var(--color-gray-500);
+    margin-bottom: .125rem;
+}
+
+.admin_orders_show_order-number {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--color-gray-800, inherit);
+    letter-spacing: .025em;
+}
+
+.admin_orders_show_col-image {
+    width: 5rem;
+}
+
+.admin_orders_show_col-price,
+.admin_orders_show_col-subtotal {
+    width: 6rem;
+    text-align: right;
+}
+
+.admin_orders_show_col-qty {
+    width: 4rem;
+    text-align: center;
+}
+
+.admin_orders_show_thumb {
+    height: 3rem;
+    width: 3rem;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-gray-200);
+}
+
+.admin_orders_show_thumb-placeholder {
+    height: 3rem;
+    width: 3rem;
+    background-color: var(--color-gray-100);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-gray-200);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin_orders_show_thumb-icon {
+    height: 1.25rem;
+    width: 1.25rem;
+    color: var(--color-gray-300);
+}
+
+.admin_orders_show_items-table td:nth-child(2) {
+    color: var(--color-gray-800, inherit);
+}
+
+.admin_orders_show_items-table td:nth-child(3) {
+    text-align: right;
+    color: var(--color-gray-700);
+}
+
+.admin_orders_show_items-table td:nth-child(4) {
+    text-align: center;
+    color: var(--color-gray-600);
+}
+
+.admin_orders_show_item-subtotal {
+    text-align: right;
+    font-weight: 500;
+    color: var(--color-gray-800, inherit);
+}
+
+.admin_orders_show_total-row {
+    padding: 1rem 1.5rem;
+    background-color: var(--color-gray-50);
+    border-top: 1px solid var(--color-gray-200);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.admin_orders_show_total-label {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-gray-700);
+}
+
+.admin_orders_show_total-amount {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--color-gray-900);
+}
+
+.admin_orders_show_status-form {
+    padding: 1rem 1.5rem;
+}
+
+.admin_orders_show_status-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.admin_orders_show_danger-body {
+    padding: 1rem 1.5rem;
+}
+
+.admin_orders_show_danger-note {
+    font-size: var(--text-xs);
+    color: var(--color-gray-500);
+    margin-bottom: .75rem;
+}
+
+.admin_orders_show_danger-button {
+    font-size: var(--text-xs);
+    padding: .5rem 1rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-red-200);
+    color: var(--color-red-500);
+    transition: background-color .15s ease;
+}
+
+.admin_orders_show_danger-button:hover {
+    background-color: var(--color-red-50);
+}
+
+@media (min-width: 640px) {
+    .admin_orders_show_status-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

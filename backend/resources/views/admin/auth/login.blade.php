@@ -4,23 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>管理者ログイン | {{ config('app.name') }}</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{{ asset('css/common.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/layout.css') }}">
 </head>
-<body class="bg-gray-50 min-h-screen flex items-center justify-center">
+<body class="admin_auth_login_body">
 
-    <div class="w-full max-w-md px-4">
+    <div class="admin_auth_login_wrap">
 
         {{-- ロゴ・タイトル --}}
-        <div class="text-center mb-8">
-            <p class="text-xs font-semibold tracking-widest text-gray-400 uppercase mb-2">{{ config('app.name') }}</p>
-            <h1 class="text-2xl font-bold text-gray-800">管理者ログイン</h1>
+        <div class="admin_auth_login_header">
+            <p class="admin_auth_login_eyebrow">{{ config('app.name') }}</p>
+            <h1 class="admin_auth_login_title">管理者ログイン</h1>
         </div>
 
         {{-- カード --}}
-        <div class="bg-white rounded-2xl shadow-sm border border-gray-200 px-8 py-10">
+        <div class="admin_auth_login_card">
 
             @if ($errors->any())
-                <div class="mb-6 bg-red-50 border border-red-200 text-red-700 text-sm px-4 py-3 rounded-lg">
+                <div class="common_flash-error">
                     {{ $errors->first() }}
                 </div>
             @endif
@@ -29,8 +30,8 @@
                 @csrf
 
                 {{-- メールアドレス --}}
-                <div class="mb-5">
-                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1.5">
+                <div class="admin_auth_login_field">
+                    <label for="email" class="common_form-label">
                         メールアドレス
                     </label>
                     <input
@@ -41,14 +42,14 @@
                         required
                         autofocus
                         autocomplete="email"
-                        class="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition @error('email') border-red-400 @enderror"
+                        class="common_form-input admin_auth_login_input @error('email') is-invalid @enderror"
                         placeholder="admin@example.com"
                     >
                 </div>
 
                 {{-- パスワード --}}
-                <div class="mb-6">
-                    <label for="password" class="block text-sm font-medium text-gray-700 mb-1.5">
+                <div class="admin_auth_login_field--last">
+                    <label for="password" class="common_form-label">
                         パスワード
                     </label>
                     <input
@@ -57,7 +58,7 @@
                         name="password"
                         required
                         autocomplete="current-password"
-                        class="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition"
+                        class="common_form-input admin_auth_login_input"
                         placeholder="••••••••"
                     >
                 </div>
@@ -65,14 +66,14 @@
                 {{-- ログインボタン --}}
                 <button
                     type="submit"
-                    class="w-full bg-gray-900 hover:bg-gray-700 text-white text-sm font-semibold py-3 px-4 rounded-lg transition"
+                    class="admin_auth_login_submit"
                 >
                     ログイン
                 </button>
             </form>
         </div>
 
-        <p class="text-center text-xs text-gray-400 mt-6">
+        <p class="admin_auth_login_footer">
             &copy; {{ date('Y') }} {{ config('app.name') }}. All rights reserved.
         </p>
     </div>

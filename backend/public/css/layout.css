@@ -1,0 +1,644 @@
+/*
+ * layout.css
+ * サイト全体の骨格（ルートlayout / header / footer / 管理画面layout / 管理者ログイン画面）
+ */
+
+/* ============================================================
+   layouts/app.blade.php（公開サイト共通レイアウト）
+   ============================================================ */
+.layouts_app_body {
+    background-color: var(--color-gray-50);
+    color: var(--color-gray-800);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.layouts_app_main {
+    flex: 1;
+}
+
+/* ============================================================
+   components/header.blade.php
+   ============================================================ */
+.header_bar {
+    background-color: var(--color-white);
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+
+.header_container {
+    max-width: 72rem;
+    margin-inline: auto;
+    padding-inline: 1rem;
+}
+
+.header_row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 4rem;
+}
+
+.header_logo {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    letter-spacing: -.025em;
+    color: var(--color-gray-900);
+    flex-shrink: 0;
+}
+
+.header_nav-desktop {
+    display: none;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.header_nav-link {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-gray-600);
+    transition: color .15s ease;
+}
+
+.header_nav-link:hover {
+    color: var(--color-indigo-600);
+}
+
+.header_nav-link.is-active {
+    color: var(--color-indigo-600);
+    border-bottom: 2px solid var(--color-indigo-600);
+    padding-bottom: .125rem;
+}
+
+.header_cart-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: .375rem;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-gray-600);
+    transition: color .15s ease;
+}
+
+.header_cart-link:hover {
+    color: var(--color-indigo-600);
+}
+
+.header_cart-link.is-active {
+    color: var(--color-indigo-600);
+}
+
+.header_nav-icon {
+    height: 1.25rem;
+    width: 1.25rem;
+}
+
+.header_divider {
+    color: var(--color-gray-200);
+}
+
+.header_logout-form {
+    display: inline;
+}
+
+.header_logout-button {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-gray-500);
+    transition: color .15s ease;
+}
+
+.header_logout-button:hover {
+    color: var(--color-red-500);
+}
+
+.header_register-link {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    background-color: var(--color-indigo-600);
+    color: var(--color-white);
+    padding: .375rem 1rem;
+    border-radius: var(--radius-lg);
+    transition: background-color .15s ease;
+}
+
+.header_register-link:hover {
+    background-color: var(--color-indigo-700);
+}
+
+.header_menu-button {
+    padding: .5rem;
+    border-radius: var(--radius-lg);
+    color: var(--color-gray-500);
+    transition: background-color .15s ease;
+}
+
+.header_menu-button:hover {
+    background-color: var(--color-gray-100);
+}
+
+.header_menu-icon {
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+.header_mobile-menu {
+    border-top: 1px solid var(--color-gray-100);
+    background-color: var(--color-white);
+}
+
+.header_mobile-nav {
+    max-width: 72rem;
+    margin-inline: auto;
+    padding: .75rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+}
+
+.header_mobile-link {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .625rem .75rem;
+    border-radius: var(--radius-lg);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-gray-700);
+    transition: background-color .15s ease, color .15s ease;
+}
+
+.header_mobile-link:hover {
+    background-color: var(--color-gray-50);
+    color: var(--color-indigo-600);
+}
+
+.header_mobile-link.is-active {
+    background-color: var(--color-indigo-50);
+    color: var(--color-indigo-600);
+}
+
+.header_mobile-icon {
+    height: 1rem;
+    width: 1rem;
+}
+
+.header_mobile-divider {
+    margin-block: .25rem;
+    border-top: 1px solid var(--color-gray-100);
+}
+
+.header_mobile-logout {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .625rem .75rem;
+    border-radius: var(--radius-lg);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-gray-700);
+    text-align: left;
+    transition: background-color .15s ease, color .15s ease;
+}
+
+.header_mobile-logout:hover {
+    background-color: var(--color-red-50);
+    color: var(--color-red-600, var(--color-red-500));
+}
+
+.header_mobile-register {
+    display: flex;
+    align-items: center;
+    padding: .625rem .75rem;
+    border-radius: var(--radius-lg);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    background-color: var(--color-indigo-600);
+    color: var(--color-white);
+    transition: background-color .15s ease;
+}
+
+.header_mobile-register:hover {
+    background-color: var(--color-indigo-700);
+}
+
+@media (min-width: 768px) {
+    .header_nav-desktop {
+        display: flex;
+    }
+
+    .header_menu-button,
+    .header_mobile-menu {
+        display: none !important;
+    }
+}
+
+/* ============================================================
+   components/footer.blade.php
+   ============================================================ */
+.footer {
+    background-color: var(--color-gray-900);
+    color: var(--color-gray-400);
+    margin-top: auto;
+}
+
+.footer_container {
+    max-width: 72rem;
+    margin-inline: auto;
+    padding: 3rem 1rem;
+}
+
+.footer_grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+.footer_brand-name {
+    color: var(--color-white);
+    font-weight: 700;
+    font-size: var(--text-lg);
+    margin-bottom: .5rem;
+}
+
+.footer_brand-sub {
+    font-size: var(--text-sm);
+    color: var(--color-gray-500);
+}
+
+.footer_heading {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-gray-300);
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    margin-bottom: .75rem;
+}
+
+.footer_contact-list,
+.footer_nav-list {
+    font-size: var(--text-sm);
+}
+
+.footer_contact-list > * + *,
+.footer_nav-list > * + * {
+    margin-top: .5rem;
+}
+
+.footer_contact-item {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.footer_contact-icon {
+    height: 1rem;
+    width: 1rem;
+    color: var(--color-gray-500);
+    flex-shrink: 0;
+}
+
+.footer_link {
+    transition: color .15s ease;
+}
+
+.footer_link:hover {
+    color: var(--color-white);
+}
+
+.footer_hours {
+    margin-top: .75rem;
+    font-size: var(--text-xs);
+    color: var(--color-gray-600);
+}
+
+.footer_bottom {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-gray-800);
+    text-align: center;
+    font-size: var(--text-xs);
+    color: var(--color-gray-600);
+}
+
+@media (min-width: 768px) {
+    .footer_grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* ============================================================
+   admin/layouts/app.blade.php（管理画面共通レイアウト）
+   ============================================================ */
+.admin_layouts_app_body {
+    background-color: var(--color-gray-100);
+    min-height: 100vh;
+    display: flex;
+}
+
+.admin_layouts_app_sidebar {
+    width: 14rem;
+    background-color: var(--color-gray-900);
+    color: var(--color-gray-300);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    min-height: 100vh;
+}
+
+.admin_layouts_app_sidebar-header {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--color-gray-700);
+}
+
+.admin_layouts_app_sidebar-eyebrow {
+    font-size: var(--text-xs);
+    color: var(--color-gray-500);
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    margin-bottom: .25rem;
+}
+
+.admin_layouts_app_sidebar-title {
+    color: var(--color-white);
+    font-weight: 700;
+    font-size: var(--text-lg);
+    line-height: 1.375;
+}
+
+.admin_layouts_app_nav {
+    flex: 1;
+    padding-block: 1rem;
+}
+
+.admin_layouts_app_nav-link {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    padding: .625rem 1.5rem;
+    font-size: var(--text-sm);
+    transition: background-color .15s ease, color .15s ease;
+}
+
+.admin_layouts_app_nav-link:hover {
+    background-color: var(--color-gray-800);
+    color: var(--color-white);
+}
+
+.admin_layouts_app_nav-link.is-active {
+    background-color: var(--color-gray-800);
+    color: var(--color-white);
+}
+
+.admin_layouts_app_nav-icon {
+    height: 1rem;
+    width: 1rem;
+}
+
+.admin_layouts_app_nav-heading {
+    padding: .5rem 1.5rem;
+    margin-top: 1rem;
+    font-size: var(--text-xs);
+    color: var(--color-gray-500);
+    text-transform: uppercase;
+    letter-spacing: .025em;
+}
+
+.admin_layouts_app_sidebar-footer {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--color-gray-700);
+}
+
+.admin_layouts_app_sidebar-footer > * + * {
+    margin-top: .75rem;
+}
+
+.admin_layouts_app_footer-link {
+    font-size: var(--text-xs);
+    color: var(--color-gray-500);
+    display: flex;
+    align-items: center;
+    gap: .25rem;
+    transition: color .15s ease;
+}
+
+.admin_layouts_app_footer-link:hover {
+    color: var(--color-white);
+}
+
+.admin_layouts_app_footer-icon {
+    height: .75rem;
+    width: .75rem;
+}
+
+.admin_layouts_app_footer-logout {
+    width: 100%;
+    text-align: left;
+    font-size: var(--text-xs);
+    color: var(--color-gray-500);
+    display: flex;
+    align-items: center;
+    gap: .25rem;
+    transition: color .15s ease;
+}
+
+.admin_layouts_app_footer-logout:hover {
+    color: var(--color-white);
+}
+
+.admin_layouts_app_content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow: auto;
+}
+
+.admin_layouts_app_topbar {
+    background-color: var(--color-white);
+    border-bottom: 1px solid var(--color-gray-200);
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.admin_layouts_app_topbar-title {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--color-gray-800);
+}
+
+.admin_layouts_app_topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.admin_layouts_app_topbar-user {
+    font-size: var(--text-sm);
+    color: var(--color-gray-500);
+}
+
+.admin_layouts_app_main {
+    flex: 1;
+    padding: 2rem;
+}
+
+/* ============================================================
+   管理画面フォームページの共通シェル
+   （admin/products/create・edit、admin/news/create・edit で共通）
+   ============================================================ */
+.admin_form-page {
+    max-width: 42rem;
+}
+
+.admin_card {
+    background-color: var(--color-white);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+}
+
+.admin_card-header {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--color-gray-200);
+}
+
+.admin_form-card {
+    background-color: var(--color-white);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-sm);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.admin_form-actions {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: .75rem;
+}
+
+.admin_header-action-button {
+    background-color: var(--color-indigo-600);
+    color: var(--color-white);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    padding: .5rem 1rem;
+    border-radius: var(--radius-lg);
+    transition: background-color .15s ease;
+}
+
+.admin_header-action-button:hover {
+    background-color: var(--color-indigo-700);
+}
+
+.admin_header-action-button--outline {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-gray-300);
+    color: var(--color-gray-600);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    padding: .5rem 1rem;
+    border-radius: var(--radius-lg);
+    transition: background-color .15s ease;
+}
+
+.admin_header-action-button--outline:hover {
+    background-color: var(--color-gray-50);
+}
+
+/* ============================================================
+   admin/auth/login.blade.php（管理者ログイン・単独ページ）
+   ============================================================ */
+.admin_auth_login_body {
+    background-color: var(--color-gray-50);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin_auth_login_wrap {
+    width: 100%;
+    max-width: 28rem;
+    padding-inline: 1rem;
+}
+
+.admin_auth_login_header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.admin_auth_login_eyebrow {
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: .1em;
+    color: var(--color-gray-400);
+    text-transform: uppercase;
+    margin-bottom: .5rem;
+}
+
+.admin_auth_login_title {
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    color: var(--color-gray-800);
+}
+
+.admin_auth_login_card {
+    background-color: var(--color-white);
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--color-gray-200);
+    padding: 2.5rem 2rem;
+}
+
+.admin_auth_login_field {
+    margin-bottom: 1.25rem;
+}
+
+.admin_auth_login_field--last {
+    margin-bottom: 1.5rem;
+}
+
+.admin_auth_login_input {
+    color: var(--color-gray-900);
+}
+
+.admin_auth_login_input::placeholder {
+    color: var(--color-gray-400);
+}
+
+.admin_auth_login_input:focus {
+    box-shadow: 0 0 0 2px var(--color-gray-900);
+}
+
+.admin_auth_login_submit {
+    width: 100%;
+    background-color: var(--color-gray-900);
+    color: var(--color-white);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    padding: .75rem 1rem;
+    border-radius: var(--radius-lg);
+    transition: background-color .15s ease;
+}
+
+.admin_auth_login_submit:hover {
+    background-color: var(--color-gray-700);
+}
+
+.admin_auth_login_footer {
+    text-align: center;
+    font-size: var(--text-xs);
+    color: var(--color-gray-400);
+    margin-top: 1.5rem;
+}

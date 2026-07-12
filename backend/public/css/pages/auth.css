@@ -1,0 +1,78 @@
+/*
+ * pages/auth.css
+ * resources/views/auth/login.blade.php, register.blade.php 専用スタイル
+ */
+
+.auth_layout {
+    min-height: calc(100vh - 8rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1rem;
+}
+
+.auth_wrap {
+    width: 100%;
+    max-width: 28rem;
+}
+
+.auth_wrap--wide {
+    max-width: 32rem;
+}
+
+.auth_header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.auth_title {
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    color: var(--color-gray-900);
+}
+
+.auth_subtext {
+    margin-top: .5rem;
+    font-size: var(--text-sm);
+    color: var(--color-gray-500);
+}
+
+.auth_subtext-link {
+    color: var(--color-indigo-600);
+    font-weight: 500;
+}
+
+.auth_subtext-link:hover {
+    text-decoration: underline;
+}
+
+.auth_card {
+    padding: 2.5rem 2rem;
+}
+
+.auth_field {
+    margin-bottom: 1.25rem;
+}
+
+.auth_field--mb6 {
+    margin-bottom: 1.5rem;
+}
+
+.auth_field--mb8 {
+    margin-bottom: 2rem;
+}
+
+.auth_submit-button {
+    width: 100%;
+    background-color: var(--color-indigo-600);
+    color: var(--color-white);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    padding: .75rem 1rem;
+    border-radius: var(--radius-lg);
+    transition: background-color .15s ease;
+}
+
+.auth_submit-button:hover {
+    background-color: var(--color-indigo-700);
+}

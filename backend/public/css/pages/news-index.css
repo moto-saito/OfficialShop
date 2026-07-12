@@ -1,0 +1,106 @@
+/*
+ * pages/news-index.css
+ * resources/views/news/index.blade.php 専用スタイル
+ */
+
+.news_index_layout {
+    max-width: 48rem;
+    margin-inline: auto;
+    padding: 2.5rem 1rem;
+}
+
+.news_index_empty {
+    color: var(--color-gray-500);
+    text-align: center;
+    padding-block: 5rem;
+}
+
+.news_index_list {
+    border-top: 1px solid var(--color-gray-200);
+}
+
+.news_index_list > li {
+    border-top: 1px solid var(--color-gray-200);
+}
+
+.news_index_list > li:first-child {
+    border-top: none;
+}
+
+.news_index_item-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 1rem;
+    margin-inline: -1rem;
+    border-radius: var(--radius-xl);
+    transition: background-color .15s ease;
+}
+
+.news_index_item-link:hover {
+    background-color: var(--color-gray-50);
+}
+
+.news_index_thumb {
+    width: 5rem;
+    height: 5rem;
+    flex-shrink: 0;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background-color: var(--color-gray-100);
+}
+
+.news_index_thumb-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.news_index_thumb-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.news_index_thumb-icon {
+    height: 2rem;
+    width: 2rem;
+    color: var(--color-gray-300);
+}
+
+.news_index_item-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.news_index_item-date {
+    font-size: var(--text-xs);
+    color: var(--color-gray-400);
+    margin-bottom: .25rem;
+}
+
+.news_index_item-title {
+    font-weight: 600;
+    color: var(--color-gray-800, inherit);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color .15s ease;
+}
+
+.news_index_item-link:hover .news_index_item-title {
+    color: var(--color-indigo-600);
+}
+
+.news_index_item-arrow {
+    height: 1rem;
+    width: 1rem;
+    color: var(--color-gray-300);
+    flex-shrink: 0;
+}
+
+.news_index_pagination-wrap {
+    margin-top: 2.5rem;
+}

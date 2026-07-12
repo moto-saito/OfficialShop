@@ -1,0 +1,311 @@
+/*
+ * pages/mypage.css
+ * resources/views/mypage/index.blade.php, edit.blade.php, orders/index.blade.php, orders/show.blade.php 専用スタイル
+ */
+
+.mypage_layout {
+    max-width: 42rem;
+    margin-inline: auto;
+    padding: 3rem 1rem;
+}
+
+.mypage_layout--wide {
+    max-width: 48rem;
+}
+
+.mypage_section-card {
+    margin-bottom: 1.5rem;
+}
+
+.mypage_section-header {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--color-gray-100);
+}
+
+.mypage_section-title {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-gray-500);
+    text-transform: uppercase;
+    letter-spacing: .05em;
+}
+
+/* ============================================================
+   mypage/index.blade.php
+   ============================================================ */
+.mypage_index_orders-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    transition: background-color .15s ease;
+}
+
+.mypage_index_orders-link:hover {
+    background-color: var(--color-gray-50);
+}
+
+.mypage_index_orders-link-left {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+}
+
+.mypage_index_orders-icon-wrap {
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: var(--color-indigo-50);
+    border-radius: var(--radius-xl);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mypage_index_orders-icon {
+    height: 1.25rem;
+    width: 1.25rem;
+    color: var(--color-indigo-600);
+}
+
+.mypage_index_orders-title {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-gray-800, inherit);
+}
+
+.mypage_index_orders-sub {
+    font-size: var(--text-xs);
+    color: var(--color-gray-400);
+}
+
+.mypage_index_orders-arrow {
+    height: 1.25rem;
+    width: 1.25rem;
+    color: var(--color-gray-400);
+}
+
+/* ============================================================
+   mypage/edit.blade.php
+   ============================================================ */
+.mypage_edit_form-card {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.mypage_edit_section-title {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-gray-500);
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    margin-bottom: 1rem;
+    padding-bottom: .5rem;
+    border-bottom: 1px solid var(--color-gray-100);
+}
+
+.mypage_edit_field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.mypage_edit_field--w40 {
+    width: 10rem;
+}
+
+.mypage_edit_field--w56 {
+    width: 14rem;
+}
+
+.mypage_edit_actions {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: .75rem;
+}
+
+/* ============================================================
+   mypage/orders/index.blade.php
+   ============================================================ */
+.mypage_orders_index_empty {
+    text-align: center;
+    padding-block: 5rem;
+    color: var(--color-gray-400);
+}
+
+.mypage_orders_index_empty-text {
+    margin-bottom: 1rem;
+}
+
+.mypage_orders_index_empty-cta {
+    display: inline-block;
+    background-color: var(--color-indigo-600);
+    color: var(--color-white);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    padding: .625rem 1.5rem;
+    border-radius: var(--radius-xl);
+    transition: background-color .15s ease;
+}
+
+.mypage_orders_index_empty-cta:hover {
+    background-color: var(--color-indigo-700);
+}
+
+.mypage_orders_index_col-date {
+    display: table-cell;
+    color: var(--color-gray-500);
+}
+
+.mypage_orders_index_col-amount {
+    text-align: right;
+}
+
+.mypage_orders_index_col-status {
+    width: 7rem;
+    text-align: center;
+}
+
+.mypage_orders_index_number-link {
+    font-weight: 500;
+    color: var(--color-indigo-600);
+    font-size: var(--text-xs);
+    letter-spacing: .025em;
+}
+
+.mypage_orders_index_number-link:hover {
+    text-decoration: underline;
+}
+
+.mypage_orders_index_date-mobile {
+    font-size: var(--text-xs);
+    color: var(--color-gray-400);
+    margin-top: .125rem;
+}
+
+.mypage_orders_index_amount-cell {
+    text-align: right;
+    font-weight: 500;
+    color: var(--color-gray-800, inherit);
+}
+
+.mypage_orders_index_status-cell {
+    text-align: center;
+}
+
+.mypage_orders_index_pagination-wrap {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--color-gray-200);
+    background-color: var(--color-gray-50);
+}
+
+@media (max-width: 639px) {
+    .mypage_orders_index_col-date,
+    .mypage_orders_index_date-desktop {
+        display: none;
+    }
+}
+
+@media (min-width: 640px) {
+    .mypage_orders_index_date-mobile {
+        display: none;
+    }
+}
+
+/* ============================================================
+   mypage/orders/show.blade.php
+   ============================================================ */
+.mypage_orders_show_summary-header {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--color-gray-100);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: .5rem;
+}
+
+.mypage_orders_show_order-number-label {
+    font-size: var(--text-xs);
+    color: var(--color-gray-400);
+    letter-spacing: .05em;
+    margin-bottom: .125rem;
+}
+
+.mypage_orders_show_order-number {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--color-gray-800, inherit);
+    letter-spacing: .025em;
+}
+
+.mypage_orders_show_items-table td:first-child {
+    color: var(--color-gray-800, inherit);
+}
+
+.mypage_orders_show_col-price {
+    width: 5rem;
+    text-align: right;
+}
+
+.mypage_orders_show_col-qty {
+    width: 4rem;
+    text-align: center;
+}
+
+.mypage_orders_show_col-subtotal {
+    width: 6rem;
+    text-align: right;
+}
+
+.mypage_orders_show_price-mobile {
+    display: block;
+    font-size: var(--text-xs);
+    color: var(--color-gray-400);
+}
+
+.mypage_orders_show_items-table td:nth-child(3) {
+    text-align: center;
+    color: var(--color-gray-600);
+}
+
+.mypage_orders_show_item-subtotal {
+    text-align: right;
+    font-weight: 500;
+    color: var(--color-gray-800, inherit);
+}
+
+.mypage_orders_show_total-row {
+    padding: 1rem 1.5rem;
+    background-color: var(--color-gray-50);
+    border-top: 1px solid var(--color-gray-200);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.mypage_orders_show_total-label {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-gray-700);
+}
+
+.mypage_orders_show_total-amount {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--color-gray-900);
+}
+
+@media (max-width: 639px) {
+    .mypage_orders_show_col-price {
+        display: none;
+    }
+}
+
+@media (min-width: 640px) {
+    .mypage_orders_show_price-mobile {
+        display: none;
+    }
+}

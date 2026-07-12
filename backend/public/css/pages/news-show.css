@@ -1,0 +1,61 @@
+/*
+ * pages/news-show.css
+ * resources/views/news/show.blade.php 専用スタイル
+ */
+
+.news_show_layout {
+    max-width: 48rem;
+    margin-inline: auto;
+    padding: 2.5rem 1rem;
+}
+
+.news_show_image {
+    width: 100%;
+    max-height: 20rem;
+    object-fit: cover;
+}
+
+.news_show_body {
+    padding: 2rem;
+}
+
+.news_show_date {
+    font-size: var(--text-sm);
+    color: var(--color-gray-400);
+    margin-bottom: .75rem;
+}
+
+.news_show_title {
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    line-height: 1.375;
+    margin-bottom: 1.5rem;
+}
+
+.news_show_content {
+    color: var(--color-gray-700);
+    line-height: 1.625;
+    white-space: pre-line;
+}
+
+.news_show_back-wrap {
+    margin-top: 2rem;
+}
+
+.news_show_back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    font-size: var(--text-sm);
+    color: var(--color-indigo-600);
+    transition: color .15s ease;
+}
+
+.news_show_back-link:hover {
+    color: var(--color-indigo-800, var(--color-indigo-700));
+}
+
+.news_show_back-icon {
+    height: 1rem;
+    width: 1rem;
+}
