@@ -6,25 +6,21 @@
 .home_hero {
     position: relative;
     overflow: hidden;
-    background-color: var(--color-gray-900);
     color: var(--color-white);
+    /* 工房・木をイメージした濃い背景（写真素材が無いためCSSのみで木目/梁の質感を表現） */
+    background-color: var(--color-wood-950);
+    background-image:
+        repeating-linear-gradient(115deg, var(--color-wood-line) 0, var(--color-wood-line) 1px, transparent 1px, transparent 14px),
+        repeating-linear-gradient(90deg, var(--color-wood-line-strong) 0, var(--color-wood-line-strong) 2px, transparent 2px, transparent 90px),
+        radial-gradient(ellipse at 20% 20%, var(--color-wood-800) 0%, transparent 55%),
+        linear-gradient(160deg, var(--color-wood-800) 0%, var(--color-wood-950) 55%, var(--color-wood-900) 100%);
 }
 
-.home_hero-bg {
+.home_hero::before {
+    content: '';
     position: absolute;
     inset: 0;
-}
-
-.home_hero-bg-gradient {
-    width: 100%;
-    height: 100%;
-    background-image: linear-gradient(to bottom right, oklch(.359 .144 278.697), var(--color-gray-900), var(--color-gray-800));
-}
-
-.home_hero-overlay {
-    position: absolute;
-    inset: 0;
-    background-color: rgb(0 0 0 / .5);
+    background-color: rgb(20 12 8 / .55);
 }
 
 .home_hero-inner {
@@ -35,41 +31,22 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 3rem;
 }
 
 .home_hero-text {
-    flex: 1;
     text-align: center;
-}
-
-.home_hero-eyebrow {
-    color: oklch(.785 .115 274.713);
-    font-size: var(--text-sm);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: .1em;
-    margin-bottom: 1rem;
 }
 
 .home_hero-title {
     font-size: 2.25rem;
     font-weight: 700;
     line-height: 1.25;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
+    text-shadow: 0 2px 8px rgb(0 0 0 / .35);
 }
 
 .home_hero-break {
     display: none;
-}
-
-.home_hero-desc {
-    color: var(--color-gray-300, oklch(.872 .01 258.338));
-    font-size: var(--text-base);
-    line-height: 1.625;
-    max-width: 28rem;
-    margin-inline: auto;
-    margin-bottom: 2rem;
 }
 
 .home_hero-actions {
@@ -107,49 +84,81 @@
     background-color: rgb(255 255 255 / .1);
 }
 
-.home_hero-photo {
+.home_section {
+    padding-block: 4rem;
+}
+
+.home_section--philosophy {
+    position: relative;
+    /* 薄い木目・和紙風の背景（写真素材が無いためCSSのみで紙の繊維/木目の質感を表現） */
+    background-color: var(--color-washi);
+    background-image:
+        repeating-linear-gradient(4deg, var(--color-washi-line) 0, var(--color-washi-line) 1px, transparent 1px, transparent 10px),
+        linear-gradient(170deg, var(--color-washi-light) 0%, var(--color-washi) 100%);
+}
+
+.home_section--news {
+    /* 薄いベージュ背景 */
+    background-color: var(--color-beige-light);
+    background-image: repeating-linear-gradient(0deg, var(--color-beige-line) 0, var(--color-beige-line) 1px, transparent 1px, transparent 8px);
+}
+
+.home_section--products {
+    /* 生成り・アイボリー背景 */
+    background-color: var(--color-ivory);
+}
+
+.home_philosophy-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    align-items: center;
+}
+
+.home_philosophy-text {
+    flex: 1;
+    text-align: center;
+}
+
+.home_philosophy-desc {
+    color: var(--color-gray-600);
+    font-size: var(--text-base);
+    line-height: 1.625;
+    max-width: 32rem;
+    margin-inline: auto;
+}
+
+.home_philosophy-photo {
     flex-shrink: 0;
     width: 100%;
 }
 
-.home_hero-photo-frame {
+.home_philosophy-photo-frame {
     border-radius: var(--radius-2xl);
     overflow: hidden;
     box-shadow: var(--shadow-lg);
     aspect-ratio: 4 / 3;
-    background-color: var(--color-gray-700, oklch(.373 .034 259.733));
+    background-color: var(--color-wood-700);
     display: flex;
     align-items: center;
     justify-content: center;
     border: 1px solid rgb(255 255 255 / .1);
 }
 
-.home_hero-photo-placeholder {
+.home_philosophy-photo-placeholder {
     text-align: center;
-    color: var(--color-gray-500);
+    color: var(--color-washi-light);
 }
 
-.home_hero-photo-caption {
+.home_philosophy-photo-caption {
     font-size: var(--text-sm);
 }
 
-.home_hero-photo-icon {
+.home_philosophy-photo-icon {
     height: 4rem;
     width: 4rem;
     margin-inline: auto;
     margin-bottom: .5rem;
-}
-
-.home_section {
-    padding-block: 4rem;
-}
-
-.home_section--news {
-    background-color: var(--color-white);
-}
-
-.home_section--products {
-    background-color: var(--color-gray-50);
 }
 
 .home_container {
@@ -409,12 +418,7 @@
 
 @media (min-width: 768px) {
     .home_hero-inner {
-        flex-direction: row;
         padding-block: 9rem;
-    }
-
-    .home_hero-text {
-        text-align: left;
     }
 
     .home_hero-break {
@@ -425,17 +429,26 @@
         font-size: 3rem;
     }
 
-    .home_hero-desc {
+    .home_hero-actions {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .home_philosophy-inner {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .home_philosophy-text {
+        text-align: left;
+    }
+
+    .home_philosophy-desc {
         font-size: var(--text-lg);
         margin-inline: 0;
     }
 
-    .home_hero-actions {
-        flex-direction: row;
-        justify-content: flex-start;
-    }
-
-    .home_hero-photo {
+    .home_philosophy-photo {
         width: 20rem;
     }
 
@@ -449,7 +462,7 @@
 }
 
 @media (min-width: 1024px) {
-    .home_hero-photo {
+    .home_philosophy-photo {
         width: 24rem;
     }
 

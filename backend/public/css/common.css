@@ -42,6 +42,20 @@
     --color-green-700: oklch(.527 .154 150.069);
     --color-green-800: oklch(.448 .119 151.328);
 
+    /* ── 老舗・味噌醤油蔵イメージの木目/和紙カラー ── */
+    --color-wood-950: #241812;
+    --color-wood-900: #33231a;
+    --color-wood-800: #43301f;
+    --color-wood-700: #5a4128;
+    --color-wood-line: rgb(255 214 156 / .06);
+    --color-wood-line-strong: rgb(0 0 0 / .18);
+    --color-washi: #ede2c8;
+    --color-washi-light: #f4ead2;
+    --color-washi-line: rgb(120 88 42 / .07);
+    --color-beige-light: #f4ebdb;
+    --color-beige-line: rgb(150 110 60 / .05);
+    --color-ivory: #faf6ec;
+
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 
     --text-xs: .75rem;

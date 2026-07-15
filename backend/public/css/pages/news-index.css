@@ -7,6 +7,9 @@
     max-width: 48rem;
     margin-inline: auto;
     padding: 2.5rem 1rem;
+    /* 薄いベージュ背景 */
+    background-color: var(--color-beige-light);
+    background-image: repeating-linear-gradient(0deg, var(--color-beige-line) 0, var(--color-beige-line) 1px, transparent 1px, transparent 8px);
 }
 
 .news_index_empty {

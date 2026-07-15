@@ -7,6 +7,8 @@
     max-width: 72rem;
     margin-inline: auto;
     padding: 2.5rem 1rem;
+    /* 生成り・アイボリー背景 */
+    background-color: var(--color-ivory);
 }
 
 .products_index_empty {

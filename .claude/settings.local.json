@@ -25,7 +25,10 @@
       "Bash(grep -rln 'text-sm text-gray-500 hover:text-gray-700 transition' resources/views/)",
       "Bash(grep -rln 'flex items-center justify-between mb-8' resources/views/)",
       "Bash(grep -rn '\\\\$order->status_color\\\\|\\\\$news->status\\\\b\\\\|status_color' resources/views/)",
-      "Bash(cd *)"
+      "Bash(cd *)",
+      "Read(//tmp/**)",
+      "Bash(npx playwright *)",
+      "Bash(node shot.js)"
     ]
   }
 }

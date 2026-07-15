@@ -242,12 +242,27 @@
    components/footer.blade.php
    ============================================================ */
 .footer {
-    background-color: var(--color-gray-900);
+    position: relative;
+    overflow: hidden;
     color: var(--color-gray-400);
     margin-top: auto;
+    /* 濃い木目・樹皮風の背景（写真素材が無いためCSSのみで木目/樹皮の質感を表現） */
+    background-color: var(--color-wood-950);
+    background-image:
+        repeating-linear-gradient(3deg, var(--color-wood-line) 0, var(--color-wood-line) 1px, transparent 1px, transparent 12px),
+        repeating-linear-gradient(93deg, var(--color-wood-line-strong) 0, var(--color-wood-line-strong) 2px, transparent 2px, transparent 70px),
+        linear-gradient(180deg, var(--color-wood-900) 0%, var(--color-wood-950) 100%);
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: rgb(0 0 0 / .2);
 }
 
 .footer_container {
+    position: relative;
     max-width: 72rem;
     margin-inline: auto;
     padding: 3rem 1rem;

@@ -9,33 +9,16 @@
 @section('content')
 
 {{-- ========================================
-     Hero: 企業理念 + 会社写真
+     Hero: TOPメインビジュアル
 ======================================== --}}
 <section class="home_hero">
-
-    {{-- 背景画像（会社写真プレースホルダー） --}}
-    <div class="home_hero-bg">
-        <div class="home_hero-bg-gradient"></div>
-        {{-- 実際の会社写真があれば下記のように差し替え
-        <img src="/images/company.jpg" alt="会社写真"
-             class="home_hero-photo-image"> --}}
-        <div class="home_hero-overlay"></div>
-    </div>
-
     <div class="home_hero-inner">
-
-        {{-- 企業理念テキスト --}}
         <div class="home_hero-text">
-            <p class="home_hero-eyebrow">Our Philosophy</p>
             <h1 class="home_hero-title">
                 品質と誠実さで、<br class="home_hero-break">
                 あなたの毎日に<br class="home_hero-break">
                 彩りを。
             </h1>
-            <p class="home_hero-desc">
-                私たちは「お客様の生活をより豊かに」という信念のもと、
-                厳選された素材と丁寧な製造で、長く愛される商品をお届けします。
-            </p>
             <div class="home_hero-actions">
                 <a href="{{ route('products.index') }}"
                    class="home_hero-cta-primary">
@@ -47,16 +30,34 @@
                 </a>
             </div>
         </div>
+    </div>
+</section>
+
+{{-- ========================================
+     企業理念
+======================================== --}}
+<section class="home_section home_section--philosophy">
+    <div class="home_container home_philosophy-inner">
+
+        {{-- 企業理念テキスト --}}
+        <div class="home_philosophy-text">
+            <p class="home_section-eyebrow">Our Philosophy</p>
+            <h2 class="home_section-title">企業理念</h2>
+            <p class="home_philosophy-desc">
+                私たちは「お客様の生活をより豊かに」という信念のもと、
+                厳選された素材と丁寧な製造で、長く愛される商品をお届けします。
+            </p>
+        </div>
 
         {{-- 会社写真エリア（プレースホルダー） --}}
-        <div class="home_hero-photo">
-            <div class="home_hero-photo-frame">
+        <div class="home_philosophy-photo">
+            <div class="home_philosophy-photo-frame">
                 {{-- 実際の写真に差し替え可能 --}}
-                <div class="home_hero-photo-placeholder">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="home_hero-photo-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div class="home_philosophy-photo-placeholder">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="home_philosophy-photo-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                     </svg>
-                    <p class="home_hero-photo-caption">会社写真</p>
+                    <p class="home_philosophy-photo-caption">会社写真</p>
                 </div>
             </div>
         </div>
