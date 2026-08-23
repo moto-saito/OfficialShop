@@ -21,7 +21,7 @@
         {{-- 商品画像 --}}
         <div class="products_show_image-wrap">
             @if ($product->image_path)
-                <img src="{{ asset($product->image_path) }}"
+                <img src="{{ asset('storage/' . $product->image_path) }}"
                      alt="{{ $product->name }}"
                      class="products_show_image">
             @else

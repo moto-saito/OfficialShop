@@ -21,7 +21,7 @@
                     {{-- 商品画像 --}}
                     <a href="{{ route('products.show', $product) }}" class="products_index_product-image-link">
                         @if ($product->image_path)
-                            <img src="{{ asset($product->image_path) }}"
+                            <img src="{{ asset('storage/' . $product->image_path) }}"
                                  alt="{{ $product->name }}"
                                  class="products_index_product-image">
                         @else

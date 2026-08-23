@@ -20,7 +20,7 @@
 
         {{-- 画像 --}}
         @if ($recipe->image_path)
-            <img src="{{ asset($recipe->image_path) }}"
+            <img src="{{ asset('storage/' . $recipe->image_path) }}"
                  alt="{{ $recipe->title }}"
                  class="recipes_show_image">
         @endif

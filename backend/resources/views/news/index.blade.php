@@ -22,7 +22,7 @@
                         {{-- サムネイル --}}
                         <div class="news_index_thumb">
                             @if ($news->image_path)
-                                <img src="{{ asset($news->image_path) }}"
+                                <img src="{{ asset('storage/' . $news->image_path) }}"
                                      alt="{{ $news->title }}"
                                      class="news_index_thumb-image">
                             @else

@@ -28,7 +28,11 @@
       "Bash(cd *)",
       "Read(//tmp/**)",
       "Bash(npx playwright *)",
-      "Bash(node shot.js)"
+      "Bash(node shot.js)",
+      "Bash(xargs -I{} echo {})",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(grep -rn \"asset\\(\\\\$\" resources/views/recipes resources/views/products resources/views/news resources/views/home.blade.php)"
     ]
   }
 }

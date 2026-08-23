@@ -22,7 +22,7 @@
                         {{-- サムネイル --}}
                         <div class="recipes_index_thumb">
                             @if ($recipe->image_path)
-                                <img src="{{ asset($recipe->image_path) }}"
+                                <img src="{{ asset('storage/' . $recipe->image_path) }}"
                                      alt="{{ $recipe->title }}"
                                      class="recipes_index_thumb-image">
                             @else
