@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
+use App\Http\Controllers\Admin\RecipeController as AdminRecipeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MypageController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RecipeController;
 use Illuminate\Support\Facades\Route;
 
 // ─── TOP ───────────────────────────────────────────────
@@ -23,6 +25,9 @@ Route::get("/products/{product}", [ProductController::class, "show"])->name("pro
 
 Route::get("/news", [NewsController::class, "index"])->name("news.index");
 Route::get("/news/{news}", [NewsController::class, "show"])->name("news.show");
+
+Route::get("/recipes", [RecipeController::class, "index"])->name("recipes.index");
+Route::get("/recipes/{recipe}", [RecipeController::class, "show"])->name("recipes.show");
 
 Route::get("/cart", [CartController::class, "index"])->name("cart.index");
 Route::post("/cart", [CartController::class, "store"])->name("cart.store");
@@ -71,6 +76,8 @@ Route::prefix("admin")->name("admin.")->group(function () {
 
         Route::resource("news", AdminNewsController::class);
         Route::patch("news/{news}/toggle", [AdminNewsController::class, "toggleStatus"])->name("news.toggle");
+        Route::resource("recipes", AdminRecipeController::class);
+        Route::patch("recipes/{recipe}/toggle", [AdminRecipeController::class, "toggleStatus"])->name("recipes.toggle");
         Route::resource("products", AdminProductController::class)->except(["show"]);
 
         // {order}パラメータとの衝突を避けるため export は resource より前に定義
