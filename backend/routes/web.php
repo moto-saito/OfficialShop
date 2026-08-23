@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\RecipeController as AdminRecipeController;
+use App\Http\Controllers\Admin\SalesController as AdminSalesController;
 use App\Http\Controllers\Admin\StoreController as AdminStoreController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
@@ -106,6 +107,10 @@ Route::prefix("admin")->name("admin.")->group(function () {
         Route::get("orders/export", [AdminOrderController::class, "export"])->name("orders.export");
         Route::resource("orders", AdminOrderController::class)->only(["index", "show", "destroy"]);
         Route::patch("orders/{order}/status", [AdminOrderController::class, "updateStatus"])->name("orders.updateStatus");
+
+        // {sales}パラメータを持つresourceではないため export の定義順は問わない
+        Route::get("sales", [AdminSalesController::class, "index"])->name("sales.index");
+        Route::get("sales/export", [AdminSalesController::class, "export"])->name("sales.export");
 
         Route::resource("inquiries", AdminInquiryController::class)->only(["index", "show"]);
         Route::patch("inquiries/{inquiry}/status", [AdminInquiryController::class, "updateStatus"])->name("inquiries.updateStatus");

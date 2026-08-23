@@ -37,6 +37,13 @@ class OrderController extends Controller
             'payment_status' => 'required|in:unpaid,paid',
         ]);
 
+        // 売上管理の期間集計に使う決済日時。unpaid→paid に変わった時点を記録し、paid→unpaid に戻された場合はクリアする
+        if ($validated['payment_status'] === 'paid' && $order->payment_status !== 'paid') {
+            $validated['paid_at'] = now();
+        } elseif ($validated['payment_status'] === 'unpaid') {
+            $validated['paid_at'] = null;
+        }
+
         $order->update($validated);
 
         return redirect()->route('admin.orders.index')->with('success', '注文ステータスを更新しました。');

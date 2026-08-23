@@ -180,6 +180,52 @@ textarea {
     color: var(--color-gray-900);
 }
 
+/* ── common_summary-*：数値サマリーカード（ダッシュボード・売上管理で共通） ── */
+.common_summary-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.common_summary-card {
+    background-color: var(--color-white);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-sm);
+    padding: 1.25rem 1.5rem;
+}
+
+.common_summary-card--muted {
+    opacity: .6;
+}
+
+.common_summary-label {
+    font-size: var(--text-xs);
+    color: var(--color-gray-500);
+    margin-bottom: .25rem;
+}
+
+.common_summary-value {
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    color: var(--color-gray-900);
+}
+
+.common_summary-value--accent {
+    color: var(--color-indigo-600);
+}
+
+.common_summary-value--danger {
+    color: var(--color-red-500);
+}
+
+.common_summary-unit {
+    font-size: var(--text-sm);
+    font-weight: 400;
+    color: var(--color-gray-400);
+    margin-left: .25rem;
+}
+
 .common_back-link {
     font-size: var(--text-sm);
     color: var(--color-gray-500);

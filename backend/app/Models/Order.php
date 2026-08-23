@@ -8,12 +8,19 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Order extends Model
 {
+    /**
+     * 決済方法の表示ラベル
+     * 現状オンライン決済（クレジットカード等の個別選択）以外の決済手段は実装されていないため固定値
+     */
+    public const PAYMENT_METHOD_LABEL = 'オンライン決済';
+
     protected $fillable = [
         'user_id',
         'order_number',
         'total_price',
         'status',
         'payment_status',
+        'paid_at',
         'recipient_name',
         'postal_code',
         'prefecture',
@@ -21,6 +28,13 @@ class Order extends Model
         'phone_number',
         'email',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'paid_at' => 'datetime',
+        ];
+    }
 
     // ─── リレーション ──────────────────────────────────
 
@@ -66,6 +80,15 @@ class Order extends Model
             });
     }
 
+    /**
+     * 決済が完了した注文（＝売上管理の集計対象）に絞り込む
+     * 「売上」の定義は payment_status = paid の注文とする（本システムに存在するステータスのみを使用）
+     */
+    public function scopePaid($query)
+    {
+        return $query->where('payment_status', 'paid');
+    }
+
     // ─── ステータスラベル ───────────────────────────────
 
     /** 注文ステータスの日本語ラベルを返す */
@@ -108,5 +131,11 @@ class Order extends Model
     public function getFormattedTotalPriceAttribute(): string
     {
         return '¥' . number_format($this->total_price);
+    }
+
+    /** 決済方法の表示ラベル（現状は固定値） */
+    public function getPaymentMethodLabelAttribute(): string
+    {
+        return self::PAYMENT_METHOD_LABEL;
     }
 }

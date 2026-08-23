@@ -1,0 +1,94 @@
+/*
+ * pages/admin-sales.css
+ * resources/views/admin/sales/index.blade.php 専用スタイル
+ */
+
+.admin_sales_filter-card {
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.admin_sales_filter-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.admin_sales_filter-actions {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+}
+
+/* サマリータイルは8枚あるため、ダッシュボードより多めの列数まで広げる */
+.admin_sales_summary-grid {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.admin_sales_note {
+    font-size: var(--text-xs);
+    color: var(--color-gray-400);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.admin_sales_index_table-scroll {
+    overflow-x: auto;
+}
+
+.admin_sales_index_col-date {
+    width: 9rem;
+}
+
+.admin_sales_index_col-amount {
+    width: 7rem;
+}
+
+.admin_sales_index_col-method {
+    width: 8rem;
+}
+
+.admin_sales_index_col-status {
+    width: 7rem;
+}
+
+.admin_sales_index_email-cell {
+    color: var(--color-gray-500);
+    word-break: break-all;
+}
+
+.admin_sales_index_items-cell {
+    color: var(--color-gray-600);
+    font-size: var(--text-xs);
+    max-width: 16rem;
+}
+
+.admin_sales_index_amount-cell {
+    font-weight: 500;
+    color: var(--color-gray-800, inherit);
+}
+
+td.admin_sales_index_empty {
+    text-align: center;
+    color: var(--color-gray-400);
+    padding-block: 4rem;
+}
+
+.admin_sales_index_pagination-wrap {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--color-gray-200);
+    background-color: var(--color-gray-50);
+}
+
+@media (min-width: 640px) {
+    .admin_sales_filter-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .admin_sales_summary-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}

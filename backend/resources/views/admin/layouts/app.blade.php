@@ -77,6 +77,14 @@
                 注文管理
             </a>
 
+            <a href="{{ route('admin.sales.index') }}"
+               class="admin_layouts_app_nav-link {{ request()->routeIs('admin.sales.*') ? 'is-active' : '' }}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="admin_layouts_app_nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2"/>
+                </svg>
+                売上管理
+            </a>
+
             <p class="admin_layouts_app_nav-heading">サポート</p>
 
             <a href="{{ route('admin.inquiries.index') }}"
