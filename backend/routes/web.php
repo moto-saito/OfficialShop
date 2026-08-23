@@ -1,19 +1,25 @@
 <?php
 
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
+use App\Http\Controllers\Admin\CompanyController as AdminCompanyController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\InquiryController as AdminInquiryController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\RecipeController as AdminRecipeController;
+use App\Http\Controllers\Admin\StoreController as AdminStoreController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InquiryController;
 use App\Http\Controllers\MypageController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RecipeController;
+use App\Http\Controllers\StoreController;
 use Illuminate\Support\Facades\Route;
 
 // ─── TOP ───────────────────────────────────────────────
@@ -28,6 +34,16 @@ Route::get("/news/{news}", [NewsController::class, "show"])->name("news.show");
 
 Route::get("/recipes", [RecipeController::class, "index"])->name("recipes.index");
 Route::get("/recipes/{recipe}", [RecipeController::class, "show"])->name("recipes.show");
+
+Route::get("/store", [StoreController::class, "show"])->name("store.show");
+
+Route::get("/company", [CompanyController::class, "show"])->name("company.show");
+
+// ─── お問い合わせ ───────────────────────────────────────
+Route::get("/contact", [InquiryController::class, "index"])->name("contact.index");
+Route::post("/contact/confirm", [InquiryController::class, "confirm"])->name("contact.confirm");
+Route::post("/contact", [InquiryController::class, "store"])->name("contact.store");
+Route::get("/contact/complete", [InquiryController::class, "complete"])->name("contact.complete");
 
 Route::get("/cart", [CartController::class, "index"])->name("cart.index");
 Route::post("/cart", [CartController::class, "store"])->name("cart.store");
@@ -80,9 +96,18 @@ Route::prefix("admin")->name("admin.")->group(function () {
         Route::patch("recipes/{recipe}/toggle", [AdminRecipeController::class, "toggleStatus"])->name("recipes.toggle");
         Route::resource("products", AdminProductController::class)->except(["show"]);
 
+        Route::get("store", [AdminStoreController::class, "edit"])->name("store.edit");
+        Route::put("store", [AdminStoreController::class, "update"])->name("store.update");
+
+        Route::get("company", [AdminCompanyController::class, "edit"])->name("company.edit");
+        Route::put("company", [AdminCompanyController::class, "update"])->name("company.update");
+
         // {order}パラメータとの衝突を避けるため export は resource より前に定義
         Route::get("orders/export", [AdminOrderController::class, "export"])->name("orders.export");
         Route::resource("orders", AdminOrderController::class)->only(["index", "show", "destroy"]);
         Route::patch("orders/{order}/status", [AdminOrderController::class, "updateStatus"])->name("orders.updateStatus");
+
+        Route::resource("inquiries", AdminInquiryController::class)->only(["index", "show"]);
+        Route::patch("inquiries/{inquiry}/status", [AdminInquiryController::class, "updateStatus"])->name("inquiries.updateStatus");
     });
 });

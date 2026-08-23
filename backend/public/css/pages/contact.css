@@ -1,0 +1,94 @@
+/*
+ * pages/contact.css
+ * resources/views/contact/index.blade.php, confirm.blade.php, complete.blade.php 専用スタイル
+ */
+
+.contact_layout {
+    max-width: 42rem;
+    margin-inline: auto;
+    padding: 3rem 1rem;
+}
+
+.contact_title {
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    color: var(--color-gray-900);
+    margin-bottom: 2rem;
+}
+
+.contact_error-list {
+    list-style: disc;
+    padding-left: 1.25rem;
+}
+
+.contact_error-list > * + * {
+    margin-top: .25rem;
+}
+
+/* 入力画面・確認画面で共有するアクション行 */
+.contact_actions {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: .75rem;
+}
+
+@media (min-width: 640px) {
+    .contact_actions {
+        flex-direction: row;
+    }
+}
+
+/* ============================================================
+   contact/index.blade.php（問い合わせ入力）
+   ============================================================ */
+.contact_form-card {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+textarea.common_form-input {
+    resize: vertical;
+    min-height: 10rem;
+}
+
+/* ============================================================
+   contact/confirm.blade.php（入力内容確認）
+   ============================================================ */
+.contact_confirm_section-card {
+    margin-bottom: 1.5rem;
+}
+
+.contact_confirm_body {
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+/* ============================================================
+   contact/complete.blade.php（送信完了）
+   ============================================================ */
+.contact_complete_body {
+    text-align: center;
+}
+
+.contact_complete_title {
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    color: var(--color-gray-900);
+    margin-bottom: .5rem;
+}
+
+.contact_complete_lead {
+    color: var(--color-gray-500);
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+}
+
+.contact_complete_actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

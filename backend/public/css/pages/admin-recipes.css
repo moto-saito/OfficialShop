@@ -118,3 +118,96 @@ td.admin_recipes_index_empty {
     font-size: var(--text-sm);
     color: var(--color-gray-700);
 }
+
+/* ============================================================
+   材料・作り方（動的リスト）
+   ============================================================ */
+.admin_recipes_form_section-label {
+    display: block;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-gray-700);
+    margin-bottom: .5rem;
+}
+
+.admin_recipes_form_ingredients-list {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    margin-bottom: .75rem;
+}
+
+.admin_recipes_form_ingredient-row {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.admin_recipes_form_ingredient-name {
+    flex: 3;
+}
+
+.admin_recipes_form_ingredient-amount {
+    flex: 2;
+}
+
+.admin_recipes_form_row-remove {
+    flex-shrink: 0;
+    font-size: var(--text-xs);
+    color: var(--color-gray-400);
+    padding: .375rem .75rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-gray-200);
+    transition: color .15s ease, border-color .15s ease;
+}
+
+.admin_recipes_form_row-remove:hover {
+    color: var(--color-red-600, #dc2626);
+    border-color: var(--color-red-200, #fecaca);
+}
+
+.admin_recipes_form_row-add {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-indigo-600);
+    padding: .5rem 1rem;
+    border-radius: var(--radius-lg);
+    border: 1px dashed var(--color-indigo-300, var(--color-indigo-200));
+    transition: background-color .15s ease;
+}
+
+.admin_recipes_form_row-add:hover {
+    background-color: var(--color-indigo-50);
+}
+
+.admin_recipes_form_steps-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: .75rem;
+}
+
+.admin_recipes_form_step-row {
+    display: flex;
+    align-items: flex-start;
+    gap: .75rem;
+    padding: 1rem;
+    background-color: var(--color-gray-50);
+    border-radius: var(--radius-xl);
+}
+
+.admin_recipes_form_step-number {
+    flex-shrink: 0;
+    width: 1.75rem;
+    font-weight: 700;
+    color: var(--color-gray-500);
+    padding-top: .5rem;
+}
+
+.admin_recipes_form_step-fields {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}

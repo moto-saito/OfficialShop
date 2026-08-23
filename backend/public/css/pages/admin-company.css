@@ -1,0 +1,111 @@
+/*
+ * pages/admin-company.css
+ * resources/views/admin/company/edit.blade.php 専用スタイル
+ */
+
+.admin_company_form_image-preview-wrap {
+    margin-bottom: .75rem;
+}
+
+.admin_company_form_image-preview {
+    height: 8rem;
+    width: auto;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-gray-200);
+    object-fit: cover;
+}
+
+.admin_company_form_file-input {
+    width: 100%;
+    font-size: var(--text-sm);
+    color: var(--color-gray-600);
+}
+
+.admin_company_form_file-input::file-selector-button {
+    margin-right: .75rem;
+    padding: .5rem 1rem;
+    border-radius: var(--radius-lg);
+    border: 0;
+    background-color: var(--color-indigo-50);
+    color: var(--color-indigo-700);
+    transition: background-color .15s ease;
+}
+
+.admin_company_form_file-input:hover::file-selector-button {
+    background-color: var(--color-indigo-100);
+}
+
+/* ============================================================
+   沿革・実績（動的リスト）
+   ============================================================ */
+.admin_company_form_section-label {
+    display: block;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-gray-700);
+    margin-bottom: .5rem;
+}
+
+.admin_company_form_history-list,
+.admin_company_form_achievements-list {
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+    margin-bottom: .75rem;
+}
+
+.admin_company_form_history-row,
+.admin_company_form_achievement-row {
+    display: flex;
+    align-items: flex-start;
+    gap: .5rem;
+    padding: .75rem;
+    background-color: var(--color-gray-50);
+    border-radius: var(--radius-xl);
+}
+
+.admin_company_form_history-year {
+    flex: 1;
+}
+
+.admin_company_form_history-event {
+    flex: 3;
+}
+
+.admin_company_form_achievement-title {
+    flex: 1;
+}
+
+.admin_company_form_achievement-description {
+    flex: 2;
+}
+
+.admin_company_form_row-remove {
+    flex-shrink: 0;
+    font-size: var(--text-xs);
+    color: var(--color-gray-400);
+    padding: .375rem .75rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-gray-200);
+    background-color: var(--color-white);
+    transition: color .15s ease, border-color .15s ease;
+}
+
+.admin_company_form_row-remove:hover {
+    color: var(--color-red-600, #dc2626);
+    border-color: var(--color-red-200, #fecaca);
+}
+
+.admin_company_form_row-add {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-indigo-600);
+    padding: .5rem 1rem;
+    border-radius: var(--radius-lg);
+    border: 1px dashed var(--color-indigo-300, var(--color-indigo-200));
+    transition: background-color .15s ease;
+}
+
+.admin_company_form_row-add:hover {
+    background-color: var(--color-indigo-50);
+}

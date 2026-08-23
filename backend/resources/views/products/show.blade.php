@@ -87,6 +87,11 @@
                 @endif
             </form>
 
+            {{-- シェア --}}
+            <div class="products_show_share-wrap">
+                <x-share-x-button :text="$product->name" />
+            </div>
+
         </div>
     </div>
 </div>

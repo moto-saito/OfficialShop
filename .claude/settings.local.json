@@ -32,7 +32,12 @@
       "Bash(xargs -I{} echo {})",
       "Bash(git add *)",
       "Bash(git commit -m ' *)",
-      "Bash(grep -rn \"asset\\(\\\\$\" resources/views/recipes resources/views/products resources/views/news resources/views/home.blade.php)"
+      "Bash(grep -rn \"asset\\(\\\\$\" resources/views/recipes resources/views/products resources/views/news resources/views/home.blade.php)",
+      "Bash(echo \"started install in background, pid $!\")",
+      "Bash(npm init *)",
+      "Bash(npm install *)",
+      "Bash(wait)",
+      "Bash(node shot_mobile.js)"
     ]
   }
 }

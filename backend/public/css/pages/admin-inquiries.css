@@ -1,0 +1,111 @@
+/*
+ * pages/admin-inquiries.css
+ * resources/views/admin/inquiries/index.blade.php, show.blade.php 専用スタイル
+ */
+
+/* ============================================================
+   admin/inquiries/index.blade.php
+   ============================================================ */
+.admin_inquiries_index_table-scroll {
+    overflow-x: auto;
+}
+
+.admin_inquiries_index_col-type {
+    width: 9rem;
+}
+
+.admin_inquiries_index_col-status {
+    width: 7rem;
+}
+
+.admin_inquiries_index_col-date {
+    width: 9rem;
+}
+
+.admin_inquiries_index_col-action {
+    width: 6rem;
+}
+
+.admin_inquiries_index_subject-cell {
+    color: var(--color-gray-800, inherit);
+}
+
+.admin_inquiries_index_email-cell {
+    color: var(--color-gray-500);
+    word-break: break-all;
+}
+
+.admin_inquiries_index_action-cell {
+    text-align: right;
+}
+
+/* 未読の問い合わせを一目で区別できるよう淡い背景色でハイライト */
+tr.is-unread {
+    background-color: var(--color-indigo-50);
+}
+
+tr.is-unread .admin_inquiries_index_subject-cell {
+    font-weight: 700;
+}
+
+td.admin_inquiries_index_empty {
+    text-align: center;
+    color: var(--color-gray-400);
+    padding-block: 4rem;
+}
+
+.admin_inquiries_index_pagination-wrap {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--color-gray-200);
+    background-color: var(--color-gray-50);
+}
+
+/* ============================================================
+   admin/inquiries/show.blade.php
+   ============================================================ */
+.admin_inquiries_show_layout {
+    max-width: 48rem;
+}
+
+.admin_inquiries_show_section {
+    margin-bottom: 1.5rem;
+}
+
+.admin_inquiries_show_summary-header {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--color-gray-200);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: .5rem;
+}
+
+.admin_inquiries_show_id-label {
+    font-size: var(--text-xs);
+    color: var(--color-gray-500);
+    margin-bottom: .125rem;
+}
+
+.admin_inquiries_show_id {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--color-gray-800, inherit);
+}
+
+.admin_inquiries_show_body {
+    padding: 1.5rem;
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-size: var(--text-sm);
+    color: var(--color-gray-800, inherit);
+    line-height: 1.7;
+}
+
+.admin_inquiries_show_status-form {
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: flex-end;
+    gap: 1rem;
+    flex-wrap: wrap;
+}

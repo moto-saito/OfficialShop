@@ -38,8 +38,12 @@
     white-space: pre-line;
 }
 
-.news_show_back-wrap {
+.news_show_share-wrap {
     margin-top: 2rem;
+}
+
+.news_show_back-wrap {
+    margin-top: 1.5rem;
 }
 
 .news_show_back-link {

@@ -21,6 +21,18 @@
                    class="header_nav-link {{ request()->routeIs('products.*') ? 'is-active' : '' }}">
                     商品一覧
                 </a>
+                <a href="{{ route('store.show') }}"
+                   class="header_nav-link {{ request()->routeIs('store.*') ? 'is-active' : '' }}">
+                    店舗・工場紹介
+                </a>
+                <a href="{{ route('company.show') }}"
+                   class="header_nav-link {{ request()->routeIs('company.*') ? 'is-active' : '' }}">
+                    企業歴史・実績
+                </a>
+                <a href="{{ route('contact.index') }}"
+                   class="header_nav-link {{ request()->routeIs('contact.*') ? 'is-active' : '' }}">
+                    お問い合わせ
+                </a>
                 <a href="{{ route('cart.index') }}"
                    class="header_cart-link {{ request()->routeIs('cart.*') ? 'is-active' : '' }}">
                     <svg xmlns="http://www.w3.org/2000/svg" class="header_nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -85,6 +97,18 @@
             <a href="{{ route('products.index') }}"
                class="header_mobile-link {{ request()->routeIs('products.*') ? 'is-active' : '' }}">
                 商品一覧
+            </a>
+            <a href="{{ route('store.show') }}"
+               class="header_mobile-link {{ request()->routeIs('store.*') ? 'is-active' : '' }}">
+                店舗・工場紹介
+            </a>
+            <a href="{{ route('company.show') }}"
+               class="header_mobile-link {{ request()->routeIs('company.*') ? 'is-active' : '' }}">
+                企業歴史・実績
+            </a>
+            <a href="{{ route('contact.index') }}"
+               class="header_mobile-link {{ request()->routeIs('contact.*') ? 'is-active' : '' }}">
+                お問い合わせ
             </a>
             <a href="{{ route('cart.index') }}"
                class="header_mobile-link {{ request()->routeIs('cart.*') ? 'is-active' : '' }}">

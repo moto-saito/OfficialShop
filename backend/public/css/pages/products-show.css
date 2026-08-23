@@ -123,6 +123,10 @@
     background-color: var(--color-indigo-700);
 }
 
+.products_show_share-wrap {
+    margin-top: 1.5rem;
+}
+
 @media (min-width: 768px) {
     .products_show_card {
         flex-direction: row;

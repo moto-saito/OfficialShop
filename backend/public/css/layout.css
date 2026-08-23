@@ -287,6 +287,34 @@
     color: var(--color-gray-500);
 }
 
+.footer_sns-list {
+    display: flex;
+    gap: .75rem;
+    margin-top: 1.25rem;
+}
+
+.footer_sns-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.25rem;
+    width: 2.25rem;
+    border-radius: 50%;
+    background-color: rgb(255 255 255 / .08);
+    color: var(--color-gray-300);
+    transition: background-color .15s ease, color .15s ease;
+}
+
+.footer_sns-link:hover {
+    background-color: rgb(255 255 255 / .16);
+    color: var(--color-white);
+}
+
+.footer_sns-icon {
+    height: 1.125rem;
+    width: 1.125rem;
+}
+
 .footer_heading {
     font-size: var(--text-sm);
     font-weight: 600;

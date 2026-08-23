@@ -17,6 +17,8 @@ class RecipeController extends Controller
     {
         abort_if(!$recipe->isPublished(), 404);
 
+        $recipe->load(["ingredients", "steps"]);
+
         return view("recipes.show", compact("recipe"));
     }
 }

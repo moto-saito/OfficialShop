@@ -1,0 +1,36 @@
+/*
+ * pages/admin-store.css
+ * resources/views/admin/store/edit.blade.php 専用スタイル
+ */
+
+.admin_store_form_image-preview-wrap {
+    margin-bottom: .75rem;
+}
+
+.admin_store_form_image-preview {
+    height: 8rem;
+    width: auto;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-gray-200);
+    object-fit: cover;
+}
+
+.admin_store_form_file-input {
+    width: 100%;
+    font-size: var(--text-sm);
+    color: var(--color-gray-600);
+}
+
+.admin_store_form_file-input::file-selector-button {
+    margin-right: .75rem;
+    padding: .5rem 1rem;
+    border-radius: var(--radius-lg);
+    border: 0;
+    background-color: var(--color-indigo-50);
+    color: var(--color-indigo-700);
+    transition: background-color .15s ease;
+}
+
+.admin_store_form_file-input:hover::file-selector-button {
+    background-color: var(--color-indigo-100);
+}

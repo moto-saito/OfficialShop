@@ -374,6 +374,28 @@ textarea {
     transition: background-color .15s ease;
 }
 
+.common_share-x-button {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-white);
+    background-color: var(--color-gray-900);
+    padding: 0.625rem 0.25rem;
+    border-radius: var(--radius-xl);
+    transition: background-color .15s ease;
+}
+
+.common_share-x-button:hover {
+    background-color: var(--color-gray-700);
+}
+
+.common_share-x-icon {
+    height: .875rem;
+    width: .875rem;
+}
+
 .common_icon-button:hover {
     background-color: var(--color-gray-100);
 }
@@ -627,6 +649,92 @@ textarea {
     color: var(--color-gray-700);
 }
 
+/* ── common_steps_*：入力フォームのステップインジケーター（チェックアウト・問い合わせ共通） ── */
+.common_steps_wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 2.5rem;
+}
+
+.common_steps_step {
+    display: flex;
+    align-items: center;
+}
+
+.common_steps_node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.common_steps_circle {
+    width: 2rem;
+    height: 2rem;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--text-sm);
+    font-weight: 700;
+    background-color: var(--color-gray-200);
+    color: var(--color-gray-500);
+}
+
+.common_steps_circle.is-active {
+    background-color: var(--color-indigo-600);
+    color: var(--color-white);
+}
+
+.common_steps_circle.is-complete {
+    background-color: var(--color-indigo-200);
+    color: var(--color-indigo-700);
+}
+
+.common_steps_label {
+    margin-top: .25rem;
+    font-size: var(--text-xs);
+    color: var(--color-gray-400);
+}
+
+.common_steps_label.is-active {
+    color: var(--color-indigo-600);
+    font-weight: 600;
+}
+
+.common_steps_connector {
+    width: 4rem;
+    height: 1px;
+    background-color: var(--color-gray-300);
+    margin: 0 .5rem;
+    margin-bottom: 1rem;
+}
+
+@media (min-width: 640px) {
+    .common_steps_connector {
+        width: 6rem;
+    }
+}
+
+/* ── common_success-icon：完了画面のチェックマークアイコン（チェックアウト・問い合わせ完了で共通） ── */
+.common_success-icon-wrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 5rem;
+    height: 5rem;
+    background-color: var(--color-green-100);
+    border-radius: var(--radius-full);
+    margin-bottom: 1.5rem;
+}
+
+.common_success-icon {
+    height: 2.5rem;
+    width: 2.5rem;
+    color: oklch(.627 .194 149.214);
+}
+
 /* ── common_table：一覧テーブル ── */
 .common_table {
     width: 100%;
@@ -659,5 +767,5 @@ textarea {
 }
 
 .common_table td {
-    padding: 1rem 1.5rem;
+    padding: 1rem 0.5rem;
 }

@@ -8,6 +8,7 @@ class Recipe extends Model
 {
     protected $fillable = [
         "title",
+        "servings",
         "content",
         "image_path",
         "status",
@@ -17,6 +18,16 @@ class Recipe extends Model
     protected $casts = [
         "published_at" => "datetime",
     ];
+
+    public function ingredients()
+    {
+        return $this->hasMany(RecipeIngredient::class)->orderBy("sort_order");
+    }
+
+    public function steps()
+    {
+        return $this->hasMany(RecipeStep::class)->orderBy("sort_order");
+    }
 
     public function scopePublished($query)
     {

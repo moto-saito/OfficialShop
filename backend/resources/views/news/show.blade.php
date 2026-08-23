@@ -41,6 +41,11 @@
         </div>
     </article>
 
+    {{-- シェア --}}
+    <div class="news_show_share-wrap">
+        <x-share-x-button :text="$news->title" />
+    </div>
+
     {{-- 一覧に戻る --}}
     <div class="news_show_back-wrap">
         <a href="{{ route('news.index') }}"
