@@ -1,0 +1,35 @@
+services:
+  - type: web
+    name: official-shop-demo
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /up
+    autoDeploy: true
+    envVars:
+      - key: APP_NAME
+        value: "公式ショップ（デモ）"
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      # `php artisan key:generate --show` の出力(base64:...)を Render の画面で貼り付ける
+      - key: APP_KEY
+        sync: false
+      - key: APP_LOCALE
+        value: ja
+      - key: APP_FALLBACK_LOCALE
+        value: ja
+      - key: DB_CONNECTION
+        value: sqlite
+      - key: SESSION_DRIVER
+        value: cookie
+      - key: CACHE_STORE
+        value: file
+      - key: QUEUE_CONNECTION
+        value: sync
+      - key: LOG_CHANNEL
+        value: stderr
+      - key: MAIL_MAILER
+        value: log
