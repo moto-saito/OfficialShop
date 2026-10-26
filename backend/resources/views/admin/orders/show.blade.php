@@ -117,6 +117,16 @@
                 @endforeach
             </tbody>
         </table>
+        <dl class="admin_orders_show_breakdown">
+            <div class="admin_orders_show_breakdown-row">
+                <dt>商品小計</dt>
+                <dd>{{ $order->formatted_subtotal_price }}</dd>
+            </div>
+            <div class="admin_orders_show_breakdown-row">
+                <dt>送料（{{ $order->prefecture }}）</dt>
+                <dd>{{ $order->formatted_shipping_fee }}</dd>
+            </div>
+        </dl>
         <div class="admin_orders_show_total-row">
             <span class="admin_orders_show_total-label">合計金額</span>
             <span class="admin_orders_show_total-amount">{{ $order->formatted_total_price }}</span>

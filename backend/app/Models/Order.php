@@ -18,6 +18,7 @@ class Order extends Model
         'user_id',
         'order_number',
         'total_price',
+        'shipping_fee',
         'status',
         'payment_status',
         'paid_at',
@@ -131,6 +132,24 @@ class Order extends Model
     public function getFormattedTotalPriceAttribute(): string
     {
         return '¥' . number_format($this->total_price);
+    }
+
+    /** 商品小計（支払総額から送料を除いた金額） */
+    public function getSubtotalPriceAttribute(): int
+    {
+        return $this->total_price - $this->shipping_fee;
+    }
+
+    /** 商品小計をフォーマット済みで返す */
+    public function getFormattedSubtotalPriceAttribute(): string
+    {
+        return '¥' . number_format($this->subtotal_price);
+    }
+
+    /** 送料をフォーマット済みで返す */
+    public function getFormattedShippingFeeAttribute(): string
+    {
+        return '¥' . number_format($this->shipping_fee);
     }
 
     /** 決済方法の表示ラベル（現状は固定値） */

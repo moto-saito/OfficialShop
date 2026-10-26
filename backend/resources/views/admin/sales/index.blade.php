@@ -78,7 +78,7 @@
         <p class="common_summary-label">税額</p>
         <p class="common_summary-value">¥{{ number_format($summary['tax_amount']) }}</p>
     </div>
-    <div class="common_summary-card common_summary-card--muted">
+    <div class="common_summary-card">
         <p class="common_summary-label">送料</p>
         <p class="common_summary-value">¥{{ number_format($summary['shipping_amount']) }}</p>
     </div>
@@ -89,7 +89,8 @@
 </div>
 
 <p class="admin_sales_note">
-    ※ 税額・送料・割引額は現在のシステムでは内訳を保持していないため0円で表示しています（売上合計は税込・送料込みの金額です）。<br>
+    ※ 税額・割引額は現在のシステムでは内訳を保持していないため0円で表示しています（売上合計は税込・送料込みの金額です）。<br>
+    ※ 送料は送料設定機能の導入後に作成された注文のみ集計されます（それ以前の注文は0円として扱います）。<br>
     ※ 返金額は「支払済みかつキャンセル」となった注文の合計金額を近似的に集計したものです。
 </p>
 

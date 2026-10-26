@@ -1,0 +1,73 @@
+/*
+ * pages/admin-shipping-fees.css
+ * resources/views/admin/shipping-fees/edit.blade.php 専用スタイル
+ */
+
+.admin_shipping_fees_page {
+    max-width: 56rem;
+}
+
+.admin_shipping_fees_note {
+    margin-top: 0;
+}
+
+.admin_shipping_fees_bulk {
+    padding: 1rem;
+    background-color: var(--color-admin-surface-sunken);
+    border-radius: var(--radius-xl);
+}
+
+.admin_shipping_fees_bulk-row {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+}
+
+.admin_shipping_fees_bulk-row .admin_shipping_fees_input {
+    max-width: 10rem;
+}
+
+.admin_shipping_fees_region {
+    border-top: 1px solid rgb(255 255 255 / .12);
+    padding-top: 1rem;
+}
+
+.admin_shipping_fees_region-title {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-admin-accent);
+    margin-bottom: .75rem;
+}
+
+.admin_shipping_fees_grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.admin_shipping_fees_input-wrap {
+    display: flex;
+    align-items: center;
+    gap: .375rem;
+}
+
+.admin_shipping_fees_prefix {
+    font-size: var(--text-sm);
+    color: var(--color-admin-text);
+}
+
+.admin_shipping_fees_input {
+    text-align: right;
+}
+
+@media (min-width: 640px) {
+    .admin_shipping_fees_grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .admin_shipping_fees_grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
