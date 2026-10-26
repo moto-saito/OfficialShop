@@ -14,7 +14,7 @@
 .admin_orders_filter-label {
     display: block;
     font-size: var(--text-xs);
-    color: var(--color-gray-500);
+    color: var(--color-admin-accent);
     margin-bottom: .25rem;
 }
 
@@ -24,6 +24,8 @@
     border: 1px solid var(--color-gray-300);
     border-radius: var(--radius-lg);
     padding: .5rem .75rem;
+    background-color: var(--color-white);
+    color: var(--color-gray-900);
 }
 
 .admin_orders_filter-input:focus {
@@ -48,7 +50,7 @@
 }
 
 .admin_orders_index_date-range-sep {
-    color: var(--color-gray-400);
+    color: var(--color-admin-text);
 }
 
 .admin_orders_index_filter-actions {
@@ -79,24 +81,24 @@
 
 .admin_orders_index_number-cell {
     font-weight: 500;
-    color: var(--color-gray-800, inherit);
+    color: var(--color-admin-strong);
 }
 
 .admin_orders_index_date-cell {
-    color: var(--color-gray-500);
+    color: var(--color-admin-accent);
 }
 
 .admin_orders_index_recipient-cell {
-    color: var(--color-gray-700);
+    color: var(--color-admin-text);
 }
 
 .admin_orders_index_email-cell {
-    color: var(--color-gray-500);
+    color: var(--color-admin-text);
     word-break: break-all;
 }
 
 .admin_orders_index_amount-cell {
-    color: var(--color-gray-700);
+    color: var(--color-admin-text);
 }
 
 .admin_orders_index_action-cell {
@@ -105,14 +107,14 @@
 
 td.admin_orders_index_empty {
     text-align: center;
-    color: var(--color-gray-400);
+    color: var(--color-admin-text);
     padding-block: 4rem;
 }
 
 .admin_orders_index_pagination-wrap {
     padding: 1rem 1.5rem;
     border-top: 1px solid var(--color-gray-200);
-    background-color: var(--color-gray-50);
+    background-color: var(--color-admin-surface-sunken);
 }
 
 @media (min-width: 640px) {
@@ -156,14 +158,14 @@ td.admin_orders_index_empty {
 
 .admin_orders_show_order-number-label {
     font-size: var(--text-xs);
-    color: var(--color-gray-500);
+    color: var(--color-admin-label);
     margin-bottom: .125rem;
 }
 
 .admin_orders_show_order-number {
     font-size: var(--text-sm);
     font-weight: 700;
-    color: var(--color-gray-800, inherit);
+    color: var(--color-admin-strong);
     letter-spacing: .025em;
 }
 
@@ -208,28 +210,28 @@ td.admin_orders_index_empty {
 }
 
 .admin_orders_show_items-table td:nth-child(2) {
-    color: var(--color-gray-800, inherit);
+    color: var(--color-admin-strong);
 }
 
 .admin_orders_show_items-table td:nth-child(3) {
     text-align: right;
-    color: var(--color-gray-700);
+    color: var(--color-admin-text);
 }
 
 .admin_orders_show_items-table td:nth-child(4) {
     text-align: center;
-    color: var(--color-gray-600);
+    color: var(--color-admin-text);
 }
 
 .admin_orders_show_item-subtotal {
     text-align: right;
     font-weight: 500;
-    color: var(--color-gray-800, inherit);
+    color: var(--color-admin-strong);
 }
 
 .admin_orders_show_total-row {
     padding: 1rem 1.5rem;
-    background-color: var(--color-gray-50);
+    background-color: var(--color-admin-surface-sunken);
     border-top: 1px solid var(--color-gray-200);
     display: flex;
     align-items: center;
@@ -239,13 +241,13 @@ td.admin_orders_index_empty {
 .admin_orders_show_total-label {
     font-size: var(--text-sm);
     font-weight: 600;
-    color: var(--color-gray-700);
+    color: var(--color-admin-label);
 }
 
 .admin_orders_show_total-amount {
     font-size: var(--text-xl);
     font-weight: 700;
-    color: var(--color-gray-900);
+    color: var(--color-admin-strong);
 }
 
 .admin_orders_show_status-form {
@@ -265,7 +267,7 @@ td.admin_orders_index_empty {
 
 .admin_orders_show_danger-note {
     font-size: var(--text-xs);
-    color: var(--color-gray-500);
+    color: var(--color-admin-text);
     margin-bottom: .75rem;
 }
 
@@ -274,12 +276,13 @@ td.admin_orders_index_empty {
     padding: .5rem 1rem;
     border-radius: var(--radius-lg);
     border: 1px solid var(--color-red-200);
-    color: var(--color-red-500);
+    color: var(--color-red-400);
     transition: background-color .15s ease;
+    background-color: var(--color-admin-button);
 }
 
 .admin_orders_show_danger-button:hover {
-    background-color: var(--color-red-50);
+    background-color: var(--color-admin-button-hover);
 }
 
 @media (min-width: 640px) {

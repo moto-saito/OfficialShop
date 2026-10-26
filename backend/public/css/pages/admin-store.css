@@ -18,7 +18,7 @@
 .admin_store_form_file-input {
     width: 100%;
     font-size: var(--text-sm);
-    color: var(--color-gray-600);
+    color: var(--color-admin-text);
 }
 
 .admin_store_form_file-input::file-selector-button {

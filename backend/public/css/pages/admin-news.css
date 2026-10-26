@@ -20,12 +20,12 @@
 }
 
 .admin_news_index_id-cell {
-    color: var(--color-gray-400);
+    color: var(--color-admin-text);
 }
 
 .admin_news_index_title {
     font-weight: 500;
-    color: var(--color-gray-800, inherit);
+    color: var(--color-admin-strong);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -33,7 +33,7 @@
 }
 
 .admin_news_index_date-cell {
-    color: var(--color-gray-500);
+    color: var(--color-admin-accent);
 }
 
 .admin_news_index_actions {
@@ -45,14 +45,14 @@
 
 td.admin_news_index_empty {
     text-align: center;
-    color: var(--color-gray-400);
+    color: var(--color-admin-text);
     padding-block: 4rem;
 }
 
 .admin_news_index_pagination-wrap {
     padding: 1rem 1.5rem;
     border-top: 1px solid var(--color-gray-200);
-    background-color: var(--color-gray-50);
+    background-color: var(--color-admin-surface-sunken);
 }
 
 /* ============================================================
@@ -73,7 +73,7 @@ td.admin_news_index_empty {
 .admin_news_form_file-input {
     width: 100%;
     font-size: var(--text-sm);
-    color: var(--color-gray-600);
+    color: var(--color-admin-text);
 }
 
 .admin_news_form_file-input::file-selector-button {
@@ -94,7 +94,7 @@ td.admin_news_index_empty {
     display: block;
     font-size: var(--text-sm);
     font-weight: 500;
-    color: var(--color-gray-700);
+    color: var(--color-admin-label);
     margin-bottom: .5rem;
 }
 
@@ -116,5 +116,5 @@ td.admin_news_index_empty {
 
 .admin_news_form_status-option-label {
     font-size: var(--text-sm);
-    color: var(--color-gray-700);
+    color: var(--color-admin-label);
 }

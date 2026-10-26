@@ -46,7 +46,7 @@
 
 .admin_products_index_name {
     font-weight: 500;
-    color: var(--color-gray-800, inherit);
+    color: var(--color-admin-strong);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -54,7 +54,7 @@
 }
 
 .admin_products_index_price-cell {
-    color: var(--color-gray-700);
+    color: var(--color-admin-text);
     font-weight: 500;
 }
 
@@ -67,14 +67,14 @@
 
 td.admin_products_index_empty {
     text-align: center;
-    color: var(--color-gray-400);
+    color: var(--color-admin-text);
     padding-block: 4rem;
 }
 
 .admin_products_index_pagination-wrap {
     padding: 1rem 1.5rem;
     border-top: 1px solid var(--color-gray-200);
-    background-color: var(--color-gray-50);
+    background-color: var(--color-admin-surface-sunken);
 }
 
 /* ============================================================
@@ -93,7 +93,7 @@ td.admin_products_index_empty {
     align-items: center;
     padding-left: .75rem;
     font-size: var(--text-sm);
-    color: var(--color-gray-500);
+    color: var(--color-admin-text);
 }
 
 .admin_products_form_price-input {
@@ -115,7 +115,7 @@ td.admin_products_index_empty {
 .admin_products_form_file-input {
     width: 100%;
     font-size: var(--text-sm);
-    color: var(--color-gray-600);
+    color: var(--color-admin-text);
 }
 
 .admin_products_form_file-input::file-selector-button {

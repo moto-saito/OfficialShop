@@ -18,7 +18,7 @@
 .admin_company_form_file-input {
     width: 100%;
     font-size: var(--text-sm);
-    color: var(--color-gray-600);
+    color: var(--color-admin-text);
 }
 
 .admin_company_form_file-input::file-selector-button {
@@ -42,7 +42,7 @@
     display: block;
     font-size: var(--text-sm);
     font-weight: 500;
-    color: var(--color-gray-700);
+    color: var(--color-admin-label);
     margin-bottom: .5rem;
 }
 
@@ -60,8 +60,12 @@
     align-items: flex-start;
     gap: .5rem;
     padding: .75rem;
-    background-color: var(--color-gray-50);
+    background-color: var(--color-admin-surface-sunken);
     border-radius: var(--radius-xl);
+}
+
+.admin_company_form_history-row {
+    background-color: #473203;
 }
 
 .admin_company_form_history-year {
@@ -83,23 +87,23 @@
 .admin_company_form_row-remove {
     flex-shrink: 0;
     font-size: var(--text-xs);
-    color: var(--color-gray-400);
+    color: var(--color-admin-text);
     padding: .375rem .75rem;
     border-radius: var(--radius-lg);
     border: 1px solid var(--color-gray-200);
-    background-color: var(--color-white);
+    background-color: var(--color-admin-button);
     transition: color .15s ease, border-color .15s ease;
 }
 
 .admin_company_form_row-remove:hover {
-    color: var(--color-red-600, #dc2626);
+    color: var(--color-red-400);
     border-color: var(--color-red-200, #fecaca);
 }
 
 .admin_company_form_row-add {
     font-size: var(--text-sm);
     font-weight: 500;
-    color: var(--color-indigo-600);
+    color: var(--color-admin-accent);
     padding: .5rem 1rem;
     border-radius: var(--radius-lg);
     border: 1px dashed var(--color-indigo-300, var(--color-indigo-200));
@@ -107,5 +111,5 @@
 }
 
 .admin_company_form_row-add:hover {
-    background-color: var(--color-indigo-50);
+    background-color: rgb(255 255 255 / .08);
 }

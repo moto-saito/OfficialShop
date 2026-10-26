@@ -27,11 +27,11 @@
 }
 
 .admin_inquiries_index_subject-cell {
-    color: var(--color-gray-800, inherit);
+    color: var(--color-admin-strong);
 }
 
 .admin_inquiries_index_email-cell {
-    color: var(--color-gray-500);
+    color: var(--color-admin-text);
     word-break: break-all;
 }
 
@@ -41,7 +41,7 @@
 
 /* 未読の問い合わせを一目で区別できるよう淡い背景色でハイライト */
 tr.is-unread {
-    background-color: var(--color-indigo-50);
+    background-color: rgb(191 219 254 / .18);
 }
 
 tr.is-unread .admin_inquiries_index_subject-cell {
@@ -50,14 +50,14 @@ tr.is-unread .admin_inquiries_index_subject-cell {
 
 td.admin_inquiries_index_empty {
     text-align: center;
-    color: var(--color-gray-400);
+    color: var(--color-admin-text);
     padding-block: 4rem;
 }
 
 .admin_inquiries_index_pagination-wrap {
     padding: 1rem 1.5rem;
     border-top: 1px solid var(--color-gray-200);
-    background-color: var(--color-gray-50);
+    background-color: var(--color-admin-surface-sunken);
 }
 
 /* ============================================================
@@ -83,14 +83,14 @@ td.admin_inquiries_index_empty {
 
 .admin_inquiries_show_id-label {
     font-size: var(--text-xs);
-    color: var(--color-gray-500);
+    color: var(--color-admin-label);
     margin-bottom: .125rem;
 }
 
 .admin_inquiries_show_id {
     font-size: var(--text-sm);
     font-weight: 700;
-    color: var(--color-gray-800, inherit);
+    color: var(--color-admin-strong);
 }
 
 .admin_inquiries_show_body {
@@ -98,7 +98,7 @@ td.admin_inquiries_index_empty {
     white-space: pre-wrap;
     word-break: break-word;
     font-size: var(--text-sm);
-    color: var(--color-gray-800, inherit);
+    color: var(--color-admin-label);
     line-height: 1.7;
 }
 

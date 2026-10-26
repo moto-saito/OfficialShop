@@ -504,7 +504,7 @@
 }
 
 .admin_layouts_app_topbar {
-    background-color: var(--color-white);
+    background-color: var(--color-admin-surface);
     border-bottom: 1px solid var(--color-gray-200);
     padding: 1rem 2rem;
     display: flex;
@@ -515,7 +515,7 @@
 .admin_layouts_app_topbar-title {
     font-size: var(--text-lg);
     font-weight: 600;
-    color: var(--color-gray-800);
+    color: #000000;
 }
 
 .admin_layouts_app_topbar-actions {
@@ -526,12 +526,13 @@
 
 .admin_layouts_app_topbar-user {
     font-size: var(--text-sm);
-    color: var(--color-gray-500);
+    color: #000;
 }
 
 .admin_layouts_app_main {
     flex: 1;
     padding: 2rem;
+    background-color: #000000d1;
 }
 
 /* ============================================================
@@ -543,7 +544,7 @@
 }
 
 .admin_card {
-    background-color: var(--color-white);
+    background-color: var(--color-admin-surface);
     border-radius: var(--radius-xl);
     box-shadow: var(--shadow-sm);
     overflow: hidden;
@@ -555,7 +556,7 @@
 }
 
 .admin_form-card {
-    background-color: var(--color-white);
+    background-color: var(--color-admin-surface);
     border-radius: var(--radius-xl);
     box-shadow: var(--shadow-sm);
     padding: 1.5rem;
@@ -598,6 +599,106 @@
 
 .admin_header-action-button--outline:hover {
     background-color: var(--color-gray-50);
+}
+
+/* ============================================================
+   管理画面内の共通コンポーネント配色
+   （common_* はフロントと共用のため admin_layouts_app_main 配下でのみ上書き）
+   ============================================================ */
+.admin_layouts_app_main .common_summary-card {
+    background-color: var(--color-admin-surface);
+}
+
+.admin_layouts_app_main .common_summary-label,
+.admin_layouts_app_main .common_info-label,
+.admin_layouts_app_main .common_form-label,
+.admin_layouts_app_main .common_admin-form-label {
+    color: var(--color-admin-label);
+}
+
+.admin_layouts_app_main .common_summary-value,
+.admin_layouts_app_main .common_info-value {
+    color: var(--color-admin-strong);
+}
+
+.admin_layouts_app_main .common_summary-value--accent,
+.admin_layouts_app_main .common_summary-unit {
+    color: var(--color-admin-accent);
+}
+
+.admin_layouts_app_main .common_summary-value--danger,
+.admin_layouts_app_main .common_required-mark,
+.admin_layouts_app_main .common_admin-form-error {
+    color: var(--color-admin-danger);
+}
+
+.admin_layouts_app_main .common_info-value--muted,
+.admin_layouts_app_main .common_admin-form-hint,
+.admin_layouts_app_main .common_back-link {
+    color: var(--color-admin-text);
+}
+
+.admin_layouts_app_main .common_back-link:hover {
+    color: var(--color-admin-label);
+}
+
+.admin_layouts_app_main .common_info-list > * + * {
+    border-top-color: rgb(255 255 255 / .12);
+}
+
+.admin_layouts_app_main .common_form-input,
+.admin_layouts_app_main .common_admin-form-input {
+    background-color: var(--color-white);
+    color: var(--color-gray-900);
+}
+
+.admin_layouts_app_main .common_admin-form-input {
+    background-color: #9c8b50;
+}
+
+.admin_layouts_app_main .common_admin-form-input::placeholder {
+    color: #1e3a8a;
+}
+
+.admin_layouts_app_main .common_table thead {
+    background-color: var(--color-admin-surface-sunken);
+}
+
+.admin_layouts_app_main .common_table th {
+    color: var(--color-admin-label);
+}
+
+.admin_layouts_app_main .common_table tbody tr {
+    border-top-color: rgb(255 255 255 / .12);
+}
+
+.admin_layouts_app_main .common_table tbody tr:hover {
+    background-color: rgb(255 255 255 / .06);
+}
+
+.admin_layouts_app_main .common_button-outline--compact,
+.admin_layouts_app_main .common_button-danger--xs,
+.admin_layouts_app_main .common_button-toggle--xs {
+    background-color: var(--color-admin-button);
+}
+
+.admin_layouts_app_main .common_button-outline--compact {
+    color: var(--color-admin-text);
+}
+
+.admin_layouts_app_main .common_button-danger--xs {
+    color: var(--color-red-400);
+}
+
+.admin_layouts_app_main .common_button-toggle--xs.is-draft {
+    color: var(--color-green-500);
+}
+
+.admin_layouts_app_main .common_button-outline--compact:hover,
+.admin_layouts_app_main .common_button-danger--xs:hover,
+.admin_layouts_app_main .common_button-toggle--xs.is-published:hover,
+.admin_layouts_app_main .common_button-toggle--xs.is-draft:hover {
+    background-color: var(--color-admin-button-hover);
 }
 
 /* ============================================================

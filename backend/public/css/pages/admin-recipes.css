@@ -20,12 +20,12 @@
 }
 
 .admin_recipes_index_id-cell {
-    color: var(--color-gray-400);
+    color: var(--color-admin-text);
 }
 
 .admin_recipes_index_title {
     font-weight: 500;
-    color: var(--color-gray-800, inherit);
+    color: var(--color-admin-strong);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -33,7 +33,7 @@
 }
 
 .admin_recipes_index_date-cell {
-    color: var(--color-gray-500);
+    color: var(--color-admin-accent);
 }
 
 .admin_recipes_index_actions {
@@ -45,14 +45,14 @@
 
 td.admin_recipes_index_empty {
     text-align: center;
-    color: var(--color-gray-400);
+    color: var(--color-admin-text);
     padding-block: 4rem;
 }
 
 .admin_recipes_index_pagination-wrap {
     padding: 1rem 1.5rem;
     border-top: 1px solid var(--color-gray-200);
-    background-color: var(--color-gray-50);
+    background-color: var(--color-admin-surface-sunken);
 }
 
 /* ============================================================
@@ -73,7 +73,7 @@ td.admin_recipes_index_empty {
 .admin_recipes_form_file-input {
     width: 100%;
     font-size: var(--text-sm);
-    color: var(--color-gray-600);
+    color: var(--color-admin-text);
 }
 
 .admin_recipes_form_file-input::file-selector-button {
@@ -94,7 +94,7 @@ td.admin_recipes_index_empty {
     display: block;
     font-size: var(--text-sm);
     font-weight: 500;
-    color: var(--color-gray-700);
+    color: var(--color-admin-label);
     margin-bottom: .5rem;
 }
 
@@ -116,7 +116,7 @@ td.admin_recipes_index_empty {
 
 .admin_recipes_form_status-option-label {
     font-size: var(--text-sm);
-    color: var(--color-gray-700);
+    color: var(--color-admin-label);
 }
 
 /* ============================================================
@@ -126,7 +126,7 @@ td.admin_recipes_index_empty {
     display: block;
     font-size: var(--text-sm);
     font-weight: 500;
-    color: var(--color-gray-700);
+    color: var(--color-admin-label);
     margin-bottom: .5rem;
 }
 
@@ -154,22 +154,23 @@ td.admin_recipes_index_empty {
 .admin_recipes_form_row-remove {
     flex-shrink: 0;
     font-size: var(--text-xs);
-    color: var(--color-gray-400);
+    color: var(--color-admin-text);
     padding: .375rem .75rem;
     border-radius: var(--radius-lg);
     border: 1px solid var(--color-gray-200);
     transition: color .15s ease, border-color .15s ease;
+    background-color: var(--color-admin-button);
 }
 
 .admin_recipes_form_row-remove:hover {
-    color: var(--color-red-600, #dc2626);
+    color: var(--color-red-400);
     border-color: var(--color-red-200, #fecaca);
 }
 
 .admin_recipes_form_row-add {
     font-size: var(--text-sm);
     font-weight: 500;
-    color: var(--color-indigo-600);
+    color: var(--color-admin-accent);
     padding: .5rem 1rem;
     border-radius: var(--radius-lg);
     border: 1px dashed var(--color-indigo-300, var(--color-indigo-200));
@@ -177,7 +178,7 @@ td.admin_recipes_index_empty {
 }
 
 .admin_recipes_form_row-add:hover {
-    background-color: var(--color-indigo-50);
+    background-color: rgb(255 255 255 / .08);
 }
 
 .admin_recipes_form_steps-list {
@@ -192,7 +193,7 @@ td.admin_recipes_index_empty {
     align-items: flex-start;
     gap: .75rem;
     padding: 1rem;
-    background-color: var(--color-gray-50);
+    background-color: var(--color-admin-surface-sunken);
     border-radius: var(--radius-xl);
 }
 
@@ -200,7 +201,7 @@ td.admin_recipes_index_empty {
     flex-shrink: 0;
     width: 1.75rem;
     font-weight: 700;
-    color: var(--color-gray-500);
+    color: var(--color-admin-text);
     padding-top: .5rem;
 }
 
