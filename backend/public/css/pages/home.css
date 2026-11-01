@@ -28,6 +28,13 @@
     max-width: 72rem;
     margin-inline: auto;
     padding: 6rem 1rem;
+    /* 会社写真の上に半透明の暗幕を重ね、白文字の可読性を確保 */
+    background-image:
+        linear-gradient(rgb(20 12 8 / .5), rgb(20 12 8 / .5)),
+        url('../../images/company.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -78,6 +85,7 @@
     padding: .75rem 2rem;
     border-radius: var(--radius-xl);
     transition: background-color .15s ease;
+    background-color: #d4c76d;
 }
 
 .home_hero-cta-secondary:hover {

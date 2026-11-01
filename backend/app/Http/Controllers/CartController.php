@@ -42,21 +42,7 @@ class CartController extends Controller
 
         // 商品一覧ページの小計欄からのAJAX送信にはJSONでカート情報を返す
         if ($request->wantsJson()) {
-            $items = Cart::with('product')
-                ->where('session_id', $sessionId)
-                ->get();
-
-            return response()->json([
-                'success'  => true,
-                'items'    => $items->map(fn ($item) => [
-                    'id'       => $item->id,
-                    'name'     => $item->product?->name,
-                    'price'    => $item->product?->price ?? 0,
-                    'quantity' => $item->quantity,
-                    'subtotal' => $item->subtotal,
-                ]),
-                'subtotal' => $items->sum(fn ($item) => $item->subtotal),
-            ]);
+            return $this->summaryResponse($sessionId);
         }
 
         return redirect()->route('cart.index')->with('success', 'カートに追加しました。');
@@ -64,19 +50,49 @@ class CartController extends Controller
 
     public function update(Request $request, Cart $cart)
     {
+        // 他のセッションのカートを操作できないようにする
+        abort_if($cart->session_id !== session()->getId(), 404);
+
         $request->validate([
             'quantity' => 'required|integer|min:1',
         ]);
 
         $cart->update(['quantity' => $request->quantity]);
 
+        // 商品一覧ページの小計欄からの個数変更にはJSONでカート情報を返す
+        if ($request->wantsJson()) {
+            return $this->summaryResponse($cart->session_id);
+        }
+
         return redirect()->route('cart.index')->with('success', '個数を変更しました。');
     }
 
     public function destroy(Cart $cart)
     {
+        abort_if($cart->session_id !== session()->getId(), 404);
+
         $cart->delete();
 
         return redirect()->route('cart.index')->with('success', '商品を削除しました。');
+    }
+
+    /** 商品一覧ページの小計欄用に、セッションのカート内容をJSONで返す */
+    private function summaryResponse(string $sessionId)
+    {
+        $items = Cart::with('product')
+            ->where('session_id', $sessionId)
+            ->get();
+
+        return response()->json([
+            'success'  => true,
+            'items'    => $items->map(fn ($item) => [
+                'id'       => $item->id,
+                'name'     => $item->product?->name,
+                'price'    => $item->product?->price ?? 0,
+                'quantity' => $item->quantity,
+                'subtotal' => $item->subtotal,
+            ]),
+            'subtotal' => $items->sum(fn ($item) => $item->subtotal),
+        ]);
     }
 }

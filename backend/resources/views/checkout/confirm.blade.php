@@ -73,8 +73,18 @@
                 @endforeach
             </tbody>
         </table>
+        <dl class="checkout_confirm_breakdown">
+            <div class="checkout_confirm_breakdown-row">
+                <dt>商品小計</dt>
+                <dd>¥{{ number_format($subtotalPrice) }}</dd>
+            </div>
+            <div class="checkout_confirm_breakdown-row">
+                <dt>送料（{{ $validated['prefecture'] }}）</dt>
+                <dd>¥{{ number_format($shippingFee) }}</dd>
+            </div>
+        </dl>
         <div class="checkout_confirm_total-row">
-            <span class="checkout_confirm_total-label">合計（税込）</span>
+            <span class="checkout_confirm_total-label">合計（税込・送料込）</span>
             <span class="checkout_confirm_total-amount">¥{{ number_format($totalPrice) }}</span>
         </div>
     </div>

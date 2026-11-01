@@ -19,6 +19,7 @@
                 あなたの毎日に<br class="home_hero-break">
                 彩りを。
             </h1>
+            {{-- ========
             <div class="home_hero-actions">
                 <a href="{{ route('products.index') }}"
                    class="home_hero-cta-primary">
@@ -29,6 +30,7 @@
                     お知らせ
                 </a>
             </div>
+            == --}}
         </div>
     </div>
 </section>

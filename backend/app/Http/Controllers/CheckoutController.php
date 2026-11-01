@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\ShippingFee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class CheckoutController extends Controller
 {
@@ -47,9 +49,11 @@ class CheckoutController extends Controller
         // 入力情報をセッションに保存し、確認画面を表示
         session(['checkout_data' => $validated]);
 
-        $totalPrice = $items->sum(fn ($item) => $item->subtotal);
+        $subtotalPrice = $items->sum(fn ($item) => $item->subtotal);
+        $shippingFee   = ShippingFee::feeFor($validated['prefecture']);
+        $totalPrice    = $subtotalPrice + $shippingFee;
 
-        return view('checkout.confirm', compact('items', 'validated', 'totalPrice'));
+        return view('checkout.confirm', compact('items', 'validated', 'subtotalPrice', 'shippingFee', 'totalPrice'));
     }
 
     // ─────────────────────────────────────────────────────
@@ -71,10 +75,12 @@ class CheckoutController extends Controller
             return redirect()->route('cart.index')->with('error', 'カートに商品がありません。');
         }
 
-        $totalPrice = $items->sum(fn ($item) => $item->subtotal);
+        // 送料は確認画面表示後に管理画面で変更されている可能性があるため、確定時点の値で再計算する
+        $shippingFee = ShippingFee::feeFor($checkoutData['prefecture']);
+        $totalPrice  = $items->sum(fn ($item) => $item->subtotal) + $shippingFee;
 
         // DB トランザクションで注文と明細を一括保存
-        $order = DB::transaction(function () use ($checkoutData, $items, $totalPrice) {
+        $order = DB::transaction(function () use ($checkoutData, $items, $shippingFee, $totalPrice) {
 
             // 一意な注文番号を生成
             $orderNumber = $this->generateOrderNumber();
@@ -83,6 +89,7 @@ class CheckoutController extends Controller
                 'user_id'        => Auth::id(),
                 'order_number'   => $orderNumber,
                 'total_price'    => $totalPrice,
+                'shipping_fee'   => $shippingFee,
                 'status'         => 'pending',
                 'payment_status' => 'unpaid',
                 ...$checkoutData,
@@ -151,7 +158,7 @@ class CheckoutController extends Controller
         return $request->validate([
             'recipient_name' => 'required|string|max:255',
             'postal_code'    => ['required', 'string', 'regex:/^\d{3}-?\d{4}$/'],
-            'prefecture'     => 'required|string|max:10',
+            'prefecture'     => ['required', 'string', Rule::in(ShippingFee::PREFECTURES)],
             'address'        => 'required|string|max:255',
             'phone_number'   => ['required', 'string', 'regex:/^[0-9\-]{10,13}$/'],
             'email'          => 'required|email|max:255',
@@ -160,6 +167,7 @@ class CheckoutController extends Controller
             'postal_code.required'    => '郵便番号を入力してください。',
             'postal_code.regex'       => '郵便番号は「123-4567」または「1234567」の形式で入力してください。',
             'prefecture.required'     => '都道府県を選択してください。',
+            'prefecture.in'           => '都道府県を選択してください。',
             'address.required'        => '住所を入力してください。',
             'phone_number.required'   => '電話番号を入力してください。',
             'phone_number.regex'      => '電話番号は半角数字とハイフンで入力してください（例: 090-1234-5678）。',

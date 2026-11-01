@@ -66,10 +66,10 @@ class SalesController extends Controller
                         $order->email,
                     ];
 
-                    // 送料・割引額・税額は現行DBに内訳を保持していないため 0 固定（total_price は税込・送料込みの合計）
+                    // 割引額・税額は現行DBに内訳を保持していないため 0 固定（total_price は税込・送料込みの合計）
                     $amountColumns = [
-                        $order->total_price,
-                        0,
+                        $order->subtotal_price,
+                        $order->shipping_fee,
                         0,
                         0,
                         $order->total_price,
@@ -139,7 +139,8 @@ class SalesController extends Controller
     {
         $paidQuery = $this->baseQuery($filters, $from, $to);
 
-        $grossSales   = (clone $paidQuery)->sum('total_price');
+        $grossSales     = (clone $paidQuery)->sum('total_price');
+        $shippingAmount = (clone $paidQuery)->sum('shipping_fee');
         $paymentCount = (clone $paidQuery)->count();
 
         // 支払済みかつキャンセルされた注文＝返金相当として扱う（現行DBに専用の返金額カラムがないための近似）
@@ -158,7 +159,7 @@ class SalesController extends Controller
             'payment_count'   => $paymentCount,
             'order_count'     => $orderCount,
             'tax_amount'      => 0,
-            'shipping_amount' => 0,
+            'shipping_amount' => $shippingAmount,
             'discount_amount' => 0,
         ];
     }

@@ -380,15 +380,16 @@
    admin/layouts/app.blade.php（管理画面共通レイアウト）
    ============================================================ */
 .admin_layouts_app_body {
-    background-color: var(--color-gray-100);
+    background-color: var(--color-admin-bg);
     min-height: 100vh;
     display: flex;
 }
 
 .admin_layouts_app_sidebar {
     width: 14rem;
-    background-color: var(--color-gray-900);
-    color: var(--color-gray-300);
+    background-color: var(--color-admin-surface);
+    color: var(--color-admin-text);
+    border-right: 1px solid var(--color-admin-border);
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
@@ -397,19 +398,19 @@
 
 .admin_layouts_app_sidebar-header {
     padding: 1.25rem 1.5rem;
-    border-bottom: 1px solid var(--color-gray-700);
+    border-bottom: 1px solid var(--color-admin-border);
 }
 
 .admin_layouts_app_sidebar-eyebrow {
     font-size: var(--text-xs);
-    color: var(--color-gray-500);
+    color: var(--color-admin-muted);
     text-transform: uppercase;
     letter-spacing: .05em;
     margin-bottom: .25rem;
 }
 
 .admin_layouts_app_sidebar-title {
-    color: var(--color-white);
+    color: var(--color-admin-strong);
     font-weight: 700;
     font-size: var(--text-lg);
     line-height: 1.375;
@@ -430,13 +431,14 @@
 }
 
 .admin_layouts_app_nav-link:hover {
-    background-color: var(--color-gray-800);
-    color: var(--color-white);
+    background-color: var(--color-admin-border);
+    color: var(--color-admin-strong);
 }
 
 .admin_layouts_app_nav-link.is-active {
-    background-color: var(--color-gray-800);
-    color: var(--color-white);
+    background-color: var(--color-admin-border);
+    color: var(--color-admin-accent);
+    box-shadow: inset 3px 0 0 var(--color-admin-accent);
 }
 
 .admin_layouts_app_nav-icon {
@@ -448,14 +450,14 @@
     padding: .5rem 1.5rem;
     margin-top: 1rem;
     font-size: var(--text-xs);
-    color: var(--color-gray-500);
+    color: var(--color-admin-muted);
     text-transform: uppercase;
     letter-spacing: .025em;
 }
 
 .admin_layouts_app_sidebar-footer {
     padding: 1rem 1.5rem;
-    border-top: 1px solid var(--color-gray-700);
+    border-top: 1px solid var(--color-admin-border);
 }
 
 .admin_layouts_app_sidebar-footer > * + * {
@@ -464,7 +466,7 @@
 
 .admin_layouts_app_footer-link {
     font-size: var(--text-xs);
-    color: var(--color-gray-500);
+    color: var(--color-admin-muted);
     display: flex;
     align-items: center;
     gap: .25rem;
@@ -472,7 +474,7 @@
 }
 
 .admin_layouts_app_footer-link:hover {
-    color: var(--color-white);
+    color: var(--color-admin-accent);
 }
 
 .admin_layouts_app_footer-icon {
@@ -484,7 +486,7 @@
     width: 100%;
     text-align: left;
     font-size: var(--text-xs);
-    color: var(--color-gray-500);
+    color: var(--color-admin-muted);
     display: flex;
     align-items: center;
     gap: .25rem;
@@ -492,7 +494,7 @@
 }
 
 .admin_layouts_app_footer-logout:hover {
-    color: var(--color-white);
+    color: var(--color-admin-accent);
 }
 
 .admin_layouts_app_content {
@@ -504,8 +506,8 @@
 }
 
 .admin_layouts_app_topbar {
-    background-color: var(--color-white);
-    border-bottom: 1px solid var(--color-gray-200);
+    background-color: var(--color-admin-surface);
+    border-bottom: 1px solid var(--color-admin-border);
     padding: 1rem 2rem;
     display: flex;
     align-items: center;
@@ -515,7 +517,7 @@
 .admin_layouts_app_topbar-title {
     font-size: var(--text-lg);
     font-weight: 600;
-    color: var(--color-gray-800);
+    color: var(--color-admin-strong);
 }
 
 .admin_layouts_app_topbar-actions {
@@ -526,12 +528,13 @@
 
 .admin_layouts_app_topbar-user {
     font-size: var(--text-sm);
-    color: var(--color-gray-500);
+    color: var(--color-admin-text);
 }
 
 .admin_layouts_app_main {
     flex: 1;
     padding: 2rem;
+    background-color: var(--color-admin-bg);
 }
 
 /* ============================================================
@@ -543,7 +546,7 @@
 }
 
 .admin_card {
-    background-color: var(--color-white);
+    background-color: var(--color-admin-surface);
     border-radius: var(--radius-xl);
     box-shadow: var(--shadow-sm);
     overflow: hidden;
@@ -551,11 +554,11 @@
 
 .admin_card-header {
     padding: 1rem 1.5rem;
-    border-bottom: 1px solid var(--color-gray-200);
+    border-bottom: 1px solid var(--color-admin-border);
 }
 
 .admin_form-card {
-    background-color: var(--color-white);
+    background-color: var(--color-admin-surface);
     border-radius: var(--radius-xl);
     box-shadow: var(--shadow-sm);
     padding: 1.5rem;
@@ -572,8 +575,8 @@
 }
 
 .admin_header-action-button {
-    background-color: var(--color-indigo-600);
-    color: var(--color-white);
+    background-color: var(--color-admin-accent);
+    color: var(--color-admin-bg);
     font-size: var(--text-sm);
     font-weight: 500;
     padding: .5rem 1rem;
@@ -582,13 +585,13 @@
 }
 
 .admin_header-action-button:hover {
-    background-color: var(--color-indigo-700);
+    background-color: #8cc8e2;
 }
 
 .admin_header-action-button--outline {
-    background-color: var(--color-white);
-    border: 1px solid var(--color-gray-300);
-    color: var(--color-gray-600);
+    background-color: transparent;
+    border: 1px solid var(--color-admin-border);
+    color: var(--color-admin-text);
     font-size: var(--text-sm);
     font-weight: 500;
     padding: .5rem 1rem;
@@ -597,7 +600,110 @@
 }
 
 .admin_header-action-button--outline:hover {
-    background-color: var(--color-gray-50);
+    background-color: var(--color-admin-border);
+}
+
+/* ============================================================
+   管理画面内の共通コンポーネント配色
+   （common_* はフロントと共用のため admin_layouts_app_main 配下でのみ上書き）
+   ============================================================ */
+.admin_layouts_app_main .common_summary-card {
+    background-color: var(--color-admin-surface);
+}
+
+.admin_layouts_app_main .common_summary-label,
+.admin_layouts_app_main .common_info-label,
+.admin_layouts_app_main .common_form-label,
+.admin_layouts_app_main .common_admin-form-label {
+    color: var(--color-admin-label);
+}
+
+.admin_layouts_app_main .common_summary-value,
+.admin_layouts_app_main .common_info-value {
+    color: var(--color-admin-strong);
+}
+
+.admin_layouts_app_main .common_summary-value--accent,
+.admin_layouts_app_main .common_summary-unit {
+    color: var(--color-admin-accent);
+}
+
+.admin_layouts_app_main .common_summary-value--danger,
+.admin_layouts_app_main .common_required-mark,
+.admin_layouts_app_main .common_admin-form-error {
+    color: var(--color-admin-danger);
+}
+
+.admin_layouts_app_main .common_info-value--muted,
+.admin_layouts_app_main .common_admin-form-hint,
+.admin_layouts_app_main .common_back-link {
+    color: var(--color-admin-text);
+}
+
+.admin_layouts_app_main .common_back-link:hover {
+    color: var(--color-admin-label);
+}
+
+.admin_layouts_app_main .common_info-list > * + * {
+    border-top-color: var(--color-admin-border);
+}
+
+.admin_layouts_app_main .common_form-input,
+.admin_layouts_app_main .common_admin-form-input {
+    background-color: var(--color-admin-border);
+    border-color: var(--color-admin-border);
+    color: var(--color-admin-text);
+}
+
+.admin_layouts_app_main .common_form-input:focus,
+.admin_layouts_app_main .common_admin-form-input:focus {
+    border-color: var(--color-admin-accent);
+}
+
+.admin_layouts_app_main .common_form-input::placeholder,
+.admin_layouts_app_main .common_admin-form-input::placeholder {
+    color: var(--color-admin-muted);
+}
+
+.admin_layouts_app_main .common_table thead {
+    background-color: var(--color-admin-surface-sunken);
+}
+
+.admin_layouts_app_main .common_table th {
+    color: var(--color-admin-label);
+}
+
+.admin_layouts_app_main .common_table tbody tr {
+    border-top-color: var(--color-admin-border);
+}
+
+.admin_layouts_app_main .common_table tbody tr:hover {
+    background-color: rgb(41 53 65 / .5);
+}
+
+.admin_layouts_app_main .common_button-outline--compact,
+.admin_layouts_app_main .common_button-danger--xs,
+.admin_layouts_app_main .common_button-toggle--xs {
+    background-color: var(--color-admin-button);
+}
+
+.admin_layouts_app_main .common_button-outline--compact {
+    color: var(--color-admin-text);
+}
+
+.admin_layouts_app_main .common_button-danger--xs {
+    color: var(--color-red-400);
+}
+
+.admin_layouts_app_main .common_button-toggle--xs.is-draft {
+    color: var(--color-green-500);
+}
+
+.admin_layouts_app_main .common_button-outline--compact:hover,
+.admin_layouts_app_main .common_button-danger--xs:hover,
+.admin_layouts_app_main .common_button-toggle--xs.is-published:hover,
+.admin_layouts_app_main .common_button-toggle--xs.is-draft:hover {
+    background-color: var(--color-admin-button-hover);
 }
 
 /* ============================================================
