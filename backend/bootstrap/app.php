@@ -11,8 +11,12 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        // Render などリバースプロキシ配下で HTTPS を正しく検出する
-        $middleware->trustProxies(at: '*');
+        // ロードバランサ / リバースプロキシ配下で HTTPS・接続元 IP を正しく検出する。
+        // TRUSTED_PROXIES に信頼するプロキシの IP/CIDR をカンマ区切りで指定（'*' で全て信頼）。
+        // 未設定なら信頼しない（直接公開時に X-Forwarded-* を偽装されないため）。
+        if ($proxies = env('TRUSTED_PROXIES')) {
+            $middleware->trustProxies(at: $proxies === '*' ? '*' : array_map('trim', explode(',', $proxies)));
+        }
 
         $middleware->alias([
             'auth.admin' => \App\Http\Middleware\AuthAdmin::class,
