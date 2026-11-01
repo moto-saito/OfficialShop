@@ -32,7 +32,7 @@
                     {{-- 画像 --}}
                     <td>
                         @if ($product->image_path)
-                            <img src="{{ asset('storage/' . $product->image_path) }}"
+                            <img src="{{ Storage::disk('public')->url($product->image_path) }}"
                                  alt="{{ $product->name }}"
                                  class="admin_products_index_thumb">
                         @else

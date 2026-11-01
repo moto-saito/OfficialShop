@@ -52,7 +52,7 @@
 
     @if (!empty($recipe->image_path))
         <div class="admin_recipes_form_image-preview-wrap">
-            <img src="{{ asset('storage/' . $recipe->image_path) }}"
+            <img src="{{ Storage::disk('public')->url($recipe->image_path) }}"
                  alt="現在の画像"
                  class="admin_recipes_form_image-preview">
             <p class="common_admin-form-hint">新しい画像をアップロードすると置き換わります</p>
@@ -120,7 +120,7 @@
 
                     @if (!empty($step['existing_image']))
                         <div class="admin_recipes_form_image-preview-wrap">
-                            <img src="{{ asset('storage/' . $step['existing_image']) }}"
+                            <img src="{{ Storage::disk('public')->url($step['existing_image']) }}"
                                  alt="現在の画像"
                                  class="admin_recipes_form_image-preview">
                             <p class="common_admin-form-hint">新しい画像をアップロードすると置き換わります</p>

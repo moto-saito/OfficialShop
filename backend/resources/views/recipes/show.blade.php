@@ -18,7 +18,7 @@
 
     {{-- メイン画像 --}}
     @if ($recipe->image_path)
-        <img src="{{ asset('storage/' . $recipe->image_path) }}"
+        <img src="{{ Storage::disk('public')->url($recipe->image_path) }}"
              alt="{{ $recipe->title }}"
              class="recipes_show_hero-image">
     @endif
@@ -74,7 +74,7 @@
                         <div class="recipes_show_step-number">{{ $index + 1 }}</div>
                         <div class="recipes_show_step-body">
                             @if ($step->image_path)
-                                <img src="{{ asset('storage/' . $step->image_path) }}"
+                                <img src="{{ Storage::disk('public')->url($step->image_path) }}"
                                      alt="手順{{ $index + 1 }}"
                                      class="recipes_show_step-image">
                             @endif

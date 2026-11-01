@@ -16,7 +16,7 @@
 
     {{-- メイン画像 --}}
     @if ($store->image_path)
-        <img src="{{ asset('storage/' . $store->image_path) }}"
+        <img src="{{ Storage::disk('public')->url($store->image_path) }}"
              alt="{{ $store->title }}"
              class="store_show_hero-image">
     @endif
@@ -59,7 +59,7 @@
         <h2 class="store_show_section-title">MAP</h2>
 
         @if ($store->map_image_path)
-            <img src="{{ asset('storage/' . $store->map_image_path) }}"
+            <img src="{{ Storage::disk('public')->url($store->map_image_path) }}"
                  alt="交通MAP"
                  class="store_show_map-image">
         @else

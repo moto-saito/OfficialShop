@@ -16,7 +16,7 @@
 
     {{-- メイン画像 --}}
     @if ($company->image_path)
-        <img src="{{ asset('storage/' . $company->image_path) }}"
+        <img src="{{ Storage::disk('public')->url($company->image_path) }}"
              alt="{{ $company->title }}"
              class="company_show_hero-image">
     @endif

@@ -44,7 +44,7 @@
 
                 @if ($store->image_path)
                     <div class="admin_store_form_image-preview-wrap">
-                        <img src="{{ asset('storage/' . $store->image_path) }}"
+                        <img src="{{ Storage::disk('public')->url($store->image_path) }}"
                              alt="現在の画像"
                              class="admin_store_form_image-preview">
                         <p class="common_admin-form-hint">新しい画像をアップロードすると置き換わります</p>
@@ -100,7 +100,7 @@
 
                 @if ($store->map_image_path)
                     <div class="admin_store_form_image-preview-wrap">
-                        <img src="{{ asset('storage/' . $store->map_image_path) }}"
+                        <img src="{{ Storage::disk('public')->url($store->map_image_path) }}"
                              alt="現在のMAP画像"
                              class="admin_store_form_image-preview">
                         <p class="common_admin-form-hint">新しい画像をアップロードすると置き換わります</p>

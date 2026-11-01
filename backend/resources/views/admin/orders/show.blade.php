@@ -98,7 +98,7 @@
                     <tr>
                         <td>
                             @if ($item->product?->image_path)
-                                <img src="{{ asset('storage/' . $item->product->image_path) }}"
+                                <img src="{{ Storage::disk('public')->url($item->product->image_path) }}"
                                      alt="{{ $item->product_name }}"
                                      class="admin_orders_show_thumb">
                             @else

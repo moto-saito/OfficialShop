@@ -49,7 +49,7 @@
 
                 @if ($company->image_path)
                     <div class="admin_company_form_image-preview-wrap">
-                        <img src="{{ asset('storage/' . $company->image_path) }}"
+                        <img src="{{ Storage::disk('public')->url($company->image_path) }}"
                              alt="現在の画像"
                              class="admin_company_form_image-preview">
                         <p class="common_admin-form-hint">新しい画像をアップロードすると置き換わります</p>

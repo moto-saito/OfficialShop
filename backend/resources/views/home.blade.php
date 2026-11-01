@@ -152,7 +152,7 @@
 
                         {{-- レシピ画像 --}}
                         @if ($recipe->image_path)
-                            <img src="{{ asset('storage/' . $recipe->image_path) }}"
+                            <img src="{{ Storage::disk('public')->url($recipe->image_path) }}"
                                  alt="{{ $recipe->title }}"
                                  class="home_recipe-image">
                         @else
@@ -214,7 +214,7 @@
                         {{-- 商品画像 --}}
                         <a href="{{ route('products.show', $product) }}" class="home_product-image-link">
                             @if ($product->image_path)
-                                <img src="{{ asset('storage/' . $product->image_path) }}"
+                                <img src="{{ Storage::disk('public')->url($product->image_path) }}"
                                      alt="{{ $product->name }}"
                                      class="home_product-image">
                             @else

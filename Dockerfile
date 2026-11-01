@@ -11,8 +11,8 @@ FROM php:8.2-apache AS app
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
         git curl zip unzip \
-        libpng-dev libonig-dev libxml2-dev libzip-dev libsqlite3-dev \
-    && docker-php-ext-install pdo_mysql pdo_sqlite mbstring exif pcntl bcmath gd zip \
+        libpng-dev libonig-dev libxml2-dev libzip-dev libsqlite3-dev libpq-dev \
+    && docker-php-ext-install pdo_mysql pdo_sqlite pdo_pgsql mbstring exif pcntl bcmath gd zip \
     && a2enmod rewrite headers \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
