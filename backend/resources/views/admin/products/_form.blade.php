@@ -46,7 +46,7 @@
 
     @if (!empty($product->image_path))
         <div class="admin_products_form_image-preview-wrap">
-            <img src="{{ asset('storage/' . $product->image_path) }}"
+            <img src="{{ Storage::disk('public')->url($product->image_path) }}"
                  alt="現在の商品画像"
                  class="admin_products_form_image-preview">
             <p class="common_admin-form-hint">新しい画像をアップロードすると置き換わります</p>

@@ -1,0 +1,71 @@
+services:
+  - type: web
+    name: official-shop
+    runtime: docker
+    plan: free
+    region: singapore
+    branch: main
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /up
+    autoDeploy: true
+    envVars:
+      - key: APP_NAME
+        value: "公式ショップ"
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      # `echo "base64:$(openssl rand -base64 32)"` の出力を貼り付ける
+      - key: APP_KEY
+        sync: false
+      - key: APP_LOCALE
+        value: ja
+      - key: APP_FALLBACK_LOCALE
+        value: ja
+
+      # ---- DB: 外部の無料 Postgres（Neon / Supabase）----
+      # 例: postgresql://user:pass@ep-xxx.ap-southeast-1.aws.neon.tech/neondb?sslmode=require
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_URL
+        sync: false
+      - key: DB_SSLMODE
+        value: require
+
+      # ---- 画像: S3 互換ストレージ（Supabase Storage 等）----
+      - key: MEDIA_DISK_DRIVER
+        value: s3
+      - key: MEDIA_S3_ENDPOINT
+        sync: false
+      - key: MEDIA_S3_REGION
+        sync: false
+      - key: MEDIA_S3_BUCKET
+        sync: false
+      - key: MEDIA_S3_KEY
+        sync: false
+      - key: MEDIA_S3_SECRET
+        sync: false
+      - key: MEDIA_S3_URL
+        sync: false
+
+      # ---- 初期管理者（存在しない場合のみ作成）----
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+
+      - key: SESSION_DRIVER
+        value: database
+      - key: SESSION_SECURE_COOKIE
+        value: "true"
+      - key: CACHE_STORE
+        value: database
+      - key: QUEUE_CONNECTION
+        value: sync
+      - key: LOG_CHANNEL
+        value: stderr
+      - key: LOG_LEVEL
+        value: warning
+      - key: MAIL_MAILER
+        value: log

@@ -48,7 +48,7 @@
                             <td>
                                 <div class="cart_index_product-cell">
                                     @if ($item->product && $item->product->image_path)
-                                        <img src="{{ asset('storage/' . $item->product->image_path) }}"
+                                        <img src="{{ Storage::disk('public')->url($item->product->image_path) }}"
                                              alt="{{ $item->product->name }}"
                                              class="cart_index_product-image">
                                     @else

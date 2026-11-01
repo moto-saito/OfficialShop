@@ -11,6 +11,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        // Render などリバースプロキシ配下で HTTPS を正しく検出する
+        $middleware->trustProxies(at: '*');
+
         $middleware->alias([
             'auth.admin' => \App\Http\Middleware\AuthAdmin::class,
         ]);
