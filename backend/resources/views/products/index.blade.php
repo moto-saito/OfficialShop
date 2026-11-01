@@ -98,10 +98,13 @@
 
                 <div id="cart-summary-items" class="products_index_cart-summary-items {{ $cartItems->isEmpty() ? 'hidden' : '' }}">
                     @foreach ($cartItems as $item)
-                        <div class="products_index_cart-summary-item">
+                        <div class="products_index_cart-summary-item" data-cart-id="{{ $item->id }}">
                             <p class="products_index_cart-summary-item-name">{{ $item->product->name ?? '（削除された商品）' }}</p>
+                            <p class="products_index_cart-summary-item-price">{{ $item->product->formatted_price ?? '―' }}</p>
                             <div class="products_index_cart-summary-item-row">
-                                <span>{{ $item->quantity }}個 &times; {{ $item->product->formatted_price ?? '―' }}</span>
+                                <div class="products_index_cart-summary-qty">
+                                    <input type="number" value="{{ $item->quantity }}" min="1" class="common_quantity-input js-cart-qty-input" aria-label="個数">
+                                </div>
                                 <span class="products_index_cart-summary-item-subtotal">¥{{ number_format($item->subtotal) }}</span>
                             </div>
                         </div>
@@ -152,10 +155,13 @@ function updateCartSummary(data) {
         checkoutBtn.classList.add('is-disabled');
     } else {
         itemsWrap.innerHTML = data.items.map(item => `
-            <div class="products_index_cart-summary-item">
-                <p class="products_index_cart-summary-item-name">${escapeHtml(item.name)}</p>
+            <div class="products_index_cart-summary-item" data-cart-id="${item.id}">
+                <p class="products_index_cart-summary-item-name">${escapeHtml(item.name ?? '（削除された商品）')}</p>
+                <p class="products_index_cart-summary-item-price">¥${Number(item.price).toLocaleString()}</p>
                 <div class="products_index_cart-summary-item-row">
-                    <span>${item.quantity}個 &times; ¥${Number(item.price).toLocaleString()}</span>
+                    <div class="products_index_cart-summary-qty">
+                        <input type="number" value="${item.quantity}" min="1" class="common_quantity-input js-cart-qty-input" aria-label="個数">
+                    </div>
                     <span class="products_index_cart-summary-item-subtotal">¥${Number(item.subtotal).toLocaleString()}</span>
                 </div>
             </div>
@@ -184,6 +190,49 @@ document.querySelectorAll('.js-add-to-cart-form').forEach(form => {
         .then(updateCartSummary)
         .catch(() => alert('カートへの追加に失敗しました。'));
     });
+});
+
+// ── 小計欄での個数変更 ──
+const cartUpdateUrl = @json(route('cart.update', ['cart' => '__ID__']));
+const csrfToken = @json(csrf_token());
+let cartRequestSeq = 0;
+
+function updateCartQuantity(cartId, quantity) {
+    const seq = ++cartRequestSeq;
+    const body = new FormData();
+    body.append('_token', csrfToken);
+    body.append('_method', 'PATCH');
+    body.append('quantity', quantity);
+
+    fetch(cartUpdateUrl.replace('__ID__', cartId), {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body,
+    })
+    .then(res => {
+        if (!res.ok) throw new Error();
+        return res.json();
+    })
+    .then(data => {
+        // 連打時に古いレスポンスで表示が戻らないよう、最新のリクエスト結果だけ反映する
+        if (seq === cartRequestSeq) updateCartSummary(data);
+    })
+    .catch(() => {
+        alert('個数の変更に失敗しました。');
+        location.reload();
+    });
+}
+
+const cartItemsWrap = document.getElementById('cart-summary-items');
+
+cartItemsWrap.addEventListener('change', e => {
+    const input = e.target.closest('.js-cart-qty-input');
+    if (!input) return;
+    const qty = parseInt(input.value);
+    if (!qty || qty < 1) {
+        input.value = 1;
+    }
+    updateCartQuantity(input.closest('[data-cart-id]').dataset.cartId, Math.max(1, qty || 1));
 });
 </script>
 @endsection
