@@ -38,7 +38,7 @@
 
 .admin_dashboard_orders-header {
     padding: 1rem 1.5rem;
-    border-bottom: 1px solid var(--color-gray-200);
+    border-bottom: 1px solid var(--color-admin-border);
     display: flex;
     align-items: center;
     justify-content: space-between;

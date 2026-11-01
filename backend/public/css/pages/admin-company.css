@@ -11,7 +11,7 @@
     height: 8rem;
     width: auto;
     border-radius: var(--radius-lg);
-    border: 1px solid var(--color-gray-200);
+    border: 1px solid var(--color-admin-border);
     object-fit: cover;
 }
 
@@ -65,7 +65,7 @@
 }
 
 .admin_company_form_history-row {
-    background-color: #473203;
+    background-color: var(--color-admin-border);
 }
 
 .admin_company_form_history-year {
@@ -90,7 +90,7 @@
     color: var(--color-admin-text);
     padding: .375rem .75rem;
     border-radius: var(--radius-lg);
-    border: 1px solid var(--color-gray-200);
+    border: 1px solid var(--color-admin-border);
     background-color: var(--color-admin-button);
     transition: color .15s ease, border-color .15s ease;
 }
