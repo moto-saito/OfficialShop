@@ -17,12 +17,20 @@ class OrderController extends Controller
     {
         $filters = $request->validated();
 
-        $orders = Order::search($filters)
-            ->orderBy('created_at', 'desc')
-            ->paginate(20)
-            ->withQueryString();
+        // 一覧はデフォルトでは表示せず、検索したときだけ表示する。
+        // 「検索」ボタン（searched=1）か、URL に検索条件が付いている場合を「検索した」とみなす。
+        // 条件を空のまま検索した場合は全件を表示する。
+        $searched = $request->boolean('searched')
+            || collect($filters)->contains(fn ($value) => $value !== null && $value !== '');
 
-        return view('admin.orders.index', compact('orders', 'filters'));
+        $orders = $searched
+            ? Order::search($filters)
+                ->orderBy('created_at', 'desc')
+                ->paginate(20)
+                ->withQueryString()
+            : null;
+
+        return view('admin.orders.index', compact('orders', 'filters', 'searched'));
     }
 
     public function show(Order $order)

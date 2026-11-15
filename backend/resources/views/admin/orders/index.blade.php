@@ -4,6 +4,16 @@
 
 @push('head')
 <link rel="stylesheet" href="{{ asset('css/pages/admin-orders.css') }}">
+<script>
+    // ページを再読み込み（F5 / 更新ボタン）したら、検索条件と一覧をデフォルト（未検索）に戻す。
+    // 表示前に切り替えるため head で実行する
+    (function () {
+        var nav = performance.getEntriesByType('navigation')[0];
+        if (nav && nav.type === 'reload' && window.location.search) {
+            window.location.replace(window.location.pathname);
+        }
+    })();
+</script>
 @endpush
 
 @section('header-action')
@@ -18,6 +28,7 @@
 {{-- 検索フォーム --}}
 <div class="admin_card admin_orders_filter-card">
     <form method="GET" action="{{ route('admin.orders.index') }}">
+        <input type="hidden" name="searched" value="1">
         <div class="admin_orders_index_filter-grid">
             <div>
                 <label class="admin_orders_filter-label">注文番号</label>
@@ -74,7 +85,15 @@
     </form>
 </div>
 
-{{-- 注文一覧 --}}
+{{-- 注文一覧（検索したときだけ表示） --}}
+@if (!$searched)
+<div class="admin_card">
+    <p class="admin_orders_index_prompt">
+        検索条件を指定して「検索」を押すと、該当する注文が表示されます。<br>
+        条件を指定せずに「検索」を押すと、すべての注文を表示します。
+    </p>
+</div>
+@else
 <div class="admin_card">
     <div class="admin_orders_index_table-scroll">
         <table class="common_table">
@@ -138,4 +157,5 @@
         </div>
     @endif
 </div>
+@endif
 @endsection

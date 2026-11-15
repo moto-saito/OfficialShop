@@ -84,7 +84,7 @@
 <div class="admin_card">
     <div class="admin_dashboard_orders-header">
         <h2 class="common_section-title">最新注文</h2>
-        <a href="{{ route('admin.orders.index') }}" class="admin_dashboard_orders-link">すべて見る →</a>
+        <a href="{{ route('admin.orders.index', ['searched' => 1]) }}" class="admin_dashboard_orders-link">すべて見る →</a>
     </div>
     <table class="common_table">
         <thead>

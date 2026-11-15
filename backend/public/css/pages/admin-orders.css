@@ -111,6 +111,14 @@ td.admin_orders_index_empty {
     padding-block: 4rem;
 }
 
+/* 検索前の案内文 */
+.admin_orders_index_prompt {
+    text-align: center;
+    color: var(--color-admin-text);
+    padding-block: 4rem;
+    line-height: 1.8;
+}
+
 .admin_orders_index_pagination-wrap {
     padding: 1rem 1.5rem;
     border-top: 1px solid var(--color-admin-border);
