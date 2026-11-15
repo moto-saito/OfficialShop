@@ -141,6 +141,14 @@
                 </div>
             @endif
 
+            @if (session('error'))
+                <div class="common_flash-error" role="alert">
+                    @foreach ((array) session('error') as $message)
+                        <p>{{ $message }}</p>
+                    @endforeach
+                </div>
+            @endif
+
             @yield('content')
         </main>
     </div>
