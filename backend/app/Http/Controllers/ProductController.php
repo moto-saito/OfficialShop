@@ -9,7 +9,8 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::selling()->paginate(12);
+        // 売り切れ商品も一覧に表示する（非表示の商品は除外）
+        $products = Product::visible()->paginate(12);
 
         // 商品一覧右上の小計欄用に、現在のセッションのカート情報を取得
         $cartItems = Cart::with('product')
@@ -21,7 +22,7 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
-        abort_if(!$product->isSelling(), 404);
+        abort_if(!$product->isSelling() && !$product->isSoldOut(), 404);
 
         return view("products.show", compact("product"));
     }

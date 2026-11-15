@@ -29,8 +29,19 @@
                                                          └→ 画像（ホストのディレクトリ or オブジェクトストレージ）
 ```
 
-- **DB**: データベースアプライアンス（MariaDB / PostgreSQL）を推奨。
-  MariaDB なら `DB_CONNECTION=mariadb` / `DB_PORT=3306`、PostgreSQL なら `pgsql` / `5432`。
+- **DB**: PostgreSQL（データベースアプライアンス or 同サーバー）。`DB_CONNECTION=pgsql` / `DB_PORT=5432`。
+  MariaDB を使う場合は `DB_CONNECTION=mariadb` / `DB_PORT=3306`（`DB_SCHEMA` は使われない）。
+- **スキーマ**: 同じ PostgreSQL インスタンスを環境ごとにスキーマで分けて使う。`DB_SCHEMA` で指定（テンプレートは仮で `production`）。
+  Laravel はスキーマ自体を作らないので、初回起動前に作成し、環境ごとの DB ユーザーにそのスキーマだけ権限を与える。
+  ```sql
+  CREATE ROLE official_shop_prod LOGIN PASSWORD '<password>';
+  CREATE SCHEMA production AUTHORIZATION official_shop_prod;
+  -- 他環境のスキーマは所有者以外に GRANT しなければアクセスできない。
+  -- public スキーマも使わせない場合（PostgreSQL 15 以降は既定で CREATE 不可、USAGE のみ許可）:
+  -- REVOKE USAGE ON SCHEMA public FROM PUBLIC;
+  ```
+  `migrations` テーブルもスキーマごとに作られるので、マイグレーションは環境ごとに実行される。
+- **DB 管理ツール**: Adminer をローカルで使い、本番 DB へは SSH トンネル経由で接続する（Adminer を本番で公開しない）。
 - **画像**: サーバー 1 台ならホストのディレクトリをボリュームでマウントすれば `local` のままでよい。
   AppRun（コンテナ実行基盤）や複数台構成など、ディスクが永続化されない場合はオブジェクトストレージ（`MEDIA_DISK_DRIVER=s3`）を使う。
   エンドポイント・リージョン・公開 URL はコントロールパネルの値で確認すること。

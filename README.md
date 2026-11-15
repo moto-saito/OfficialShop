@@ -14,8 +14,9 @@ Laravel + Docker で構築するECサイト（醤油製造所の公式ショッ�
 ```
 .
 ├── backend/          # Laravelアプリケーション本体
-├── docker/            # Dockerfile・PHP/Apache/MySQL設定
-├── mysql/             # MySQLデータ永続化用（Git管理外）
+├── docker/            # Dockerfile・PHP/Apache設定
+├── postgres/          # PostgreSQLデータ永続化用（Git管理外）
+├── mysql/             # 旧MySQLデータ（PostgreSQL移行前のバックアップ。Git管理外）
 └── docker-compose.yml
 ```
 
@@ -24,8 +25,8 @@ Laravel + Docker で構築するECサイト（醤油製造所の公式ショッ�
 | サービス   | 役割                  | ポート |
 |------------|-----------------------|--------|
 | app        | PHP 8.2 + Apache       | 80     |
-| db         | MySQL 8.0              | 3306   |
-| phpmyadmin | DB管理用GUI            | 8080   |
+| db         | PostgreSQL 17          | 5432   |
+| adminer    | DB管理用GUI（Adminer） | 8080   |
 
 ## セットアップ
 
@@ -33,7 +34,7 @@ Laravel + Docker で構築するECサイト（醤油製造所の公式ショッ�
 
 - Git がインストールされていること
 - Docker / Docker Compose がインストールされていること
-- ホスト側で 80 / 3306 / 8080 番ポートが空いていること
+- ホスト側で 80 / 5432 / 8080 番ポートが空いていること
 
 ### 手順
 
@@ -62,12 +63,13 @@ php artisan storage:link
 ### `.env` の主な設定値（docker-compose.yml と対応）
 
 ```
-DB_CONNECTION=mysql
+DB_CONNECTION=pgsql
 DB_HOST=db
-DB_PORT=3306
+DB_PORT=5432
 DB_DATABASE=official_shop
 DB_USERNAME=laravel
 DB_PASSWORD=password
+DB_SCHEMA=public
 ```
 
 `backend/.env.example` はLaravel標準のsqlite設定のままになっているため、`.env`作成後に上記の値へ書き換えること。
@@ -75,7 +77,8 @@ DB_PASSWORD=password
 ## アクセス先
 
 - アプリ本体: http://localhost
-- phpMyAdmin: http://localhost:8080 （ユーザー: root / パスワード: root）
+- Adminer: http://localhost:8080 （データベース種類: PostgreSQL / サーバー: db / ユーザー: laravel / パスワード: password / データベース: official_shop）
+  - スキーマは左メニューの「スキーマ」で切り替える
 
 ## よく使うコマンド
 
@@ -100,5 +103,6 @@ docker compose exec app php artisan test
 
 ## 注意事項
 
-- `backend/.env` と `mysql/` ディレクトリの中身はGit管理対象外。各自の環境で作成すること。
-- DBの初期データはマイグレーション・シーダーで再現する（`mysql/`の実データはリポジトリで共有しない）。
+- `backend/.env` と `postgres/`・`mysql/` ディレクトリの中身はGit管理対象外。各自の環境で作成すること。
+- DBの初期データはマイグレーション・シーダーで再現する（`postgres/`の実データはリポジトリで共有しない）。
+- `DB_SCHEMA` で使用するスキーマを指定する（ローカルは `public`）。`public` 以外を使う場合はスキーマを事前に作成しておくこと。

@@ -1,6 +1,10 @@
-# MySQL data
+# MySQL data（PostgreSQL 移行前のデータ。バックアップとして残す）
 /mysql/*
 !/mysql/.gitkeep
+
+# PostgreSQL data
+/postgres/*
+!/postgres/.gitkeep
 
 # Laravel
 /backend/.env

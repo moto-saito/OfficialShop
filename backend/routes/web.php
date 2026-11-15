@@ -41,6 +41,8 @@ Route::get("/store", [StoreController::class, "show"])->name("store.show");
 
 Route::get("/company", [CompanyController::class, "show"])->name("company.show");
 
+Route::view("/philosophy", "philosophy")->name("philosophy");
+
 // ─── お問い合わせ ───────────────────────────────────────
 Route::get("/contact", [InquiryController::class, "index"])->name("contact.index");
 Route::post("/contact/confirm", [InquiryController::class, "confirm"])->name("contact.confirm");
