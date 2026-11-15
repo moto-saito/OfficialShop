@@ -162,7 +162,7 @@ class SalesTest extends TestCase
             ['name' => '商品X', 'price' => 2000, 'quantity' => 3],
         ]);
 
-        $response = $this->actingAs($admin, 'admin')->get(route('admin.sales.index'));
+        $response = $this->actingAs($admin, 'admin')->get(route('admin.sales.index', ['searched' => 1]));
 
         $response->assertStatus(200);
         $response->assertSee($order->order_number);
@@ -178,11 +178,11 @@ class SalesTest extends TestCase
             $this->makeOrder(['order_number' => "ORD-PAGE-{$i}", 'paid_at' => now()]);
         }
 
-        $response = $this->actingAs($admin, 'admin')->get(route('admin.sales.index'));
+        $response = $this->actingAs($admin, 'admin')->get(route('admin.sales.index', ['searched' => 1]));
         $response->assertStatus(200);
         $response->assertViewHas('orders', fn ($orders) => $orders->total() === 25 && $orders->count() === 20);
 
-        $page2 = $this->actingAs($admin, 'admin')->get(route('admin.sales.index', ['page' => 2]));
+        $page2 = $this->actingAs($admin, 'admin')->get(route('admin.sales.index', ['searched' => 1, 'page' => 2]));
         $page2->assertStatus(200);
         $page2->assertViewHas('orders', fn ($orders) => $orders->count() === 5);
     }
@@ -262,5 +262,59 @@ class SalesTest extends TestCase
 
         // 注文件数(5件)に比例してクエリが増えていないこと（N+1が発生していれば件数分クエリが増える）
         $this->assertLessThan(15, $queryCount);
+    }
+
+    public function test_検索前は集計が0で一覧が空白になり日付も空欄(): void
+    {
+        $admin = $this->makeAdmin();
+        $order = $this->makeOrder(['paid_at' => now()]);
+
+        $response = $this->actingAs($admin, 'admin')->get(route('admin.sales.index'));
+
+        $response->assertOk();
+        $response->assertViewHas('searched', false);
+        $response->assertViewHas('summary', fn ($summary) => collect($summary)->every(fn ($v) => $v === 0));
+        $response->assertSee('admin_sales_summary-grid', false);
+        $response->assertSee('admin_sales_index_table-scroll', false);
+        $response->assertSee('¥0');
+        $response->assertDontSee($order->order_number);
+        $response->assertDontSee('指定期間内の決済データがありません');
+        $response->assertSee('name="date_from" value=""', false);
+        $response->assertSee('name="date_to" value=""', false);
+    }
+
+    public function test_日付を空欄のまま検索すると全期間を集計する(): void
+    {
+        $admin = $this->makeAdmin();
+        $this->makeOrder(['paid_at' => '2020-01-10 10:00:00'], [['name' => '古い商品', 'price' => 1000, 'quantity' => 1]]);
+        $this->makeOrder(['paid_at' => now()], [['name' => '新しい商品', 'price' => 2000, 'quantity' => 1]]);
+
+        $response = $this->actingAs($admin, 'admin')->get(route('admin.sales.index', ['searched' => 1, 'date_from' => '', 'date_to' => '']));
+
+        $response->assertOk();
+        $response->assertViewHas('summary', fn ($summary) => $summary['payment_count'] === 2 && $summary['gross_sales'] === 3000);
+    }
+
+    public function test_開始日だけ指定するとその日以降を集計する(): void
+    {
+        $admin = $this->makeAdmin();
+        $this->makeOrder(['paid_at' => '2020-01-10 10:00:00'], [['name' => '古い商品', 'price' => 1000, 'quantity' => 1]]);
+        $this->makeOrder(['paid_at' => '2026-04-10 10:00:00'], [['name' => '新しい商品', 'price' => 2000, 'quantity' => 1]]);
+
+        $response = $this->actingAs($admin, 'admin')->get(route('admin.sales.index', ['searched' => 1, 'date_from' => '2026-01-01']));
+
+        $response->assertViewHas('summary', fn ($summary) => $summary['payment_count'] === 1 && $summary['gross_sales'] === 2000);
+    }
+
+    public function test_期間未指定のCSVは全期間でファイル名に反映される(): void
+    {
+        $admin = $this->makeAdmin();
+        $this->makeOrder(['paid_at' => '2020-01-10 10:00:00']);
+
+        $response = $this->actingAs($admin, 'admin')->get(route('admin.sales.export'));
+
+        $response->assertOk();
+        $response->assertHeader('Content-Disposition', 'attachment; filename=sales_start_end.csv');
+        $this->assertStringContainsString('2020-01-10', $response->streamedContent());
     }
 }

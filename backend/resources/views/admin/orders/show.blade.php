@@ -7,6 +7,10 @@
 @endpush
 
 @section('header-action')
+    <a href="{{ route('admin.orders.pdf', $order) }}"
+       class="admin_header-action-button--outline">
+        PDF出力
+    </a>
     <a href="{{ route('admin.orders.index') }}" class="common_back-link">
         ← 注文一覧へ戻る
     </a>

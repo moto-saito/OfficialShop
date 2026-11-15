@@ -4,6 +4,16 @@
 
 @push('head')
 <link rel="stylesheet" href="{{ asset('css/pages/admin-sales.css') }}">
+<script>
+    // ページを再読み込み（F5 / 更新ボタン）したら、検索条件・集計・一覧をデフォルト（未検索）に戻す。
+    // 表示前に切り替えるため head で実行する
+    (function () {
+        var nav = performance.getEntriesByType('navigation')[0];
+        if (nav && nav.type === 'reload' && window.location.search) {
+            window.location.replace(window.location.pathname);
+        }
+    })();
+</script>
 @endpush
 
 @section('header-action')
@@ -18,18 +28,15 @@
 {{-- 検索フォーム --}}
 <div class="admin_card admin_sales_filter-card">
     <form method="GET" action="{{ route('admin.sales.index') }}">
+        <input type="hidden" name="searched" value="1">
         <div class="admin_sales_filter-grid">
             <div>
                 <label class="common_admin-form-label">開始日</label>
-                <input type="date" name="date_from"
-                       value="{{ $filters['date_from'] ?? $from->format('Y-m-d') }}"
-                       class="common_admin-form-input">
+                <x-admin.date-input name="date_from" :value="$filters['date_from'] ?? ''" label="開始日" />
             </div>
             <div>
                 <label class="common_admin-form-label">終了日</label>
-                <input type="date" name="date_to"
-                       value="{{ $filters['date_to'] ?? $to->format('Y-m-d') }}"
-                       class="common_admin-form-input">
+                <x-admin.date-input name="date_to" :value="$filters['date_to'] ?? ''" label="終了日" />
             </div>
             <div>
                 <label class="common_admin-form-label">注文ステータス</label>
@@ -52,7 +59,7 @@
     </form>
 </div>
 
-{{-- 売上サマリー --}}
+{{-- 売上サマリー（検索前はすべて 0） --}}
 <div class="common_summary-grid admin_sales_summary-grid">
     <div class="common_summary-card">
         <p class="common_summary-label">売上合計（税込）</p>
@@ -137,11 +144,14 @@
                         </td>
                     </tr>
                 @empty
-                    <tr>
-                        <td colspan="10" class="admin_sales_index_empty">
-                            指定期間内の決済データがありません
-                        </td>
-                    </tr>
+                    {{-- 検索前は空白。検索して該当が無い場合だけメッセージを出す --}}
+                    @if ($searched)
+                        <tr>
+                            <td colspan="10" class="admin_sales_index_empty">
+                                指定期間内の決済データがありません
+                            </td>
+                        </tr>
+                    @endif
                 @endforelse
             </tbody>
         </table>

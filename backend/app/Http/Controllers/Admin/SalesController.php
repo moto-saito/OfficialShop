@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\SalesSearchRequest;
 use App\Models\Order;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Carbon;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
@@ -13,6 +14,22 @@ class SalesController extends Controller
     public function index(SalesSearchRequest $request)
     {
         $filters = $request->validated();
+
+        // 集計・一覧はデフォルトでは表示せず、検索したときだけ表示する（注文管理と同じ）。
+        // 「検索」ボタン（searched=1）か、URL に検索条件が付いている場合を「検索した」とみなす。
+        $searched = $request->boolean('searched')
+            || collect($filters)->contains(fn ($value) => $value !== null && $value !== '');
+
+        // 検索前は集計を 0、一覧を空で表示する
+        if (!$searched) {
+            return view('admin.sales.index', [
+                'filters'  => $filters,
+                'searched' => false,
+                'summary'  => $this->emptySummary(),
+                'orders'   => new LengthAwarePaginator([], 0, 20),
+            ]);
+        }
+
         [$from, $to] = $this->resolvePeriod($filters);
 
         $paidQuery = $this->baseQuery($filters, $from, $to);
@@ -25,7 +42,7 @@ class SalesController extends Controller
             ->paginate(20)
             ->withQueryString();
 
-        return view('admin.sales.index', compact('orders', 'summary', 'filters', 'from', 'to'));
+        return view('admin.sales.index', compact('orders', 'summary', 'filters', 'searched'));
     }
 
     public function export(SalesSearchRequest $request): StreamedResponse
@@ -35,7 +52,8 @@ class SalesController extends Controller
 
         $query = $this->baseQuery($filters, $from, $to)->with('items');
 
-        $fileName = sprintf('sales_%s_%s.csv', $from->format('Ymd'), $to->format('Ymd'));
+        // 期間の指定が無い側は start / end と表記する
+        $fileName = sprintf('sales_%s_%s.csv', $from?->format('Ymd') ?? 'start', $to?->format('Ymd') ?? 'end');
 
         $headers = [
             'Content-Type'        => 'text/csv; charset=UTF-8',
@@ -107,26 +125,27 @@ class SalesController extends Controller
     /**
      * 売上管理の対象となる注文（決済完了済み・指定期間・任意の注文ステータス）を返す
      */
-    private function baseQuery(array $filters, Carbon $from, Carbon $to)
+    private function baseQuery(array $filters, ?Carbon $from, ?Carbon $to)
     {
         return Order::query()
             ->paid()
-            ->whereBetween('paid_at', [$from, $to])
+            ->when($from, fn ($query) => $query->where('paid_at', '>=', $from))
+            ->when($to, fn ($query) => $query->where('paid_at', '<=', $to))
             ->when($filters['status'] ?? null, function ($query, $value) {
                 $query->where('status', $value);
             });
     }
 
-    /** 検索期間を確定する。未指定の場合は「当月1日〜今日」をデフォルトとする */
+    /**
+     * 検索期間を確定する。未指定の側は期間の制限なし（null）とする
+     * （開始日だけ → その日以降すべて、両方空 → 全期間）
+     *
+     * @return array{0: ?Carbon, 1: ?Carbon}
+     */
     private function resolvePeriod(array $filters): array
     {
-        $from = isset($filters['date_from'])
-            ? Carbon::parse($filters['date_from'])->startOfDay()
-            : now()->startOfMonth()->startOfDay();
-
-        $to = isset($filters['date_to'])
-            ? Carbon::parse($filters['date_to'])->endOfDay()
-            : now()->endOfDay();
+        $from = !empty($filters['date_from']) ? Carbon::parse($filters['date_from'])->startOfDay() : null;
+        $to   = !empty($filters['date_to']) ? Carbon::parse($filters['date_to'])->endOfDay() : null;
 
         return [$from, $to];
     }
@@ -135,7 +154,7 @@ class SalesController extends Controller
      * 期間内の売上サマリーを DB 側の集計（SUM/COUNT）で算出する
      * 全件を PHP 側に取得して合計する実装は避ける
      */
-    private function buildSummary(array $filters, Carbon $from, Carbon $to): array
+    private function buildSummary(array $filters, ?Carbon $from, ?Carbon $to): array
     {
         $paidQuery = $this->baseQuery($filters, $from, $to);
 
@@ -149,7 +168,10 @@ class SalesController extends Controller
         $refundedCount  = (clone $refundedQuery)->count();
 
         // 注文件数：決済有無に関わらず、期間内に作成された注文の総数（決済件数との比較用）
-        $orderCount = Order::query()->whereBetween('created_at', [$from, $to])->count();
+        $orderCount = Order::query()
+            ->when($from, fn ($query) => $query->where('created_at', '>=', $from))
+            ->when($to, fn ($query) => $query->where('created_at', '<=', $to))
+            ->count();
 
         return [
             'gross_sales'     => $grossSales,
@@ -162,5 +184,14 @@ class SalesController extends Controller
             'shipping_amount' => $shippingAmount,
             'discount_amount' => 0,
         ];
+    }
+
+    /** 検索前に表示する集計（すべて 0） */
+    private function emptySummary(): array
+    {
+        return array_fill_keys([
+            'gross_sales', 'net_sales', 'refunded_amount', 'refunded_count',
+            'payment_count', 'order_count', 'tax_amount', 'shipping_amount', 'discount_amount',
+        ], 0);
     }
 }
