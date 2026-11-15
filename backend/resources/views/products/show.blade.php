@@ -18,10 +18,93 @@
 
     <div class="products_show_card">
 
-        {{-- 商品画像 --}}
+        {{-- 商品画像（2枚以上はスライド表示、1枚はそのまま表示） --}}
+        @php
+            $imagePaths = $product->images->pluck('path');
+            if ($imagePaths->isEmpty() && $product->image_path) {
+                $imagePaths = collect([$product->image_path]);
+            }
+        @endphp
         <div class="products_show_image-wrap">
-            @if ($product->image_path)
-                <img src="{{ Storage::disk('public')->url($product->image_path) }}"
+            @if ($imagePaths->count() > 1)
+                <div class="products_show_slider" data-slider
+                     role="region" aria-roledescription="carousel" aria-label="{{ $product->name }}の画像">
+                    <div class="products_show_slider-track" data-slider-track tabindex="0">
+                        @foreach ($imagePaths as $path)
+                            <div class="products_show_slide" role="group" aria-roledescription="slide"
+                                 aria-label="{{ $loop->iteration }} / {{ $loop->count }}">
+                                <img src="{{ Storage::disk('public')->url($path) }}"
+                                     alt="{{ $product->name }}（{{ $loop->iteration }}枚目）"
+                                     class="products_show_image"
+                                     @unless ($loop->first) loading="lazy" @endunless>
+                            </div>
+                        @endforeach
+                    </div>
+
+                    <button type="button" class="products_show_slider-nav products_show_slider-nav--prev" data-slider-prev aria-label="前の画像">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                    </button>
+                    <button type="button" class="products_show_slider-nav products_show_slider-nav--next" data-slider-next aria-label="次の画像">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                    </button>
+
+                    <div class="products_show_slider-dots">
+                        @foreach ($imagePaths as $path)
+                            <button type="button" class="products_show_slider-dot" data-slider-dot="{{ $loop->index }}"
+                                    aria-label="{{ $loop->iteration }}枚目の画像を表示"
+                                    @if ($loop->first) aria-current="true" @endif></button>
+                        @endforeach
+                    </div>
+                </div>
+                {{-- スライドがあるときだけスクリプトを読み込む --}}
+@push('scripts')
+<script>
+// 商品画像のスライド（スワイプ・矢印ボタン・ドットで切り替え）
+document.querySelectorAll('[data-slider]').forEach((slider) => {
+    const track = slider.querySelector('[data-slider-track]');
+    const slides = track.children;
+    const dots = slider.querySelectorAll('[data-slider-dot]');
+    const count = slides.length;
+    const current = () => Math.round(track.scrollLeft / track.clientWidth);
+
+    function go(index) {
+        const i = (index + count) % count; // 最後の次は最初、最初の前は最後へ
+        track.scrollTo({ left: i * track.clientWidth });
+    }
+
+    function updateDots() {
+        const i = current();
+        dots.forEach((dot, n) => dot.toggleAttribute('aria-current', n === i));
+    }
+
+    slider.querySelector('[data-slider-prev]').addEventListener('click', () => go(current() - 1));
+    slider.querySelector('[data-slider-next]').addEventListener('click', () => go(current() + 1));
+    dots.forEach((dot) => dot.addEventListener('click', () => go(Number(dot.dataset.sliderDot))));
+
+    let ticking = false;
+    track.addEventListener('scroll', () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => { updateDots(); ticking = false; });
+    });
+
+    // 左右キーで切り替え（スライド部分にフォーカスがあるとき）
+    track.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+            e.preventDefault();
+            go(current() + (e.key === 'ArrowRight' ? 1 : -1));
+        }
+    });
+
+    // 画面幅が変わっても今の画像の位置を保つ
+    let index = 0;
+    track.addEventListener('scroll', () => { index = current(); }, { passive: true });
+    window.addEventListener('resize', () => { track.scrollLeft = index * track.clientWidth; });
+});
+</script>
+@endpush
+            @elseif ($imagePaths->count() === 1)
+                <img src="{{ Storage::disk('public')->url($imagePaths->first()) }}"
                      alt="{{ $product->name }}"
                      class="products_show_image">
             @else
@@ -106,3 +189,4 @@ document.getElementById('btn-plus').addEventListener('click', () => {
 });
 </script>
 @endsection
+

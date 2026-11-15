@@ -104,9 +104,136 @@ td.admin_products_index_empty {
     margin-bottom: .75rem;
 }
 
+.admin_products_form_image-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    list-style: none;
+    margin-bottom: .5rem;
+}
+
+.admin_products_form_image-list:empty {
+    display: none;
+}
+
+.admin_products_form_image-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: .375rem;
+}
+
+/* 削除予定の画像は薄く表示 */
+.admin_products_form_image-item.is-deleted .admin_products_form_image-preview {
+    opacity: .35;
+    filter: grayscale(1);
+}
+
+/* 状態（変更・削除・追加）のラベル */
+.admin_products_form_image-badge {
+    position: absolute;
+    top: .25rem;
+    right: .25rem;
+    padding: 0 .4rem;
+    border-radius: var(--radius-sm);
+    background-color: var(--color-indigo-600);
+    color: var(--color-white);
+    font-size: var(--text-xs);
+}
+
+.admin_products_form_image-item.is-deleted .admin_products_form_image-badge {
+    background-color: var(--color-red-600, #dc2626);
+}
+
+.admin_products_form_image-badge--new {
+    background-color: var(--color-green-600, #16a34a);
+}
+
+.admin_products_form_image-actions {
+    display: flex;
+    gap: .25rem;
+}
+
+.admin_products_form_image-button {
+    position: relative;
+    flex: 1;
+    padding: .25rem 0;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-admin-border);
+    background-color: var(--color-admin-button);
+    color: var(--color-admin-text);
+    font-size: var(--text-xs);
+    text-align: center;
+    cursor: pointer;
+    transition: background-color .15s ease;
+}
+
+.admin_products_form_image-button:hover {
+    background-color: var(--color-admin-button-hover);
+}
+
+.admin_products_form_image-button:focus-within,
+.admin_products_form_image-button:focus-visible {
+    outline: 2px solid var(--color-indigo-500);
+    outline-offset: 1px;
+}
+
+.admin_products_form_image-button--danger {
+    color: var(--color-admin-danger);
+}
+
+.admin_products_form_image-item.is-deleted label.admin_products_form_image-button {
+    opacity: .4;
+    pointer-events: none;
+}
+
+/* 「画像を追加」ボタン */
+.admin_products_form_add-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: .375rem;
+    padding: .5rem 1rem;
+    margin-bottom: .5rem;
+    border-radius: var(--radius-lg);
+    background-color: var(--color-indigo-50);
+    color: var(--color-indigo-700);
+    font-size: var(--text-sm);
+    cursor: pointer;
+    transition: background-color .15s ease;
+}
+
+.admin_products_form_add-button:hover {
+    background-color: var(--color-indigo-100);
+}
+
+.admin_products_form_add-button:focus-within {
+    outline: 2px solid var(--color-indigo-500);
+    outline-offset: 2px;
+}
+
+.admin_products_form_add-button.is-disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+/* 表示順の番号（1 がメイン画像） */
+.admin_products_form_image-number {
+    position: absolute;
+    top: .25rem;
+    left: .25rem;
+    min-width: 1.4rem;
+    padding: 0 .3rem;
+    border-radius: var(--radius-full);
+    background-color: rgb(0 0 0 / .65);
+    color: var(--color-white);
+    font-size: var(--text-xs);
+    text-align: center;
+}
+
 .admin_products_form_image-preview {
     height: 8rem;
-    width: auto;
+    width: 8rem;
     border-radius: var(--radius-lg);
     border: 1px solid var(--color-admin-border);
     object-fit: cover;
@@ -130,4 +257,17 @@ td.admin_products_index_empty {
 
 .admin_products_form_file-input:hover::file-selector-button {
     background-color: var(--color-indigo-100);
+}
+
+/* 見た目は隠すがキーボード操作はできるようにする（ファイル選択の入力） */
+.admin_products_form_visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
 }
