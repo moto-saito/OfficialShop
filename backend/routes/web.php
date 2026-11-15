@@ -110,6 +110,7 @@ Route::prefix("admin")->name("admin.")->group(function () {
         Route::get("orders/export", [AdminOrderController::class, "export"])->name("orders.export");
         Route::resource("orders", AdminOrderController::class)->only(["index", "show", "destroy"]);
         Route::patch("orders/{order}/status", [AdminOrderController::class, "updateStatus"])->name("orders.updateStatus");
+        Route::get("orders/{order}/pdf", [AdminOrderController::class, "pdf"])->name("orders.pdf");
 
         // {sales}パラメータを持つresourceではないため export の定義順は問わない
         Route::get("sales", [AdminSalesController::class, "index"])->name("sales.index");
