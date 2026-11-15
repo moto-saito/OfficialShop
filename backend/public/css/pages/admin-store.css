@@ -34,3 +34,14 @@
 .admin_store_form_file-input:hover::file-selector-button {
     background-color: var(--color-indigo-100);
 }
+
+/* 送り状のご依頼主 */
+.admin_store_form_sender-card {
+    margin-top: 1.5rem;
+}
+
+.admin_store_form_section-title {
+    font-size: var(--text-base);
+    font-weight: 600;
+    color: var(--color-admin-strong);
+}

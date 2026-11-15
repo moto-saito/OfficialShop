@@ -51,8 +51,12 @@
 
     {{-- 購入者情報 --}}
     <div class="admin_card admin_orders_show_section">
-        <div class="admin_card-header">
+        <div class="admin_card-header admin_orders_show_card-header">
             <h2 class="common_section-title">購入者情報</h2>
+            {{-- ヤマト運輸 B2クラウドに取り込む送り状 CSV --}}
+            <a href="{{ route('admin.orders.b2csv', $order) }}" class="common_button-outline--xs">
+                B2クラウド用CSV
+            </a>
         </div>
         <dl class="common_info-list">
             <div class="common_info-row common_info-row--compact">

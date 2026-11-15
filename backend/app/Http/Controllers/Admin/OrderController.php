@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\OrderSearchRequest;
 use App\Models\Order;
+use App\Services\YamatoB2Csv;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -39,6 +40,37 @@ class OrderController extends Controller
         $order->load('items.product');
 
         return view('admin.orders.show', compact('order'));
+    }
+
+    /**
+     * ヤマト運輸 B2クラウドに取り込む送り状 CSV（基本レイアウト・Shift_JIS）を出力する。
+     * 送り状に収まらない項目や .env の設定漏れがあれば、注文詳細に戻って理由を表示する。
+     */
+    public function b2Csv(Order $order, YamatoB2Csv $b2)
+    {
+        $order->load('items');
+
+        $row = $b2->row($order);
+        if ($row === null) {
+            return redirect()->route('admin.orders.show', $order)
+                ->with('error', array_merge(['B2クラウド用CSVを出力できません。'], $b2->errors()));
+        }
+
+        $handle = fopen('php://temp', 'r+');
+        $lines = config('yamato.b2.header_row') ? [YamatoB2Csv::COLUMNS, $row] : [$row];
+        foreach ($lines as $line) {
+            fputcsv($handle, array_map([YamatoB2Csv::class, 'toSjis'], $line), ',', '"', '', "\r\n");
+        }
+        rewind($handle);
+        $csv = stream_get_contents($handle);
+        fclose($handle);
+
+        $fileName = 'b2_' . str_replace('-', '', $order->order_number) . '.csv';
+
+        return response($csv, 200, [
+            'Content-Type'        => 'text/csv; charset=Shift_JIS',
+            'Content-Disposition' => "attachment; filename={$fileName}",
+        ]);
     }
 
     /** PDF 用の日本語フォント（Docker イメージに fonts-ipafont-gothic で導入） */

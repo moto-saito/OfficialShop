@@ -118,6 +118,77 @@
             </div>
         </div>
 
+        {{-- 送り状のご依頼主（ヤマト運輸 B2クラウド用 CSV に使う） --}}
+        <div class="admin_form-card admin_store_form_sender-card">
+            <div>
+                <h2 class="admin_store_form_section-title">送り状のご依頼主（ヤマト運輸 B2クラウド）</h2>
+                <p class="common_admin-form-hint">
+                    注文詳細の「B2クラウド用CSV」で、送り状のご依頼主（発送元）として使います。
+                    空欄の項目は .env の設定（YAMATO_B2_SENDER_*）を使います。
+                </p>
+            </div>
+
+            <div>
+                <label class="common_admin-form-label" for="sender_name">ご依頼主名</label>
+                <input type="text" name="sender_name" id="sender_name"
+                       value="{{ old('sender_name', $store->sender_name) }}"
+                       class="common_admin-form-input @error('sender_name') is-invalid @enderror"
+                       placeholder="山一醤油製造所">
+                <p class="common_admin-form-hint">全角16文字以内。送り状の「ご依頼主」に印字されます。</p>
+                @error('sender_name')
+                    <p class="common_admin-form-error">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div>
+                <label class="common_admin-form-label" for="sender_phone">電話番号</label>
+                <input type="text" name="sender_phone" id="sender_phone"
+                       value="{{ old('sender_phone', $store->sender_phone) }}"
+                       class="common_admin-form-input @error('sender_phone') is-invalid @enderror"
+                       placeholder="0120-000-000">
+                <p class="common_admin-form-hint">ハイフンありで15文字以内</p>
+                @error('sender_phone')
+                    <p class="common_admin-form-error">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div>
+                <label class="common_admin-form-label" for="sender_postal">郵便番号</label>
+                <input type="text" name="sender_postal" id="sender_postal"
+                       value="{{ old('sender_postal', $store->sender_postal) }}"
+                       class="common_admin-form-input @error('sender_postal') is-invalid @enderror"
+                       placeholder="123-4567">
+                <p class="common_admin-form-hint">7桁（ハイフンはあってもなくても可）</p>
+                @error('sender_postal')
+                    <p class="common_admin-form-error">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div>
+                <label class="common_admin-form-label" for="sender_address">住所</label>
+                <input type="text" name="sender_address" id="sender_address"
+                       value="{{ old('sender_address', $store->sender_address) }}"
+                       class="common_admin-form-input @error('sender_address') is-invalid @enderror"
+                       placeholder="東京都千代田区千代田1-1">
+                <p class="common_admin-form-hint">都道府県から町・番地まで。全角32文字以内</p>
+                @error('sender_address')
+                    <p class="common_admin-form-error">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div>
+                <label class="common_admin-form-label" for="sender_building">建物名</label>
+                <input type="text" name="sender_building" id="sender_building"
+                       value="{{ old('sender_building', $store->sender_building) }}"
+                       class="common_admin-form-input @error('sender_building') is-invalid @enderror"
+                       placeholder="〇〇ビル 1F">
+                <p class="common_admin-form-hint">全角16文字以内（無ければ空欄）</p>
+                @error('sender_building')
+                    <p class="common_admin-form-error">{{ $message }}</p>
+                @enderror
+            </div>
+        </div>
+
         <div class="admin_form-actions">
             <a href="{{ route('store.show') }}" target="_blank" class="common_button-outline--compact">
                 公開ページを見る
