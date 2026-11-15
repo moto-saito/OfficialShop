@@ -63,14 +63,12 @@
                     @endforeach
                 </select>
             </div>
-            <div>
+            <div class="admin_orders_index_date-field">
                 <label class="admin_orders_filter-label">注文日（期間指定）</label>
                 <div class="admin_orders_index_date-range">
-                    <input type="date" name="date_from" value="{{ $filters['date_from'] ?? '' }}"
-                           class="admin_orders_filter-input">
+                    <x-admin.date-input name="date_from" :value="$filters['date_from'] ?? ''" label="注文日（開始）" />
                     <span class="admin_orders_index_date-range-sep">〜</span>
-                    <input type="date" name="date_to" value="{{ $filters['date_to'] ?? '' }}"
-                           class="admin_orders_filter-input">
+                    <x-admin.date-input name="date_to" :value="$filters['date_to'] ?? ''" label="注文日（終了）" />
                 </div>
             </div>
         </div>

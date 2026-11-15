@@ -45,12 +45,14 @@
 
 .admin_orders_index_date-range {
     display: flex;
-    align-items: center;
+    /* 片方にエラーが出ても入力欄の高さを揃える */
+    align-items: flex-start;
     gap: .5rem;
 }
 
 .admin_orders_index_date-range-sep {
     color: var(--color-admin-text);
+    padding-top: .5rem;
 }
 
 .admin_orders_index_filter-actions {
@@ -128,6 +130,11 @@ td.admin_orders_index_empty {
 @media (min-width: 640px) {
     .admin_orders_index_filter-grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* 年月日の手入力欄を2つ並べるため2列分の幅を使う */
+    .admin_orders_index_date-field {
+        grid-column: span 2;
     }
 }
 

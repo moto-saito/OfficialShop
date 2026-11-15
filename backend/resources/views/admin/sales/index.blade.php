@@ -21,15 +21,11 @@
         <div class="admin_sales_filter-grid">
             <div>
                 <label class="common_admin-form-label">開始日</label>
-                <input type="date" name="date_from"
-                       value="{{ $filters['date_from'] ?? $from->format('Y-m-d') }}"
-                       class="common_admin-form-input">
+                <x-admin.date-input name="date_from" :value="$filters['date_from'] ?? $from->format('Y-m-d')" label="開始日" />
             </div>
             <div>
                 <label class="common_admin-form-label">終了日</label>
-                <input type="date" name="date_to"
-                       value="{{ $filters['date_to'] ?? $to->format('Y-m-d') }}"
-                       class="common_admin-form-input">
+                <x-admin.date-input name="date_to" :value="$filters['date_to'] ?? $to->format('Y-m-d')" label="終了日" />
             </div>
             <div>
                 <label class="common_admin-form-label">注文ステータス</label>
