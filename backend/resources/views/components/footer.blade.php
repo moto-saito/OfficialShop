@@ -51,7 +51,9 @@
                     <li><a href="/" class="footer_link">TOP</a></li>
                     <li><a href="{{ route('news.index') }}" class="footer_link">お知らせ</a></li>
                     <li><a href="{{ route('products.index') }}" class="footer_link">商品一覧</a></li>
+                    <li><a href="{{ route('recipes.index') }}" class="footer_link">レシピ紹介</a></li>
                     <li><a href="{{ route('store.show') }}" class="footer_link">店舗・工場紹介</a></li>
+                    <li><a href="{{ route('philosophy') }}" class="footer_link">企業理念</a></li>
                     <li><a href="{{ route('company.show') }}" class="footer_link">企業歴史・実績</a></li>
                     <li><a href="{{ route('contact.index') }}" class="footer_link">お問い合わせ</a></li>
                     <li><a href="{{ route('cart.index') }}" class="footer_link">カート</a></li>

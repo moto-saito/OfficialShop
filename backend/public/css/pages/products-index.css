@@ -110,6 +110,17 @@
     cursor: not-allowed;
 }
 
+.products_index_sold-out-label {
+    margin-top: auto;
+    padding-block: .5rem;
+    border-radius: var(--radius-xl);
+    background-color: var(--color-gray-200);
+    color: var(--color-gray-500);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    text-align: center;
+}
+
 .products_index_add-cart-button {
     width: 100%;
     padding-block: .5rem;
@@ -254,6 +265,11 @@
 
     .products_index_main-col {
         grid-column: span 2 / span 2;
+    }
+
+    /* カート小計欄を非表示にしたときは商品一覧を全幅表示 */
+    .products_index_grid-wrap--no-cart .products_index_main-col {
+        grid-column: 1 / -1;
     }
 
     .products_index_product-grid {

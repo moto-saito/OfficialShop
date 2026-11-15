@@ -23,6 +23,12 @@ class Product extends Model
         return $query->where("status", self::STATUS_SELLING);
     }
 
+    /** 公開画面に表示する商品（販売中・売り切れ） */
+    public function scopeVisible($query)
+    {
+        return $query->whereIn("status", [self::STATUS_SELLING, self::STATUS_SOLDOUT]);
+    }
+
     public function isSelling(): bool
     {
         return $this->status === self::STATUS_SELLING;

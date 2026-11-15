@@ -1,0 +1,140 @@
+/*
+ * pages/philosophy.css
+ * resources/views/philosophy.blade.php 専用スタイル
+ */
+
+.philosophy_section {
+    padding-block: 4rem;
+    /* 薄い木目・和紙風の背景（写真素材が無いためCSSのみで紙の繊維/木目の質感を表現） */
+    background-color: var(--color-washi);
+    background-image:
+        repeating-linear-gradient(4deg, var(--color-washi-line) 0, var(--color-washi-line) 1px, transparent 1px, transparent 10px),
+        linear-gradient(170deg, var(--color-washi-light) 0%, var(--color-washi) 100%);
+}
+
+.philosophy_container {
+    max-width: 72rem;
+    margin-inline: auto;
+    padding-inline: 1rem;
+}
+
+.philosophy_inner {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    align-items: center;
+}
+
+.philosophy_text {
+    flex: 1;
+    text-align: center;
+}
+
+.philosophy_eyebrow {
+    color: var(--color-indigo-500);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    margin-bottom: .25rem;
+}
+
+.philosophy_title {
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    color: var(--color-gray-900);
+    margin-bottom: 1rem;
+}
+
+.philosophy_desc {
+    color: var(--color-gray-600);
+    font-size: var(--text-base);
+    line-height: 1.625;
+    max-width: 32rem;
+    margin-inline: auto;
+}
+
+.philosophy_photo {
+    flex-shrink: 0;
+    width: 100%;
+}
+
+.philosophy_photo-frame {
+    border-radius: var(--radius-2xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    aspect-ratio: 4 / 3;
+    background-color: var(--color-wood-700);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgb(255 255 255 / .1);
+}
+
+.philosophy_photo-placeholder {
+    text-align: center;
+    color: var(--color-washi-light);
+}
+
+.philosophy_photo-caption {
+    font-size: var(--text-sm);
+}
+
+.philosophy_photo-icon {
+    height: 4rem;
+    width: 4rem;
+    margin-inline: auto;
+    margin-bottom: .5rem;
+}
+
+.philosophy_back-wrap {
+    margin-top: 3rem;
+}
+
+.philosophy_back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    font-size: var(--text-sm);
+    color: var(--color-indigo-600);
+    transition: color .15s ease;
+}
+
+.philosophy_back-link:hover {
+    color: var(--color-indigo-800, var(--color-indigo-700));
+}
+
+.philosophy_back-icon {
+    height: 1rem;
+    width: 1rem;
+}
+
+@media (min-width: 768px) {
+    .philosophy_section {
+        padding-block: 5rem;
+    }
+
+    .philosophy_inner {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .philosophy_text {
+        text-align: left;
+    }
+
+    .philosophy_desc {
+        font-size: var(--text-lg);
+        margin-inline: 0;
+    }
+
+    .philosophy_photo {
+        width: 20rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .philosophy_photo {
+        width: 24rem;
+    }
+}

@@ -7,10 +7,13 @@
 @endpush
 
 @section('content')
+{{-- カート機能（カート追加フォーム・小計欄）の表示切替。再表示する場合は true に変更 --}}
+@php $showCart = false; @endphp
+
 <div class="products_index_layout">
     <h1 class="common_page-title">商品一覧</h1>
 
-    <div class="products_index_grid-wrap">
+    <div class="products_index_grid-wrap {{ $showCart ? '' : 'products_index_grid-wrap--no-cart' }}">
         <div class="products_index_main-col">
     @if ($products->isEmpty())
         <p class="products_index_empty">現在販売中の商品はありません。</p>
@@ -44,6 +47,7 @@
                         <p class="products_index_product-price">{{ $product->formatted_price }}</p>
 
                         {{-- カート追加フォーム --}}
+                        @if ($showCart)
                         <form method="POST" action="{{ route('cart.store') }}" class="products_index_add-cart-form js-add-to-cart-form">
                             @csrf
                             <input type="hidden" name="product_id" value="{{ $product->id }}">
@@ -77,6 +81,10 @@
                                 </button>
                             @endif
                         </form>
+                        @elseif ($product->isSoldOut())
+                            {{-- カート機能非表示時も売り切れは表示 --}}
+                            <p class="products_index_sold-out-label">売り切れ</p>
+                        @endif
                     </div>
                 </div>
             @endforeach
@@ -90,6 +98,7 @@
         </div>
 
         {{-- 小計欄 --}}
+        @if ($showCart)
         <aside class="products_index_cart-summary">
             <div class="products_index_cart-summary-card">
                 <h2 class="products_index_cart-summary-title">カート内容</h2>
@@ -126,9 +135,11 @@
                 </a>
             </div>
         </aside>
+        @endif
     </div>
 </div>
 
+@if ($showCart)
 <script>
 function changeQty(btn, delta) {
     const input = btn.closest('form').querySelector('input[name="quantity"]');
@@ -235,4 +246,5 @@ cartItemsWrap.addEventListener('change', e => {
     updateCartQuantity(input.closest('[data-cart-id]').dataset.cartId, Math.max(1, qty || 1));
 });
 </script>
+@endif
 @endsection

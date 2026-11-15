@@ -13,32 +13,21 @@
                    class="header_nav-link {{ request()->is('/') ? 'is-active' : '' }}">
                     TOP
                 </a>
-                <a href="{{ route('news.index') }}"
-                   class="header_nav-link {{ request()->routeIs('news.*') ? 'is-active' : '' }}">
-                    お知らせ
-                </a>
                 <a href="{{ route('products.index') }}"
                    class="header_nav-link {{ request()->routeIs('products.*') ? 'is-active' : '' }}">
                     商品一覧
                 </a>
-                <a href="{{ route('store.show') }}"
-                   class="header_nav-link {{ request()->routeIs('store.*') ? 'is-active' : '' }}">
-                    店舗・工場紹介
+                <a href="{{ route('recipes.index') }}"
+                   class="header_nav-link {{ request()->routeIs('recipes.*') ? 'is-active' : '' }}">
+                    レシピ紹介
                 </a>
-                <a href="{{ route('company.show') }}"
-                   class="header_nav-link {{ request()->routeIs('company.*') ? 'is-active' : '' }}">
-                    企業歴史・実績
+                <a href="{{ route('cart.index') }}"
+                   class="header_nav-link {{ request()->routeIs('cart.*') ? 'is-active' : '' }}">
+                    オンラインストア
                 </a>
                 <a href="{{ route('contact.index') }}"
                    class="header_nav-link {{ request()->routeIs('contact.*') ? 'is-active' : '' }}">
                     お問い合わせ
-                </a>
-                <a href="{{ route('cart.index') }}"
-                   class="header_cart-link {{ request()->routeIs('cart.*') ? 'is-active' : '' }}">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="header_nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-10H5.4M7 13l-1.4 7h12.8M10 21a1 1 0 100-2 1 1 0 000 2zm8 0a1 1 0 100-2 1 1 0 000 2z"/>
-                    </svg>
-                    カート
                 </a>
 
                 {{-- 仕切り --}}
@@ -90,32 +79,21 @@
                class="header_mobile-link {{ request()->is('/') ? 'is-active' : '' }}">
                 TOP
             </a>
-            <a href="{{ route('news.index') }}"
-               class="header_mobile-link {{ request()->routeIs('news.*') ? 'is-active' : '' }}">
-                お知らせ
-            </a>
             <a href="{{ route('products.index') }}"
                class="header_mobile-link {{ request()->routeIs('products.*') ? 'is-active' : '' }}">
                 商品一覧
             </a>
-            <a href="{{ route('store.show') }}"
-               class="header_mobile-link {{ request()->routeIs('store.*') ? 'is-active' : '' }}">
-                店舗・工場紹介
+            <a href="{{ route('recipes.index') }}"
+               class="header_mobile-link {{ request()->routeIs('recipes.*') ? 'is-active' : '' }}">
+                レシピ紹介
             </a>
-            <a href="{{ route('company.show') }}"
-               class="header_mobile-link {{ request()->routeIs('company.*') ? 'is-active' : '' }}">
-                企業歴史・実績
+            <a href="{{ route('cart.index') }}"
+               class="header_mobile-link {{ request()->routeIs('cart.*') ? 'is-active' : '' }}">
+                オンラインストア
             </a>
             <a href="{{ route('contact.index') }}"
                class="header_mobile-link {{ request()->routeIs('contact.*') ? 'is-active' : '' }}">
                 お問い合わせ
-            </a>
-            <a href="{{ route('cart.index') }}"
-               class="header_mobile-link {{ request()->routeIs('cart.*') ? 'is-active' : '' }}">
-                <svg xmlns="http://www.w3.org/2000/svg" class="header_mobile-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-10H5.4M7 13l-1.4 7h12.8M10 21a1 1 0 100-2 1 1 0 000 2zm8 0a1 1 0 100-2 1 1 0 000 2z"/>
-                </svg>
-                カート
             </a>
 
             {{-- 仕切り --}}
