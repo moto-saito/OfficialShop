@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Product extends Model
 {
@@ -17,6 +18,12 @@ class Product extends Model
     const STATUS_SELLING = "selling";
     const STATUS_SOLDOUT = "soldout";
     const STATUS_HIDDEN  = "hidden";
+
+    /** 商品画像（表示順）。1枚目は image_path と同じ */
+    public function images(): HasMany
+    {
+        return $this->hasMany(ProductImage::class)->orderBy('sort_order')->orderBy('id');
+    }
 
     public function scopeSelling($query)
     {

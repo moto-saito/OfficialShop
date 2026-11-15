@@ -24,6 +24,8 @@ class ProductController extends Controller
     {
         abort_if(!$product->isSelling() && !$product->isSoldOut(), 404);
 
+        $product->load('images');
+
         return view("products.show", compact("product"));
     }
 }
