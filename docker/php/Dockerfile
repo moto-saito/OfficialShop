@@ -3,7 +3,7 @@
 # 修正版は 8.2.35 だが本ビルド時点では公式Dockerイメージ未公開のため、
 # 現時点で入手可能な最新パッチ版 8.2.34 を使用し、php.ini側で暫定緩和策を適用している。
 # 8.2.35-apache が Docker Hub に公開されたら、下記タグを 8.2.35-apache に変更して再ビルドすること。
-FROM php:8.2.34-apache
+FROM php:8.2.35-apache
 
 RUN apt-get update && apt-get install -y \
     git \

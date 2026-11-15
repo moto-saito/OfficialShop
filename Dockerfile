@@ -7,7 +7,7 @@ COPY backend/ .
 RUN npm run build
 
 # ---------- 2. 本番アプリイメージ ----------
-FROM php:8.2-apache AS app
+FROM php:8.2.35-apache AS app
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
         git curl zip unzip \
